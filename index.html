@@ -7,6 +7,13 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
   <style>
+    /* Stop iPhone/iPad Safari from auto-zooming when a text box is tapped.
+       Safari zooms on any field with text smaller than 16px, so on touch
+       devices every input, dropdown and text area uses 16px text.
+       Pinch-to-zoom still works for anyone who wants it. */
+    @media (hover: none) and (pointer: coarse), (max-width: 767px) {
+      input, select, textarea { font-size: 16px !important; }
+    }
     body { -webkit-tap-highlight-color: transparent; }
     .no-scrollbar::-webkit-scrollbar { display: none; }
     .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
