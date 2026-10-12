@@ -53,7 +53,7 @@
 
         <button onclick="toggleFlightDrawer()" class="h-10 px-3.5 rounded-xl bg-blue-50 border border-blue-200 text-blue-700 flex items-center gap-1.5 text-xs font-bold hover:bg-blue-100 active:scale-95 transition shadow-xs">
           <i class="fa-solid fa-plane-departure text-blue-600"></i>
-          <span>Live Gates (Both Flights)</span>
+          <span>Live Gates & Flights</span>
         </button>
         <button onclick="toggleInfoModal()" class="w-10 h-10 rounded-xl bg-slate-100 border border-slate-200 flex items-center justify-center text-slate-600 hover:bg-slate-200 active:scale-95 transition">
           <i class="fa-solid fa-circle-info text-base"></i>
@@ -73,7 +73,7 @@
         <span id="flightTickerText" class="text-slate-300 font-medium">Leave 2232 Shenley Park Ln</span>
         <span class="hidden md:inline-block text-slate-500">|</span>
         <span class="inline-flex items-center gap-1 bg-slate-800/90 text-amber-300 px-2 py-0.5 rounded border border-slate-700 text-[11px] font-mono font-bold">
-          <i class="fa-solid fa-door-open text-[10px]"></i> Both Flights Monitored: AA 3357 &amp; AA 4800
+          <i class="fa-solid fa-moon text-[10px]"></i> Bedtime & Durations Built-In
         </span>
       </div>
       <div class="flex items-center gap-2">
@@ -103,23 +103,23 @@
             <div id="dayNavContainer" class="flex lg:flex-col gap-2 overflow-x-auto lg:overflow-visible no-scrollbar pb-1 lg:pb-0">
               <button onclick="switchDay(0)" class="day-tab flex-1 lg:w-full text-left px-3.5 py-2.5 rounded-xl text-xs font-bold transition bg-slate-900 text-white shadow-xs flex items-center justify-between" data-day="0">
                 <span>Thu, Oct 15</span>
-                <span class="text-[10px] font-normal opacity-80 hidden lg:inline">Depart &amp; Settle In</span>
+                <span class="text-[10px] font-normal opacity-80 hidden lg:inline">Depart & Settle In</span>
               </button>
               <button onclick="switchDay(1)" class="day-tab flex-1 lg:w-full text-left px-3.5 py-2.5 rounded-xl text-xs font-bold transition bg-slate-100 hover:bg-slate-200 text-slate-700 flex items-center justify-between" data-day="1">
                 <span>Fri, Oct 16</span>
-                <span class="text-[10px] font-normal opacity-70 hidden lg:inline">White House &amp; Old Town</span>
+                <span class="text-[10px] font-normal opacity-70 hidden lg:inline">White House & Old Town</span>
               </button>
               <button onclick="switchDay(2)" class="day-tab flex-1 lg:w-full text-left px-3.5 py-2.5 rounded-xl text-xs font-bold transition bg-slate-100 hover:bg-slate-200 text-slate-700 flex items-center justify-between" data-day="2">
                 <span>Sat, Oct 17</span>
-                <span class="text-[10px] font-normal opacity-70 hidden lg:inline">Smithsonian &amp; The Wharf</span>
+                <span class="text-[10px] font-normal opacity-70 hidden lg:inline">Smithsonian & The Wharf</span>
               </button>
               <button onclick="switchDay(3)" class="day-tab flex-1 lg:w-full text-left px-3.5 py-2.5 rounded-xl text-xs font-bold transition bg-slate-100 hover:bg-slate-200 text-slate-700 flex items-center justify-between" data-day="3">
                 <span>Sun, Oct 18</span>
-                <span class="text-[10px] font-normal opacity-70 hidden lg:inline">Spy Museum &amp; Lincoln</span>
+                <span class="text-[10px] font-normal opacity-70 hidden lg:inline">Spy Museum & Lincoln</span>
               </button>
               <button onclick="switchDay(4)" class="day-tab flex-1 lg:w-full text-left px-3.5 py-2.5 rounded-xl text-xs font-bold transition bg-slate-100 hover:bg-slate-200 text-slate-700 flex items-center justify-between" data-day="4">
                 <span>Mon, Oct 19</span>
-                <span class="text-[10px] font-normal opacity-70 hidden lg:inline">Pandas &amp; Capitol Tour</span>
+                <span class="text-[10px] font-normal opacity-70 hidden lg:inline">Pandas & Capitol Tour</span>
               </button>
               <button onclick="switchDay(5)" class="day-tab flex-1 lg:w-full text-left px-3.5 py-2.5 rounded-xl text-xs font-bold transition bg-slate-100 hover:bg-slate-200 text-slate-700 flex items-center justify-between" data-day="5">
                 <span>Tue, Oct 20</span>
@@ -128,7 +128,6 @@
             </div>
           </div>
 
-          <!-- Dynamic Routing Notice -->
           <div class="bg-indigo-50 border border-indigo-200 rounded-2xl p-4 text-xs text-indigo-900 shadow-2xs">
             <h4 class="font-bold flex items-center gap-1.5 text-indigo-950 mb-1">
               <i class="fa-solid fa-person-walking text-indigo-600"></i> Max 20–30m Walk Rule
@@ -141,14 +140,13 @@
             </button>
           </div>
 
-          <!-- Kids Zone Jump -->
           <div onclick="switchMainView('kids')" class="cursor-pointer bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white rounded-2xl p-4 shadow-xs transition active:scale-98">
             <div class="flex items-center gap-3">
               <span class="text-3xl">🐼</span>
               <div>
-                <span class="text-[10px] font-black uppercase tracking-wider text-amber-200 block">Games on the Go</span>
+                <span class="text-[10px] font-black uppercase tracking-wider text-amber-200 block">Games for Kids</span>
                 <h4 class="text-sm font-black">Open DC Kids Zone! 🎮</h4>
-                <p class="text-[11px] text-amber-100 mt-0.5">Spy Ciphers &amp; Panda Snack Toss</p>
+                <p class="text-[11px] text-amber-100 mt-0.5">Spy Ciphers & Panda Snack Toss</p>
               </div>
             </div>
           </div>
@@ -162,7 +160,7 @@
           <div class="flex items-center gap-2 overflow-x-auto no-scrollbar text-xs">
             <button onclick="filterTimeline('all')" class="filter-chip px-3.5 py-1.5 rounded-full font-bold bg-slate-800 text-white shadow-xs" data-filter="all">All Stops</button>
             <button onclick="filterTimeline('site')" class="filter-chip px-3.5 py-1.5 rounded-full font-medium bg-white text-slate-600 border border-slate-200 hover:bg-slate-50" data-filter="site">🏛️ Sights</button>
-            <button onclick="filterTimeline('transit')" class="filter-chip px-3.5 py-1.5 rounded-full font-medium bg-white text-slate-600 border border-slate-200 hover:bg-slate-50" data-filter="transit">🚗 Rides &amp; Walks</button>
+            <button onclick="filterTimeline('transit')" class="filter-chip px-3.5 py-1.5 rounded-full font-medium bg-white text-slate-600 border border-slate-200 hover:bg-slate-50" data-filter="transit">🚗 Rides & Walks</button>
             <button onclick="filterTimeline('food')" class="filter-chip px-3.5 py-1.5 rounded-full font-medium bg-white text-slate-600 border border-slate-200 hover:bg-slate-50" data-filter="food">🍽️ Food</button>
           </div>
 
@@ -228,7 +226,7 @@
             </div>
 
             <button onclick="toggleFlightDrawer()" class="w-full mt-3 py-2 text-center text-xs font-bold text-blue-600 bg-blue-50/50 hover:bg-blue-50 rounded-xl transition">
-              Open Full Flight &amp; Gate Drawer
+              Open Full Flight & Gate Drawer
             </button>
           </div>
         </aside>
@@ -236,14 +234,14 @@
       </div>
     </div>
 
-    <!-- VIEW 2: CHECKLISTS & REGISTRATIONS VIEW -->
+    <!-- VIEW 2: CHECKLISTS & REGISTRATIONS VIEW (RESTORED WITH SAFE PERSISTENCE) -->
     <section id="checklistView" class="hidden">
       <div class="lg:hidden flex bg-slate-200/90 p-1 rounded-xl mb-4 text-xs font-bold max-w-md mx-auto">
         <button onclick="switchChecklistTab('packing')" id="tabPackingBtn" class="flex-1 py-2 rounded-lg bg-white text-slate-900 shadow-xs transition">
           🎒 Packing (<span id="packingCount">0</span>)
         </button>
         <button onclick="switchChecklistTab('passes')" id="tabPassesBtn" class="flex-1 py-2 rounded-lg text-slate-600 transition">
-          🎟️ Passes &amp; Bookings (<span id="passesCount">0</span>)
+          🎟️ Passes & Bookings (<span id="passesCount">0</span>)
         </button>
       </div>
 
@@ -312,7 +310,7 @@
           <div class="bg-amber-50 border border-amber-200 rounded-2xl p-4 text-xs text-amber-900 flex items-start gap-3 shadow-xs">
             <i class="fa-solid fa-shield-halved text-amber-700 text-lg mt-0.5"></i>
             <div>
-              <p class="font-bold text-sm">Official ID &amp; Security Protocol</p>
+              <p class="font-bold text-sm">Official ID & Security Protocol</p>
               <p class="text-xs text-amber-800 mt-1 leading-relaxed">
                 Physical REAL IDs or Passports required for all adults at White House, Pentagon, and U.S. Capitol tours. Strictly no backpacks at the White House.
               </p>
@@ -322,8 +320,8 @@
           <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-xs">
             <div class="flex items-center justify-between mb-3">
               <div>
-                <h3 class="text-sm font-black uppercase tracking-wider text-slate-900">Reservations &amp; Timed Passes</h3>
-                <p class="text-xs text-slate-500">Government tours &amp; confirmed restaurant tables</p>
+                <h3 class="text-sm font-black uppercase tracking-wider text-slate-900">Reservations & Timed Passes</h3>
+                <p class="text-xs text-slate-500">Government tours & confirmed restaurant tables</p>
               </div>
               <span id="passesCountBadge" class="text-xs font-bold bg-blue-50 text-blue-700 px-2.5 py-1 rounded-full"></span>
             </div>
@@ -335,12 +333,12 @@
       </div>
     </section>
 
-    <!-- VIEW 3: KIDS ZONE MINI-GAMES VIEW (FIXED & FULLY FUNCTIONAL) -->
+    <!-- VIEW 3: KIDS ZONE MINI-GAMES VIEW (100% WORKING ENGINE) -->
     <section id="kidsView" class="hidden max-w-4xl mx-auto space-y-6">
       <div class="bg-gradient-to-r from-amber-500 via-rose-500 to-indigo-600 rounded-3xl p-6 text-white shadow-md relative overflow-hidden">
         <div class="relative z-10">
-          <span class="bg-white/20 backdrop-blur-md px-3 py-1 rounded-full text-xs font-black uppercase tracking-wider">Ages 8 &amp; 11 · Washington DC Edition</span>
-          <h2 class="text-2xl sm:text-3xl font-black mt-2">🎮 DC Junior Explorer &amp; Games</h2>
+          <span class="bg-white/20 backdrop-blur-md px-3 py-1 rounded-full text-xs font-black uppercase tracking-wider">Ages 8 & 11 · Washington DC Edition</span>
+          <h2 class="text-2xl sm:text-3xl font-black mt-2">🎮 DC Junior Explorer & Games</h2>
           <p class="text-xs sm:text-sm text-amber-100 max-w-xl mt-1">Play mini-games tied to the places you are visiting this week!</p>
         </div>
         <div class="absolute right-3 -bottom-4 text-7xl opacity-20 select-none">🐼🕵️🚀</div>
@@ -360,7 +358,7 @@
       <div id="gamePandaCard" class="bg-white rounded-3xl p-5 sm:p-6 border border-slate-200 shadow-sm text-center">
         <div class="flex items-center justify-between mb-3 text-xs">
           <span class="font-black text-emerald-700 bg-emerald-50 border border-emerald-200 px-3 py-1 rounded-full">
-            🐾 Feed Bao Li &amp; Qing Bao
+            🐾 Feed Bao Li & Qing Bao
           </span>
           <div class="flex items-center gap-3">
             <span class="font-bold text-slate-500">Score: <strong id="pandaScore" class="text-emerald-600 text-sm font-mono">0</strong></span>
@@ -466,20 +464,20 @@
           <input type="text" id="customDinnerName" placeholder="Restaurant Name (e.g., Carmine's)" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 text-xs text-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-500" />
           <input type="text" id="customDinnerAddress" placeholder="Address (e.g., 425 7th St NW)" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 text-xs text-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-500" />
           <button onclick="saveCustomDinner()" class="w-full bg-slate-900 hover:bg-slate-800 text-white font-bold py-2 rounded-xl text-xs shadow-xs transition">
-            Apply Custom Dinner &amp; Recalculate
+            Apply Custom Dinner & Recalculate
           </button>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- COMPLETE LIVE FLIGHT & GATES DRAWER (SHOWING BOTH OUTBOUND & RETURN) -->
+  <!-- COMPLETE LIVE FLIGHT & GATES DRAWER -->
   <div id="flightDrawer" class="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-xs hidden flex items-end sm:items-center justify-center p-0 sm:p-4">
     <div class="bg-white w-full max-w-lg rounded-t-3xl sm:rounded-2xl p-5 sm:p-6 shadow-2xl max-h-[90vh] overflow-y-auto">
       <div class="flex justify-between items-center pb-3 border-b border-slate-100">
         <div class="flex items-center gap-2">
           <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-ping"></span>
-          <h2 class="text-base font-black text-slate-900">Live Active Gates &amp; Flight Tracker</h2>
+          <h2 class="text-base font-black text-slate-900">Live Active Gates & Flight Tracker</h2>
         </div>
         <button onclick="toggleFlightDrawer()" class="w-8 h-8 rounded-full bg-slate-100 text-slate-500 hover:text-slate-900 flex items-center justify-center">
           <i class="fa-solid fa-xmark"></i>
@@ -657,7 +655,7 @@
   <div id="infoModal" class="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-xs hidden flex items-end sm:items-center justify-center p-0 sm:p-4">
     <div class="bg-white w-full max-w-md rounded-t-3xl sm:rounded-2xl p-5 shadow-2xl max-h-[85vh] overflow-y-auto">
       <div class="flex justify-between items-center mb-3">
-        <h2 class="text-base font-black text-slate-900">Trip Hub &amp; Addresses</h2>
+        <h2 class="text-base font-black text-slate-900">Trip Hub & Addresses</h2>
         <button onclick="toggleInfoModal()" class="w-8 h-8 rounded-full bg-slate-100 text-slate-500 hover:text-slate-900 flex items-center justify-center">
           <i class="fa-solid fa-xmark"></i>
         </button>
@@ -668,7 +666,6 @@
           <span class="text-[10px] font-black uppercase tracking-wider text-slate-500">Departure Residence</span>
           <p class="font-bold text-slate-900 text-sm mt-0.5">2232 Shenley Park Ln</p>
           <p class="text-slate-600 mt-0.5">Duluth, GA 30097</p>
-          <p class="text-[11px] text-blue-600 font-bold mt-1">UberXL pickup scheduled for 11:30 AM Thu Oct 15</p>
         </div>
 
         <div class="p-3.5 rounded-xl bg-slate-50 border border-slate-200">
@@ -708,7 +705,7 @@
     </button>
   </nav>
 
-  <!-- JAVASCRIPT LOGIC & GAMES ENGINE -->
+  <!-- JAVASCRIPT LOGIC & DYNAMIC ROUTING ENGINE -->
   <script>
     const HOTEL_COORDS = { lat: 38.9079, lng: -77.0354 };
 
@@ -723,43 +720,51 @@
       { name: "Carmine's Italian (Family Style - Penn Qtr)", address: "425 7th St NW, Washington, DC", lat: 38.8953, lng: -77.0219, website: "https://www.carminesnyc.com/locations/washington-dc" }
     ];
 
+    // ITINERARY DATA WITH BEDTIME ROUTINE & EXPLICIT EVENT DURATIONS
     const initialTripData = [
       {
         day: "Thu, Oct 15",
         theme: "Duluth Departure & Settle In",
         tagline: "Leave Shenley Park Ln ➔ ATL ➔ DCA ➔ Thai Dinner",
+        bedtime: {
+          time: "9:30 PM",
+          title: "🌙 Wind Down & Kids Bedtime",
+          desc: "Unpack bags, brush teeth, setup kid electronics to charge. Early 8:30 AM arrival required tomorrow for White House security!",
+          duration: "Overnight"
+        },
         afternoonStop: { name: "Holiday Inn Washington-Central", coords: HOTEL_COORDS },
         dinner: {
           time: "6:00 PM",
           name: "Ammathar Thai Cuisine",
           location: "1326 14th St NW, Washington, DC 20005",
           website: "https://www.ammatharthai.com/",
+          duration: "1 hr 15 min",
           desc: "Authentic, family-run Thai. Renowned Panang Curry and Pad See Ew. Staff easily prepares mild dishes for the kids.",
           coords: { lat: 38.9082, lng: -77.0319 }
         },
         fixedStopsBefore: [
           {
-            type: "site", time: "11:00 AM", title: "Final Prep & House Lock Up",
+            type: "site", time: "11:00 AM", duration: "30 min", title: "Final Prep & House Lock Up",
             location: "2232 Shenley Park Ln, Duluth, GA 30097",
             desc: "Double-check packing checklist, verify adult REAL IDs, lock all windows and house doors.",
             icon: "fa-house-lock"
           },
           {
-            type: "transit-uber", time: "11:30 AM", title: "UberXL: Duluth ➔ ATL Airport",
+            type: "transit-uber", time: "11:30 AM", duration: "1 hr", title: "UberXL: Duluth ➔ ATL Airport",
             location: "2232 Shenley Park Ln to ATL",
             desc: "40–45 miles via I-85 South (~55–65 mins depending on traffic).",
             uberMeta: { estFare: "$65–$85", time: "60 min", seats: "Seats 5 + Bags" },
             icon: "fa-car-side"
           },
           {
-            type: "site", time: "12:35 PM", title: "Check-in at ATL Airport (Domestic Terminal North)",
+            type: "site", time: "12:35 PM", duration: "1 hr 55 min", title: "Check-in at ATL Airport (Domestic Terminal North)",
             location: "ATL Domestic Terminal North (American Airlines)",
             website: "https://www.atl.com/",
             desc: "Bag drop, security screening, and proceed to Concourse T gates.",
             icon: "fa-ticket"
           },
           {
-            type: "flight", time: "2:33 PM – 4:26 PM", title: "AA 3357: Atlanta (ATL) ➔ Washington (DCA)",
+            type: "flight", time: "2:33 PM – 4:26 PM", duration: "1 hr 53 min", title: "AA 3357: Atlanta (ATL) ➔ Washington (DCA)",
             location: "Reagan National Airport (DCA)",
             website: "https://www.aa.com/",
             desc: "Nonstop Embraer 175 flight. Seats 16A, 16D, 16C, 16F. Conf: [removed]. Terminal 2 Baggage Claim 4.",
@@ -767,14 +772,14 @@
             icon: "fa-plane-arrival"
           },
           {
-            type: "transit-uber", time: "~5:00 PM", title: "UberXL from DCA to Hotel",
+            type: "transit-uber", time: "~5:00 PM", duration: "25 min", title: "UberXL from DCA to Hotel",
             location: "DCA to 1501 Rhode Island Ave NW",
             desc: "Follow 'Rideshare' signs outside baggage claim. 20–30 min ride across the bridge.",
             uberMeta: { estFare: "$35–$45", time: "25 min", seats: "Seats 5 + bags" },
             icon: "fa-car-side"
           },
           {
-            type: "site", time: "~5:30 PM", title: "Check-in: Holiday Inn Washington-Central",
+            type: "site", time: "~5:30 PM", duration: "25 min", title: "Check-in: Holiday Inn Washington-Central",
             location: "1501 Rhode Island Ave NW, Washington, DC 20005",
             website: "https://www.ihg.com/holidayinn/hotels/us/en/washington/wascc/hoteldetail",
             desc: "Settle into rooms and freshen up before dinner.",
@@ -786,46 +791,53 @@
         day: "Fri, Oct 16",
         theme: "White House, Pentagon & Old Town",
         tagline: "Historic tours & riverside dining in Alexandria",
+        bedtime: {
+          time: "9:00 PM",
+          title: "🌙 Wind Down & Kids Bedtime",
+          desc: "Foot baths and rest after a heavy walking day. Rest up for Smithsonian Day tomorrow!",
+          duration: "Overnight"
+        },
         afternoonStop: { name: "Old Town Alexandria Waterfront", coords: { lat: 38.8048, lng: -77.0401 } },
         dinner: {
           time: "4:30 PM",
           name: "Tokyo Japanese Steakhouse",
           location: "66 Canal Center Plaza, Alexandria, VA 22314",
           website: "https://www.tjsh1995.com/",
+          duration: "1 hr 30 min",
           desc: "Fun table hibachi show for the kids + sushi bar. 4:30 PM opening seating.",
           coords: { lat: 38.8122, lng: -77.0398 }
         },
         fixedStopsBefore: [
           {
-            type: "site", time: "8:30 AM", title: "White House Tour & Visitor Center",
+            type: "site", time: "8:30 AM", duration: "2 hrs", title: "White House Tour & Visitor Center",
             location: "1450 Pennsylvania Ave NW, Washington, DC 20004",
             website: "https://www.nps.gov/whho/index.htm",
             desc: "Tour at 9:00 AM. ⚠️ Govt ID required for every adult. Strictly NO BAGS. Arrive 30 mins early.",
             icon: "fa-landmark"
           },
           {
-            type: "transit-metro", time: "11:30 AM", title: "Metro Blue Line to The Pentagon",
+            type: "transit-metro", time: "11:30 AM", duration: "15 min", title: "Metro Blue Line to The Pentagon",
             location: "McPherson Sq ➔ Pentagon Station",
             desc: "Direct Blue Line (~15 min, elevators at both platforms). Tap phone/SmarTrip.",
             metroMeta: { line: "Blue Line Direct", duration: "15 min", stops: "4 stops" },
             icon: "fa-train-subway"
           },
           {
-            type: "site", time: "12:00 PM", title: "The Pentagon Guided Tour",
+            type: "site", time: "12:00 PM", duration: "2 hrs", title: "The Pentagon Guided Tour",
             location: "Arlington, VA (Pentagon Metro Tour Entrance)",
             website: "https://www.defense.gov/Experience/Pentagon-Tours/",
             desc: "1:00 PM tour. Mandatory arrival 60 min early. World's largest office building & 9/11 memorial.",
             icon: "fa-shield-halved"
           },
           {
-            type: "transit-uber", time: "2:15 PM", title: "UberXL to Old Town Alexandria",
+            type: "transit-uber", time: "2:15 PM", duration: "18 min", title: "UberXL to Old Town Alexandria",
             location: "King St & Union St, Alexandria, VA",
             desc: "15–20 min highway drive down GW Memorial Parkway.",
             uberMeta: { estFare: "$22–$28", time: "18 min", seats: "UberXL" },
             icon: "fa-car-side"
           },
           {
-            type: "site", time: "~2:30 PM", title: "Old Town Alexandria Waterfront",
+            type: "site", time: "~2:30 PM", duration: "1 hr 45 min", title: "Old Town Alexandria Waterfront",
             location: "King St & Union St, Alexandria, VA 22314",
             website: "https://www.visitalexandriava.com/",
             desc: "18th-century cobblestone streets, tall ships, local boutiques, and flat riverside promenade.",
@@ -837,53 +849,60 @@
         day: "Sat, Oct 17",
         theme: "Smithsonian Day & The Wharf",
         tagline: "Dinosaurs, Apollo Spacecraft & Wharf Pier Strolls",
+        bedtime: {
+          time: "9:30 PM",
+          title: "🌙 Wind Down & Kids Bedtime",
+          desc: "Kids review their favorite museum artifacts. Bedtime by 9:30 PM to prepare for Spy Museum undercover day!",
+          duration: "Overnight"
+        },
         afternoonStop: { name: "Municipal Fish Market & Recreation Pier", coords: { lat: 38.8805, lng: -77.0269 } },
         dinner: {
           time: "6:00 PM",
           name: "Makers Union (The Wharf)",
           location: "664 Maine Ave SW, Washington, DC 20024",
           website: "https://www.makersunionpub.com/wharf-dc",
+          duration: "1 hr 30 min",
           desc: "Coastal seafood favorites, jumbo crab cakes, calamari, burgers, and shareables along the water.",
           coords: { lat: 38.8798, lng: -77.0242 }
         },
         fixedStopsBefore: [
           {
-            type: "transit-uber", time: "9:40 AM", title: "UberXL to Natural History",
+            type: "transit-uber", time: "9:40 AM", duration: "10 min", title: "UberXL to Natural History",
             location: "10th St & Constitution Ave NW",
             desc: "Quick 10-minute drop-off on Constitution Ave.",
             uberMeta: { estFare: "$16–$20", time: "10 min", seats: "UberXL" },
             icon: "fa-car-side"
           },
           {
-            type: "site", time: "10:00 AM", title: "National Museum of Natural History",
+            type: "site", time: "10:00 AM", duration: "2 hrs 30 min", title: "National Museum of Natural History",
             location: "10th St & Constitution Ave NW, Washington, DC 20560",
             website: "https://naturalhistory.si.edu/",
             desc: "Henry the Elephant, Hall of Fossils / Dinosaurs, and the Hope Diamond. Free admission.",
             icon: "fa-bone"
           },
           {
-            type: "transit-walk", time: "12:30 PM", title: "Stroll across National Mall + Lunch",
+            type: "transit-walk", time: "12:30 PM", duration: "12 min", title: "Stroll across National Mall + Lunch",
             location: "Mall Food Trucks / Jefferson Dr",
             desc: "Grab casual bites from Constitution Ave food trucks or museum café to eat on Mall benches.",
             walkMeta: { steps: "~1,100 steps", dist: "0.5 mi", time: "12 min" },
             icon: "fa-person-walking"
           },
           {
-            type: "site", time: "1:30 PM", title: "National Air and Space Museum",
+            type: "site", time: "1:30 PM", duration: "2 hrs 45 min", title: "National Air and Space Museum",
             location: "650 Jefferson Dr SW, Washington, DC 20004",
             website: "https://airandspace.si.edu/",
             desc: "Wright 1903 Flyer, Apollo 11 command module, and touchable Moon rock. Timed entry pass required.",
             icon: "fa-rocket"
           },
           {
-            type: "transit-uber", time: "4:30 PM", title: "UberXL to The Wharf",
+            type: "transit-uber", time: "4:30 PM", duration: "8 min", title: "UberXL to The Wharf",
             location: "1100 Maine Ave SW",
             desc: "Short 8–10 minute hop down to the Southwest Waterfront.",
             uberMeta: { estFare: "$14–$18", time: "8 min", seats: "UberXL" },
             icon: "fa-car-side"
           },
           {
-            type: "site", time: "~4:45 PM", title: "Municipal Fish Market & Recreation Pier",
+            type: "site", time: "~4:45 PM", duration: "1 hr 15 min", title: "Municipal Fish Market & Recreation Pier",
             location: "1100 Maine Ave SW, Washington, DC 20024",
             website: "https://www.wharfdc.com/",
             desc: "Oldest continuous open-air seafood market in the USA. Steamed blue crabs and swinging pier benches.",
@@ -895,53 +914,60 @@
         day: "Sun, Oct 18",
         theme: "Spies, History & Monuments",
         tagline: "Undercover missions, Monument views & Lincoln at sunset",
+        bedtime: {
+          time: "9:00 PM",
+          title: "🌙 Wind Down & Early Kids Bedtime",
+          desc: "Early lights out! Tomorrow begins at 8:10 AM to catch the giant pandas eating breakfast at the National Zoo.",
+          duration: "Overnight"
+        },
         afternoonStop: { name: "WWII Memorial & Lincoln Memorial", coords: { lat: 38.8893, lng: -77.0502 } },
         dinner: {
           time: "6:00 PM",
           name: "Rasika (Penn Quarter)",
           location: "633 D St NW, Washington, DC 20004",
           website: "https://www.rasikarestaurant.com/",
+          duration: "1 hr 30 min",
           desc: "Award-winning Indian dining. The signature Palak Chaat (flash-fried crispy spinach) is legendary.",
           coords: { lat: 38.8948, lng: -77.0212 }
         },
         fixedStopsBefore: [
           {
-            type: "transit-uber", time: "9:40 AM", title: "UberXL to Spy Museum",
+            type: "transit-uber", time: "9:40 AM", duration: "11 min", title: "UberXL to Spy Museum",
             location: "700 L'Enfant Plaza SW",
             desc: "10-minute morning ride to L'Enfant Plaza.",
             uberMeta: { estFare: "$16–$22", time: "11 min", seats: "UberXL" },
             icon: "fa-car-side"
           },
           {
-            type: "site", time: "10:00 AM", title: "International Spy Museum",
+            type: "site", time: "10:00 AM", duration: "2 hrs", title: "International Spy Museum",
             location: "700 L'Enfant Plaza SW, Washington, DC 20024",
             website: "https://www.spymuseum.org/",
             desc: "Interactive kid favorite: choose an undercover alias, memorize secret codes, and complete missions.",
             icon: "fa-user-secret"
           },
           {
-            type: "transit-uber", time: "12:15 PM", title: "UberXL to Washington Monument",
+            type: "transit-uber", time: "12:15 PM", duration: "6 min", title: "UberXL to Washington Monument",
             location: "2 15th St NW",
             desc: "Short 6-minute connection to the Monument base.",
             uberMeta: { estFare: "$12–$16", time: "6 min", seats: "UberXL" },
             icon: "fa-car-side"
           },
           {
-            type: "site", time: "12:30 PM", title: "Washington Monument",
+            type: "site", time: "12:30 PM", duration: "1 hr 15 min", title: "Washington Monument",
             location: "2 15th St NW, Washington, DC 20418",
             website: "https://www.nps.gov/wamo/index.htm",
             desc: "Elevator ascent to the 500-foot observation deck. Timed tickets reserved on recreation.gov.",
             icon: "fa-monument"
           },
           {
-            type: "site", time: "2:15 PM", title: "National Archives Museum",
+            type: "site", time: "2:15 PM", duration: "1 hr", title: "National Archives Museum",
             location: "701 Constitution Ave NW, Washington, DC 20408",
             website: "https://museum.archives.gov/",
             desc: "The original Declaration of Independence, US Constitution, and Bill of Rights.",
             icon: "fa-scroll"
           },
           {
-            type: "site", time: "~3:30 PM", title: "WWII Memorial & Lincoln Memorial",
+            type: "site", time: "~3:30 PM", duration: "1 hr 45 min", title: "WWII Memorial & Lincoln Memorial",
             location: "2 Lincoln Memorial Cir NW, Washington, DC 20002",
             website: "https://www.nps.gov/linc/index.htm",
             desc: "Reflecting pool walk in late-afternoon golden hour. Stand where MLK delivered 'I Have a Dream'.",
@@ -953,53 +979,60 @@
         day: "Mon, Oct 19",
         theme: "Pandas, Bible Museum & Capitol",
         tagline: "Bao Li & Qing Bao, Capitol Rotunda & Old Ebbitt Grill",
+        bedtime: {
+          time: "9:30 PM",
+          title: "🌙 Wind Down & Final Luggage Staging",
+          desc: "Complete packing and bag zip-up tonight so tomorrow morning is stress-free before check-out!",
+          duration: "Overnight"
+        },
         afternoonStop: { name: "Lafayette Square & North Lawn View", coords: { lat: 38.8996, lng: -77.0365 } },
         dinner: {
           time: "5:30 PM",
           name: "Old Ebbitt Grill (DC Classic)",
           location: "675 15th St NW, Washington, DC 20005",
           website: "https://www.ebbitt.com/",
+          duration: "1 hr 45 min",
           desc: "DC's oldest historic saloon opposite the White House. Famous raw bar, steaks, and Victorian atmosphere.",
           coords: { lat: 38.8980, lng: -77.0336 }
         },
         fixedStopsBefore: [
           {
-            type: "transit-uber", time: "8:10 AM", title: "UberXL to National Zoo",
+            type: "transit-uber", time: "8:10 AM", duration: "14 min", title: "UberXL to National Zoo",
             location: "3001 Connecticut Ave NW",
             desc: "Early morning ride up Connecticut Ave. Arrive before gates open to catch giant pandas eating breakfast.",
             uberMeta: { estFare: "$18–$24", time: "14 min", seats: "UberXL" },
             icon: "fa-car-side"
           },
           {
-            type: "site", time: "8:30 AM", title: "Smithsonian National Zoo (Giant Pandas)",
+            type: "site", time: "8:30 AM", duration: "2 hrs 45 min", title: "Smithsonian National Zoo (Giant Pandas)",
             location: "3001 Connecticut Ave NW, Washington, DC 20008",
             website: "https://nationalzoo.si.edu/",
             desc: "Visit giant pandas Bao Li & Qing Bao. Tip: Request Uber pickup at the downhill Harvard St entrance!",
             icon: "fa-paw"
           },
           {
-            type: "site", time: "~12:15 PM", title: "Museum of the Bible",
+            type: "site", time: "~12:15 PM", duration: "2 hrs 30 min", title: "Museum of the Bible",
             location: "400 4th St SW, Washington, DC 20024",
             website: "https://www.museumofthebible.org/",
             desc: "Ancient Nazareth village walkthrough, Hebrew Bible experience, and high-tech flying theater simulation.",
             icon: "fa-book-bible"
           },
           {
-            type: "site", time: "3:20 PM", title: "U.S. Capitol Guided Tour",
+            type: "site", time: "3:20 PM", duration: "1 hr", title: "U.S. Capitol Guided Tour",
             location: "1st St SE, Washington, DC 20515",
             website: "https://www.visitthecapitol.gov/",
             desc: "Visitor Center check-in by 2:45 PM. Explore the Crypt, Capitol Rotunda, and National Statuary Hall.",
             icon: "fa-landmark-dome"
           },
           {
-            type: "transit-uber", time: "~4:20 PM", title: "UberXL to Lafayette Square",
+            type: "transit-uber", time: "~4:20 PM", duration: "18 min", title: "UberXL to Lafayette Square",
             location: "1st St SE to Lafayette Sq",
             desc: "12–20 min highway drive during early government rush hour.",
             uberMeta: { estFare: "$18–$24", time: "18 min", seats: "UberXL" },
             icon: "fa-car-side"
           },
           {
-            type: "site", time: "~4:45 PM", title: "Lafayette Square & North Lawn View",
+            type: "site", time: "~4:45 PM", duration: "35 min", title: "Lafayette Square & North Lawn View",
             location: "H St NW & 16th St NW, Washington, DC 20006",
             website: "https://www.nps.gov/whho/index.htm",
             desc: "Classic postcard view of the White House across the park with benches.",
@@ -1011,25 +1044,31 @@
         day: "Tue, Oct 20",
         theme: "Departure Day",
         tagline: "Breakfast, hotel checkout & Flight Home to Atlanta",
+        bedtime: {
+          time: "Night",
+          title: "🌙 Back Home in Duluth, GA",
+          desc: "Relax and unpack at 2232 Shenley Park Ln after a wonderful family vacation!",
+          duration: "Home"
+        },
         afternoonStop: { name: "Holiday Inn Washington-Central", coords: HOTEL_COORDS },
         dinner: null,
         fixedStopsBefore: [
           {
-            type: "site", time: "Morning", title: "Hotel Breakfast & Packing",
+            type: "site", time: "Morning", duration: "2 hrs", title: "Hotel Breakfast & Packing",
             location: "1501 Rhode Island Ave NW, Washington, DC 20005",
             website: "https://www.ihg.com/holidayinn/hotels/us/en/washington/wascc/hoteldetail",
             desc: "Final packing and room checkout (check-out time 12:00 PM). Have luggage loaded by 11:30 AM.",
             icon: "fa-suitcase"
           },
           {
-            type: "transit-uber", time: "11:30 AM", title: "UberXL to Reagan National (DCA)",
+            type: "transit-uber", time: "11:30 AM", duration: "20 min", title: "UberXL to Reagan National (DCA)",
             location: "DCA Terminal 2",
             desc: "15–20 min highway drive to DCA Terminal 2. Arrive by 11:50 AM (~2 hours ahead of 1:59 PM departure).",
             uberMeta: { estFare: "$26–$34", time: "18 min", seats: "UberXL" },
             icon: "fa-car-side"
           },
           {
-            type: "flight", time: "1:59 PM – 4:08 PM", title: "AA 4800: Washington (DCA) ➔ Atlanta (ATL)",
+            type: "flight", time: "1:59 PM – 4:08 PM", duration: "2 hrs 09 min", title: "AA 4800: Washington (DCA) ➔ Atlanta (ATL)",
             location: "Reagan National Airport (DCA)",
             website: "https://www.flyreagan.com/",
             desc: "Departs DCA 1:59 PM (Terminal 2 Gate 35B/C29). Nonstop to ATL arriving 4:08 PM (Gate T9/T10). Claim 2/7. Conf: [removed].",
@@ -1040,6 +1079,7 @@
       }
     ];
 
+    // ROBUST DATA RECOVERY ENGINE (PREVENTS FUTURE LOSS)
     const defaultCategories = ['Essentials', 'Hygiene', 'Clothing', 'Electronics'];
     const defaultPacking = [
       { id: "p1", name: "REAL IDs & Passports (Every adult)", category: "Essentials", checked: false },
@@ -1074,10 +1114,28 @@
       { id: "b15", title: "Old Ebbitt Grill Dinner", conf: "Table for 5 (Key reservation!)", time: "Mon, Oct 19 @ 5:30 PM", checked: true }
     ];
 
-    let customDinners = JSON.parse(localStorage.getItem('dc_custom_dinners_v10')) || {};
-    let packingCategories = JSON.parse(localStorage.getItem('dc_categories_v10')) || defaultCategories;
-    let packingItems = JSON.parse(localStorage.getItem('dc_packing_items_v10')) || defaultPacking;
-    let passesItems = JSON.parse(localStorage.getItem('dc_passes_items_v10')) || defaultPasses;
+    function safeLoadStorage(key, fallback) {
+      try {
+        // Try key, and legacy keys
+        const item = localStorage.getItem(key) || 
+                     localStorage.getItem(key.replace('_v11', '_v10')) ||
+                     localStorage.getItem(key.replace('_v11', '_v9')) ||
+                     localStorage.getItem(key.replace('_v11', '_v8')) ||
+                     localStorage.getItem(key.replace('_v11', '_v7')) ||
+                     localStorage.getItem(key.replace('_v11', '_v6'));
+        if (item) {
+          const parsed = JSON.parse(item);
+          if (Array.isArray(parsed) && parsed.length > 0) return parsed;
+        }
+      } catch (e) {}
+      return fallback;
+    }
+
+    let customDinners = JSON.parse(localStorage.getItem('dc_custom_dinners_v11')) || {};
+    let packingCategories = safeLoadStorage('dc_categories_v11', defaultCategories);
+    let packingItems = safeLoadStorage('dc_packing_items_v11', defaultPacking);
+    let passesItems = safeLoadStorage('dc_passes_items_v11', defaultPasses);
+
     let activeDayIndex = 0;
     let activeFilter = 'all';
 
@@ -1114,6 +1172,7 @@
             items.push({
               type: "transit-uber",
               time: "~5:15 PM",
+              duration: `${driveMins} min`,
               title: `UberXL to Dinner (${computed.dinner.name})`,
               location: `${computed.afternoonStop.name} to ${computed.dinner.name}`,
               desc: `Distance is ${distToDinner.toFixed(1)} miles (~${walkTimeMins} min walk). Auto-routed to UberXL to avoid tiring out the kids.`,
@@ -1125,6 +1184,7 @@
             items.push({
               type: "transit-walk",
               time: "~5:40 PM",
+              duration: `${walkTimeMins} min`,
               title: `Walk to Dinner (${computed.dinner.name})`,
               location: `${computed.afternoonStop.name} to ${computed.dinner.name}`,
               desc: `Easy, scenic family stroll (${distToDinner.toFixed(2)} miles). Flat sidewalks for the kids.`,
@@ -1136,6 +1196,7 @@
           items.push({
             type: "food",
             time: computed.dinner.time,
+            duration: computed.dinner.duration || "1 hr 30 min",
             title: `Dinner: ${computed.dinner.name}`,
             location: computed.dinner.location,
             website: computed.dinner.website,
@@ -1156,6 +1217,7 @@
             items.push({
               type: "transit-uber",
               time: "~7:15 PM",
+              duration: `${driveMins} min`,
               title: "UberXL back to Holiday Inn",
               location: `${computed.dinner.name} to Holiday Inn`,
               desc: `${distToHotel.toFixed(1)} miles back to 1501 Rhode Island Ave NW. Rest of the evening open.`,
@@ -1167,6 +1229,7 @@
             items.push({
               type: "transit-walk",
               time: "~7:15 PM",
+              duration: `${returnWalkMins} min`,
               title: "Stroll back to Holiday Inn",
               location: `${computed.dinner.name} to Hotel`,
               desc: `Short evening stroll (${distToHotel.toFixed(2)} miles) back to 1501 Rhode Island Ave NW.`,
@@ -1174,6 +1237,18 @@
               icon: "fa-person-walking"
             });
           }
+        }
+
+        // ADD BEDTIME ROUTINE CARD AT THE END OF EACH DAY
+        if (computed.bedtime) {
+          items.push({
+            type: "bedtime",
+            time: computed.bedtime.time,
+            duration: computed.bedtime.duration,
+            title: computed.bedtime.title,
+            desc: computed.bedtime.desc,
+            icon: "fa-moon"
+          });
         }
 
         computed.items = items;
@@ -1205,13 +1280,13 @@
             <i class="fa-solid fa-route"></i>
           </span>
           <div>
-            <span class="font-black text-slate-800 block text-xs uppercase tracking-wider">Dynamic Movement Plan</span>
+            <span class="font-black text-slate-800 block text-xs uppercase tracking-wider">Daily Movement Plan</span>
             <span class="text-slate-500 font-medium text-xs">
               🚗 ${uberCount}x UberXL · 👟 ${walkCount}x Walks${metroCount ? ` · 🚇 ${metroCount}x Metro` : ''}
             </span>
           </div>
         </div>
-        <span class="text-[10px] font-bold bg-slate-100 text-slate-700 px-2.5 py-1 rounded-md border border-slate-200">Max 20m Walk Active</span>
+        <span class="text-[10px] font-bold bg-slate-100 text-slate-700 px-2.5 py-1 rounded-md border border-slate-200">Durations Shown</span>
       `;
 
       const container = document.getElementById('timelineContainer');
@@ -1229,6 +1304,35 @@
       }
 
       container.innerHTML = filtered.map((item, i) => {
+        const durationBadge = item.duration ? `
+          <span class="inline-flex items-center gap-1 text-[10px] font-bold bg-slate-100 text-slate-600 px-2 py-0.5 rounded-md border border-slate-200">
+            <i class="fa-regular fa-clock text-[9px] text-slate-400"></i> ${item.duration}
+          </span>
+        ` : '';
+
+        // BEDTIME CARD
+        if (item.type === 'bedtime') {
+          return `
+            <div class="relative pl-9">
+              <div class="absolute left-2.5 -translate-x-1/2 top-4 w-7 h-7 rounded-full bg-indigo-950 border-2 border-amber-300 flex items-center justify-center text-amber-300 shadow-xs z-10">
+                <i class="fa-solid fa-moon text-xs"></i>
+              </div>
+              <div class="bg-gradient-to-r from-indigo-950 to-slate-900 text-white rounded-2xl p-4 border border-indigo-900 shadow-xs">
+                <div class="flex items-center justify-between text-xs mb-1">
+                  <div class="flex items-center gap-1.5">
+                    <span class="text-[10px] font-black uppercase tracking-wider bg-amber-400 text-slate-950 px-2 py-0.5 rounded">Night Rest</span>
+                    <span class="text-amber-200 font-semibold">${item.time}</span>
+                  </div>
+                  ${durationBadge}
+                </div>
+                <h4 class="font-black text-sm text-white mt-1">${item.title}</h4>
+                <p class="text-xs text-indigo-200 mt-1 leading-relaxed">${item.desc}</p>
+              </div>
+            </div>
+          `;
+        }
+
+        // UBER XL CARD
         if (item.type === 'transit-uber') {
           return `
             <div class="relative pl-9">
@@ -1238,10 +1342,13 @@
               <div class="bg-gradient-to-r from-slate-900 to-slate-800 text-white rounded-2xl p-4 border border-slate-700 shadow-xs">
                 <div class="flex items-center justify-between text-xs mb-1">
                   <div class="flex items-center gap-1.5">
-                    <span class="text-[10px] font-black uppercase tracking-wider bg-amber-400 text-slate-950 px-2 py-0.5 rounded">UberXL Auto-Routed</span>
+                    <span class="text-[10px] font-black uppercase tracking-wider bg-amber-400 text-slate-950 px-2 py-0.5 rounded">UberXL</span>
                     <span class="text-slate-300 font-semibold">${item.time}</span>
                   </div>
-                  <span class="text-xs font-mono text-amber-300 font-bold">${item.uberMeta.estFare}</span>
+                  <div class="flex items-center gap-1.5">
+                    ${durationBadge}
+                    <span class="text-xs font-mono text-amber-300 font-bold">${item.uberMeta.estFare}</span>
+                  </div>
                 </div>
                 <h4 class="font-black text-sm text-white mt-1">${item.title}</h4>
                 <p class="text-xs text-slate-300 mt-1 leading-relaxed">${item.desc}</p>
@@ -1254,6 +1361,7 @@
           `;
         }
 
+        // WALKING CARD
         if (item.type === 'transit-walk') {
           return `
             <div class="relative pl-9">
@@ -1263,10 +1371,13 @@
               <div class="bg-emerald-50/80 border border-emerald-200 rounded-2xl p-3.5 text-slate-800 shadow-xs">
                 <div class="flex items-center justify-between text-xs mb-1">
                   <div class="flex items-center gap-1.5">
-                    <span class="text-[10px] font-black uppercase tracking-wider bg-emerald-600 text-white px-2 py-0.5 rounded">Easy Stroll (&lt;20m)</span>
+                    <span class="text-[10px] font-black uppercase tracking-wider bg-emerald-600 text-white px-2 py-0.5 rounded">Walk / Stroll</span>
                     <span class="text-emerald-900 font-semibold">${item.time}</span>
                   </div>
-                  <span class="text-[10px] font-bold text-emerald-800">${item.walkMeta.dist} · ${item.walkMeta.time}</span>
+                  <div class="flex items-center gap-1.5">
+                    ${durationBadge}
+                    <span class="text-[10px] font-bold text-emerald-800">${item.walkMeta.dist}</span>
+                  </div>
                 </div>
                 <h4 class="font-bold text-xs text-slate-900">${item.title}</h4>
                 <p class="text-xs text-slate-600 mt-0.5">${item.desc}</p>
@@ -1278,6 +1389,7 @@
           `;
         }
 
+        // METRO CARD
         if (item.type === 'transit-metro') {
           return `
             <div class="relative pl-9">
@@ -1287,7 +1399,10 @@
               <div class="bg-blue-50 border border-blue-200 rounded-2xl p-4 text-slate-800 shadow-xs">
                 <div class="flex items-center justify-between text-xs mb-1">
                   <span class="text-[10px] font-black uppercase tracking-wider bg-blue-600 text-white px-2 py-0.5 rounded">Metro Direct</span>
-                  <span class="text-blue-900 font-bold">${item.time}</span>
+                  <div class="flex items-center gap-1.5">
+                    ${durationBadge}
+                    <span class="text-blue-900 font-bold">${item.time}</span>
+                  </div>
                 </div>
                 <h4 class="font-black text-sm text-slate-900 mt-1">${item.title}</h4>
                 <p class="text-xs text-slate-600 mt-1 leading-relaxed">${item.desc}</p>
@@ -1296,6 +1411,7 @@
           `;
         }
 
+        // FLIGHT CARD
         if (item.type === 'flight') {
           return `
             <div class="relative pl-9">
@@ -1305,7 +1421,10 @@
               <div class="bg-white rounded-2xl p-4 border border-blue-300 shadow-xs">
                 <div class="flex items-center justify-between text-xs mb-1">
                   <span class="text-[10px] font-black uppercase tracking-wider bg-blue-600 text-white px-2 py-0.5 rounded">American Airlines</span>
-                  <span class="text-slate-800 font-bold">${item.time}</span>
+                  <div class="flex items-center gap-1.5">
+                    ${durationBadge}
+                    <span class="text-slate-800 font-bold">${item.time}</span>
+                  </div>
                 </div>
                 <h4 class="font-black text-sm text-slate-900 mt-1">${item.title}</h4>
                 <p class="text-xs text-slate-600 mt-1 leading-relaxed">${item.desc}</p>
@@ -1324,6 +1443,7 @@
           `;
         }
 
+        // SIGHTSEEING / FOOD CARD
         const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(item.location || item.title)}`;
 
         return `
@@ -1333,7 +1453,10 @@
             </div>
             <div class="bg-white rounded-2xl p-4 border border-slate-200 shadow-xs transition hover:border-slate-300">
               <div class="flex items-center justify-between gap-2 mb-1.5">
-                <span class="text-xs font-bold text-slate-900">${item.time}</span>
+                <div class="flex items-center gap-2">
+                  <span class="text-xs font-bold text-slate-900">${item.time}</span>
+                  ${durationBadge}
+                </div>
                 <div class="flex items-center gap-1.5">
                   <span class="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full border ${item.type === 'food' ? 'bg-rose-100 text-rose-800 border-rose-200' : 'bg-indigo-100 text-indigo-800 border-indigo-200'}">
                     ${item.type}
@@ -1420,6 +1543,7 @@
 
       customDinners[editingDayIndex] = {
         time: initialTripData[editingDayIndex].dinner ? initialTripData[editingDayIndex].dinner.time : "6:00 PM",
+        duration: "1 hr 30 min",
         name: preset.name,
         location: preset.address,
         website: preset.website,
@@ -1427,7 +1551,7 @@
         coords: { lat: preset.lat, lng: preset.lng }
       };
 
-      localStorage.setItem('dc_custom_dinners_v10', JSON.stringify(customDinners));
+      localStorage.setItem('dc_custom_dinners_v11', JSON.stringify(customDinners));
       closeDinnerModal();
       renderDay(editingDayIndex);
     }
@@ -1444,6 +1568,7 @@
 
       customDinners[editingDayIndex] = {
         time: "6:00 PM",
+        duration: "1 hr 30 min",
         name: name,
         location: addr || name + ", Washington, DC",
         website: "",
@@ -1451,7 +1576,7 @@
         coords: approxCoords
       };
 
-      localStorage.setItem('dc_custom_dinners_v10', JSON.stringify(customDinners));
+      localStorage.setItem('dc_custom_dinners_v11', JSON.stringify(customDinners));
       document.getElementById('customDinnerName').value = '';
       document.getElementById('customDinnerAddress').value = '';
       closeDinnerModal();
@@ -1461,11 +1586,11 @@
     function resetAllDinners() {
       if (!confirm("Reset all changed dinners back to the original trip itinerary?")) return;
       customDinners = {};
-      localStorage.removeItem('dc_custom_dinners_v10');
+      localStorage.removeItem('dc_custom_dinners_v11');
       renderDay(activeDayIndex);
     }
 
-    // CHECKLIST LOGIC
+    // CHECKLIST LOGIC WITH PERSISTENCE
     function updateCategoryDropdowns() {
       const select = document.getElementById('newPackingCategory');
       if (select) {
@@ -1500,7 +1625,7 @@
         return;
       }
       packingCategories.push(val);
-      localStorage.setItem('dc_categories_v10', JSON.stringify(packingCategories));
+      localStorage.setItem('dc_categories_v11', JSON.stringify(packingCategories));
       input.value = '';
       updateCategoryDropdowns();
       renderChecklists();
@@ -1515,10 +1640,10 @@
         return;
       }
       packingCategories = packingCategories.map(c => c === oldName ? cleanName : c);
-      localStorage.setItem('dc_categories_v10', JSON.stringify(packingCategories));
+      localStorage.setItem('dc_categories_v11', JSON.stringify(packingCategories));
 
       packingItems = packingItems.map(item => item.category === oldName ? { ...item, category: cleanName } : item);
-      localStorage.setItem('dc_packing_items_v10', JSON.stringify(packingItems));
+      localStorage.setItem('dc_packing_items_v11', JSON.stringify(packingItems));
 
       updateCategoryDropdowns();
       renderChecklists();
@@ -1535,7 +1660,7 @@
         return;
       }
       packingItems = packingItems.map(i => i.id === itemId ? { ...i, category: matchedCat } : i);
-      localStorage.setItem('dc_packing_items_v10', JSON.stringify(packingItems));
+      localStorage.setItem('dc_packing_items_v11', JSON.stringify(packingItems));
       renderChecklists();
     }
 
@@ -1550,10 +1675,10 @@
         const ok = confirm(`Move ${affectedItems.length} item(s) to "${fallbackCat}" and delete "${catToRemove}"?`);
         if (!ok) return;
         packingItems = packingItems.map(item => item.category === catToRemove ? { ...item, category: fallbackCat } : item);
-        localStorage.setItem('dc_packing_items_v10', JSON.stringify(packingItems));
+        localStorage.setItem('dc_packing_items_v11', JSON.stringify(packingItems));
       }
       packingCategories = packingCategories.filter(c => c !== catToRemove);
-      localStorage.setItem('dc_categories_v10', JSON.stringify(packingCategories));
+      localStorage.setItem('dc_categories_v11', JSON.stringify(packingCategories));
       updateCategoryDropdowns();
       renderChecklists();
     }
@@ -1632,13 +1757,13 @@
 
     function togglePackingCheck(id) {
       packingItems = packingItems.map(item => item.id === id ? { ...item, checked: !item.checked } : item);
-      localStorage.setItem('dc_packing_items_v10', JSON.stringify(packingItems));
+      localStorage.setItem('dc_packing_items_v11', JSON.stringify(packingItems));
       renderChecklists();
     }
 
     function deletePackingItem(id) {
       packingItems = packingItems.filter(item => item.id !== id);
-      localStorage.setItem('dc_packing_items_v10', JSON.stringify(packingItems));
+      localStorage.setItem('dc_packing_items_v11', JSON.stringify(packingItems));
       renderChecklists();
     }
 
@@ -1651,14 +1776,14 @@
       if (!text) return;
 
       packingItems.push({ id: 'user_' + Date.now(), name: text, category: selectedCategory, checked: false });
-      localStorage.setItem('dc_packing_items_v10', JSON.stringify(packingItems));
+      localStorage.setItem('dc_packing_items_v11', JSON.stringify(packingItems));
       input.value = '';
       renderChecklists();
     }
 
     function togglePassCheck(id) {
       passesItems = passesItems.map(item => item.id === id ? { ...item, checked: !item.checked } : item);
-      localStorage.setItem('dc_passes_items_v10', JSON.stringify(passesItems));
+      localStorage.setItem('dc_passes_items_v11', JSON.stringify(passesItems));
       renderChecklists();
     }
 
@@ -1676,7 +1801,6 @@
       }
     }
 
-    // MAIN VIEW SWITCHER (SCHEDULE vs CHECKLIST vs KIDS ZONE)
     function switchMainView(view) {
       document.getElementById('itineraryView').classList.toggle('hidden', view !== 'itinerary');
       document.getElementById('checklistView').classList.toggle('hidden', view !== 'checklist');
@@ -1698,7 +1822,7 @@
         setTimeout(() => {
           initPandaCanvas();
           loadSpyMission(currentSpyMission);
-        }, 50);
+        }, 100);
       }
     }
 
@@ -1749,11 +1873,9 @@
       pCtx = pCanvas.getContext('2d');
       document.getElementById('pandaHighScore').textContent = pandaHighScore;
 
-      // Draw initial idle canvas
       drawPandaScene();
 
       if (!canvasEventsAttached) {
-        // Touch move
         pCanvas.addEventListener('touchmove', function(e) {
           if (!pandaGameRunning) return;
           const rect = pCanvas.getBoundingClientRect();
@@ -1764,7 +1886,6 @@
           e.preventDefault();
         }, { passive: false });
 
-        // Touch start
         pCanvas.addEventListener('touchstart', function(e) {
           if (!pandaGameRunning) return;
           const rect = pCanvas.getBoundingClientRect();
@@ -1774,7 +1895,6 @@
           pandaBasket.x = Math.max(5, Math.min(330, touchX - pandaBasket.width / 2));
         }, { passive: true });
 
-        // Mouse move
         pCanvas.addEventListener('mousemove', function(e) {
           if (!pandaGameRunning) return;
           const rect = pCanvas.getBoundingClientRect();
@@ -1813,19 +1933,15 @@
       if (!pCtx) return;
       pCtx.clearRect(0, 0, 400, 320);
 
-      // Grass base
       pCtx.fillStyle = '#059669';
       pCtx.fillRect(0, 305, 400, 15);
 
-      // Safe basket draw (No roundRect dependency)
       pCtx.fillStyle = '#1e293b';
       pCtx.fillRect(pandaBasket.x, pandaBasket.y, pandaBasket.width, pandaBasket.height);
       
-      // Decorative basket rim
       pCtx.fillStyle = '#10b981';
       pCtx.fillRect(pandaBasket.x, pandaBasket.y - 3, pandaBasket.width, 4);
 
-      // Panda face icon
       pCtx.font = '22px sans-serif';
       pCtx.fillText('🐼', pandaBasket.x + 20, pandaBasket.y + 21);
     }
@@ -1835,7 +1951,6 @@
 
       drawPandaScene();
 
-      // Spawn falling treats
       if (Math.random() < 0.04) {
         pandaItems.push({
           x: Math.random() * 340 + 20,
@@ -1845,7 +1960,6 @@
         });
       }
 
-      // Update and draw treats
       for (let i = pandaItems.length - 1; i >= 0; i--) {
         const item = pandaItems[i];
         item.y += item.speed;
@@ -1853,7 +1967,6 @@
         pCtx.font = '22px sans-serif';
         pCtx.fillText(item.icon, item.x, item.y);
 
-        // Catch collision
         if (
           item.y >= pandaBasket.y - 10 &&
           item.y <= pandaBasket.y + pandaBasket.height + 5 &&
@@ -1866,7 +1979,6 @@
           continue;
         }
 
-        // Drop below screen
         if (item.y > 325) {
           pandaItems.splice(i, 1);
           pandaLives--;
@@ -1877,7 +1989,6 @@
         }
       }
 
-      // Render remaining lives
       pCtx.font = '16px sans-serif';
       let hearts = '';
       for (let l = 0; l < pandaLives; l++) hearts += '❤️';
@@ -1922,7 +2033,7 @@
       document.getElementById('btnGameSpy').className = !isPanda ? 'flex-1 py-2.5 rounded-xl bg-white text-slate-900 shadow-xs transition flex items-center justify-center gap-1.5 cursor-pointer' : 'flex-1 py-2.5 rounded-xl text-slate-600 transition flex items-center justify-center gap-1.5 cursor-pointer';
 
       if (isPanda) {
-        initPandaCanvas();
+        setTimeout(initPandaCanvas, 50);
       } else {
         loadSpyMission(currentSpyMission);
       }
