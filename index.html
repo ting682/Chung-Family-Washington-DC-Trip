@@ -345,7 +345,7 @@
       </div>
 
       <!-- GAME SELECTOR TABS -->
-      <div class="flex bg-slate-200/90 p-1 rounded-2xl max-w-xl mx-auto text-[11px] sm:text-xs font-black">
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-1 bg-slate-200/90 p-1 rounded-2xl max-w-2xl mx-auto text-[11px] sm:text-xs font-black">
         <button onclick="switchMiniGame('panda')" id="btnGamePanda" class="flex-1 py-2.5 rounded-xl bg-white text-slate-900 shadow-xs transition flex items-center justify-center gap-1.5 cursor-pointer">
           <span>🐼 Panda Snack Toss</span>
         </button>
@@ -354,6 +354,9 @@
         </button>
         <button onclick="switchMiniGame('trivia')" id="btnGameTrivia" class="flex-1 py-2.5 rounded-xl text-slate-600 transition flex items-center justify-center gap-1.5 cursor-pointer">
           <span>🧠 DC Trivia</span>
+        </button>
+        <button onclick="switchMiniGame('hunt')" id="btnGameHunt" class="flex-1 py-2.5 rounded-xl text-slate-600 transition flex items-center justify-center gap-1.5 cursor-pointer">
+          <span>🔍 Scavenger Hunt</span>
         </button>
       </div>
 
@@ -490,6 +493,39 @@
               Change Place
             </button>
           </div>
+        </div>
+      </div>
+
+      <!-- GAME 4: DC SCAVENGER HUNT -->
+      <div id="gameHuntCard" class="bg-white rounded-3xl p-5 sm:p-6 border border-slate-200 shadow-sm hidden text-slate-800">
+        <div class="flex items-center justify-between pb-3 border-b border-slate-100 mb-3 gap-2">
+          <div class="flex items-center gap-2">
+            <span class="text-2xl">🔍</span>
+            <div>
+              <h3 class="text-sm font-black text-slate-900">DC Scavenger Hunt</h3>
+              <p class="text-xs text-slate-500">Find it, tap it, earn points! ⭐ items are worth 25.</p>
+            </div>
+          </div>
+          <span id="huntBadge" class="bg-amber-100 text-amber-800 text-[10px] font-black px-2.5 py-1 rounded-full whitespace-nowrap">🥉 Rookie</span>
+        </div>
+
+        <div class="bg-amber-50 border border-amber-200 rounded-2xl p-3 mb-4">
+          <div class="flex items-center justify-between text-xs font-bold mb-1.5">
+            <span class="text-amber-900"><span id="huntFound">0</span> of <span id="huntTotal">0</span> found</span>
+            <span class="text-amber-900"><span id="huntPoints" class="font-mono text-sm">0</span> pts</span>
+          </div>
+          <div class="w-full h-2 bg-white rounded-full overflow-hidden border border-amber-200">
+            <div id="huntProgress" class="h-full bg-amber-500 transition-all" style="width:0%"></div>
+          </div>
+          <p id="huntNextBadge" class="text-[10px] text-amber-800 mt-1.5"></p>
+        </div>
+
+        <div id="huntList" class="space-y-3"></div>
+
+        <div class="mt-4 pt-3 border-t border-slate-100 text-center">
+          <button onclick="resetHunt()" class="text-xs font-bold text-slate-400 hover:text-rose-600 cursor-pointer">
+            <i class="fa-solid fa-rotate-left"></i> Start the hunt over
+          </button>
         </div>
       </div>
     </section>
@@ -2722,6 +2758,114 @@
     }
 
     // ==========================================
+    // DC SCAVENGER HUNT: [day, place, emoji, [[task, points], ...]]
+    const HUNT_STOPS = [["Thu, Oct 15", "Travel Day", "✈️", [["Find your gate number on the airport departure screen at ATL", 10], ["Look out the plane window and spot the Washington Monument as you land", 25], ["Spot a D.C. license plate that says \"End Taxation Without Representation\"", 25], ["Find the hotel's front desk and learn the name of someone who works there", 10]]], ["Fri, Oct 16", "White House", "🏛️", [["Spot the American flag flying on the White House roof", 10], ["Find a uniformed Secret Service officer", 10], ["At the Visitor Center, find an exhibit about a president's family", 10], ["Take a family photo with the White House behind you", 10]]], ["Fri, Oct 16", "The Pentagon", "🛡️", [["Find the Pentagon stop on the Metro map before you ride", 10], ["Notice your tour guide walking backward the whole tour", 25], ["Spot people in uniforms from at least 2 different military branches", 10], ["Find the memorial to the people who died on September 11, 2001", 10]]], ["Fri, Oct 16", "Old Town Alexandria", "⚓", [["Find the skinny Spite House at 523 Queen Street", 25], ["Walk on the old cobblestones of Prince Street", 10], ["Peek into an artist's studio at the Torpedo Factory", 10], ["Spot Christ Church, where George Washington went to church", 10], ["Spot a water taxi on the Potomac River", 10]]], ["Sat, Oct 17", "Natural History Museum", "🦴", [["Say hi to Henry the elephant in the rotunda", 10], ["Find the deep blue Hope Diamond", 10], ["Find the T. rex in the Deep Time fossil hall", 10], ["Find Phoenix, the giant right whale, in the Ocean Hall", 10], ["Find a giant squid", 25], ["Watch a tarantula feeding (or find a live tarantula) in the Insect Zoo", 25]]], ["Sat, Oct 17", "Air and Space Museum", "🚀", [["Find the 1903 Wright Flyer", 10], ["Find the Spirit of St. Louis", 10], ["Touch the real Moon rock", 25], ["Find Columbia, the Apollo 11 spacecraft", 10], ["Find Amelia Earhart's red airplane", 10]]], ["Sat, Oct 17", "The Wharf", "🦀", [["Sit on a swinging bench on the Recreation Pier", 10], ["Find a barge at the fish market selling blue crabs", 10], ["Count how many boats you can see in the marina (more than 20?)", 10], ["Spot a fire pit along the waterfront", 10]]], ["Sun, Oct 18", "International Spy Museum", "🕵️", [["Get your secret cover identity and memorize it", 10], ["Find the Enigma code machine", 10], ["Find a spy gadget hidden inside something ordinary (like a lipstick or shoe)", 25], ["Find something about George Washington's Culper spy ring", 10], ["Finish your undercover mission at the end", 10]]], ["Sun, Oct 18", "Washington Monument", "🗼", [["Count the American flags around the base (hint: one for each state)", 10], ["Find the line where the stone changes color", 25], ["From the top, spot the White House", 10], ["From the top, spot the Capitol dome", 10]]], ["Sun, Oct 18", "National Archives", "📜", [["Find John Hancock's huge signature on the Declaration of Independence", 10], ["Find the words \"We the People\" on the Constitution", 10], ["Find the 1297 Magna Carta", 25], ["Spot the giant paintings on the Rotunda walls", 10]]], ["Sun, Oct 18", "Lincoln & WWII Memorials", "🗽", [["Find the Gettysburg Address carved on the wall", 10], ["Find the spot on the steps where Martin Luther King Jr. stood", 25], ["Count all 36 columns of the Lincoln Memorial", 10], ["At the WWII Memorial, find the pillar for Georgia", 10], ["Find a hidden \"Kilroy was here\" carving at the WWII Memorial", 25]]], ["Mon, Oct 19", "National Zoo", "🐼", [["See giant pandas Bao Li and Qing Bao", 10], ["Watch a panda eat bamboo", 10], ["Spot an orangutan on the O Line cables (if they're out)", 25], ["Find the Asian elephants", 10], ["Find the American bison", 10]]], ["Mon, Oct 19", "Museum of the Bible", "📖", [["Find the giant 40-foot bronze front doors", 10], ["Look up at the digital ceiling in the Grand Hall", 10], ["Walk through the recreated village of Nazareth", 10], ["Spot the Capitol from the rooftop", 25]]], ["Mon, Oct 19", "U.S. Capitol", "🏛️", [["Look up and find the painting at the top of the dome", 10], ["Find the plaster model of the Statue of Freedom", 10], ["Find a statue sent by Georgia", 25], ["Try the whispering spot in Statuary Hall", 25]]], ["Mon, Oct 19", "Lafayette Square", "📸", [["Find Andrew Jackson on his horse", 10], ["Find the statue of the Marquis de Lafayette", 10], ["Spot the yellow St. John's \"Church of the Presidents\"", 10], ["Count the squirrels you see in the park", 10]]], ["All Trip", "Anytime Bonus", "⭐", [["Ride the Metro escalator (some are super long!)", 10], ["Spot a food truck on the National Mall", 10], ["Find a cherry tree (they bloom in spring, but the trees are everywhere)", 10], ["Find a red, white and blue D.C. flag (three stars, two stripes)", 10], ["Say thank you to a park ranger", 10]]]];
+
+    const HUNT_BADGES = [
+      { min: 0,   label: '🥉 Rookie' },
+      { min: 100, label: '🥈 Explorer' },
+      { min: 250, label: '🥇 Trailblazer' },
+      { min: 450, label: '🏆 DC Master Detective' }
+    ];
+    const HUNT_STORE_KEY = 'dc_scavenger_hunt_v1';
+
+    function loadHuntState() {
+      try { return JSON.parse(localStorage.getItem(HUNT_STORE_KEY)) || {}; } catch (e) { return {}; }
+    }
+    function saveHuntState(state) {
+      try { localStorage.setItem(HUNT_STORE_KEY, JSON.stringify(state)); } catch (e) {}
+    }
+    let huntState = loadHuntState();
+    let huntOpen = null;
+
+    function huntTotals() {
+      let found = 0, total = 0, points = 0, maxPoints = 0;
+      HUNT_STOPS.forEach((stop, si) => stop[3].forEach(([task, pts], ti) => {
+        total++; maxPoints += pts;
+        if (huntState[`${si}-${ti}`]) { found++; points += pts; }
+      }));
+      return { found, total, points, maxPoints };
+    }
+
+    function renderHunt() {
+      const { found, total, points, maxPoints } = huntTotals();
+      document.getElementById('huntFound').textContent = found;
+      document.getElementById('huntTotal').textContent = total;
+      document.getElementById('huntPoints').textContent = points;
+      document.getElementById('huntProgress').style.width = `${total ? (found / total) * 100 : 0}%`;
+      const badge = found === total ? HUNT_BADGES[HUNT_BADGES.length - 1] : HUNT_BADGES.filter(b => points >= b.min).pop();
+      document.getElementById('huntBadge').textContent = badge.label;
+      const next = HUNT_BADGES.find(b => b.min > points);
+      document.getElementById('huntNextBadge').textContent = found === total
+        ? '🎉 You found everything! Official DC Master Detectives!'
+        : next ? `${next.min - points} more points to become ${next.label}` : `Find everything (${maxPoints} pts) to finish the hunt!`;
+
+      // Open today's stop by default (or the first unfinished stop)
+      if (huntOpen === null) {
+        const today = new Date().toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' }).replace(',', ',');
+        let idx = HUNT_STOPS.findIndex(st => st[0] === today);
+        if (idx < 0) idx = HUNT_STOPS.findIndex((st, si) => st[3].some((_, ti) => !huntState[`${si}-${ti}`]));
+        huntOpen = idx < 0 ? 0 : idx;
+      }
+
+      const list = document.getElementById('huntList');
+      list.innerHTML = '';
+      let lastDay = '';
+      HUNT_STOPS.forEach(([day, place, emoji, tasks], si) => {
+        if (day !== lastDay) {
+          const h = document.createElement('div');
+          h.className = 'text-[10px] font-black uppercase tracking-wider text-slate-400 pt-1';
+          h.textContent = day;
+          list.appendChild(h);
+          lastDay = day;
+        }
+        const doneCount = tasks.filter((_, ti) => huntState[`${si}-${ti}`]).length;
+        const complete = doneCount === tasks.length;
+        const box = document.createElement('div');
+        box.className = `rounded-2xl border ${complete ? 'border-emerald-300 bg-emerald-50/60' : 'border-slate-200 bg-slate-50'}`;
+
+        const head = document.createElement('button');
+        head.className = 'w-full flex items-center justify-between gap-2 px-3 py-2.5 text-left cursor-pointer';
+        head.innerHTML = `<span class="flex items-center gap-2 text-sm font-black text-slate-900"><span class="text-lg">${emoji}</span><span></span></span>
+          <span class="flex items-center gap-2 text-xs font-bold ${complete ? 'text-emerald-700' : 'text-slate-500'}">${complete ? '✅' : ''} ${doneCount}/${tasks.length}
+          <i class="fa-solid fa-chevron-${huntOpen === si ? 'up' : 'down'} text-[10px]"></i></span>`;
+        head.querySelector('span span:last-child').textContent = place;
+        head.onclick = () => { huntOpen = huntOpen === si ? -1 : si; renderHunt(); };
+        box.appendChild(head);
+
+        if (huntOpen === si) {
+          const ul = document.createElement('div');
+          ul.className = 'px-2 pb-2 space-y-1.5';
+          tasks.forEach(([task, pts], ti) => {
+            const key = `${si}-${ti}`;
+            const on = !!huntState[key];
+            const row = document.createElement('button');
+            row.className = `w-full flex items-center gap-3 text-left rounded-xl px-3 py-2.5 border-2 transition cursor-pointer ${on ? 'bg-emerald-100 border-emerald-400' : 'bg-white border-slate-200 hover:border-amber-300'}`;
+            row.innerHTML = `<span class="w-6 h-6 shrink-0 rounded-full border-2 flex items-center justify-center text-xs font-black ${on ? 'bg-emerald-500 border-emerald-500 text-white' : 'border-slate-300 text-transparent'}">✓</span>
+              <span class="flex-1 text-xs font-bold ${on ? 'text-emerald-900 line-through decoration-emerald-400' : 'text-slate-800'}"></span>
+              <span class="text-[10px] font-black whitespace-nowrap ${pts > 10 ? 'text-amber-600' : 'text-slate-400'}">${pts > 10 ? '⭐ ' : ''}+${pts}</span>`;
+            row.children[1].textContent = task;
+            row.onclick = () => {
+              if (huntState[key]) delete huntState[key]; else huntState[key] = Date.now();
+              saveHuntState(huntState);
+              renderHunt();
+            };
+            ul.appendChild(row);
+          });
+          box.appendChild(ul);
+        }
+        list.appendChild(box);
+      });
+    }
+
+    function resetHunt() {
+      if (!confirm('Start the scavenger hunt over? This clears every checkmark on this phone.')) return;
+      huntState = {};
+      saveHuntState(huntState);
+      huntOpen = null;
+      renderHunt();
+    }
+
     // DC TRIVIA QUESTION BANK: [siteKey, question, correct answer, [3 wrong answers]]
     const TRIVIA_QUESTIONS = [
       ["white-house", "Who was the first president to live in the White House?", "John Adams", ["George Washington", "Thomas Jefferson", "Abraham Lincoln"]],
@@ -3084,7 +3228,7 @@
     let currentSpyMission = 0;
 
     function switchMiniGame(game) {
-      const games = { panda: ['gamePandaCard', 'btnGamePanda'], spy: ['gameSpyCard', 'btnGameSpy'], trivia: ['gameTriviaCard', 'btnGameTrivia'] };
+      const games = { panda: ['gamePandaCard', 'btnGamePanda'], spy: ['gameSpyCard', 'btnGameSpy'], trivia: ['gameTriviaCard', 'btnGameTrivia'], hunt: ['gameHuntCard', 'btnGameHunt'] };
       Object.entries(games).forEach(([key, [cardId, btnId]]) => {
         const on = key === game;
         document.getElementById(cardId).classList.toggle('hidden', !on);
@@ -3096,8 +3240,10 @@
         setTimeout(initPandaCanvas, 60);
       } else if (game === 'spy') {
         loadSpyMission(currentSpyMission);
-      } else {
+      } else if (game === 'trivia') {
         initTrivia();
+      } else {
+        renderHunt();
       }
     }
 
