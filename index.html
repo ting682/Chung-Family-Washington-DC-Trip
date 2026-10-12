@@ -345,12 +345,15 @@
       </div>
 
       <!-- GAME SELECTOR TABS -->
-      <div class="flex bg-slate-200/90 p-1 rounded-2xl max-w-md mx-auto text-xs font-black">
+      <div class="flex bg-slate-200/90 p-1 rounded-2xl max-w-xl mx-auto text-[11px] sm:text-xs font-black">
         <button onclick="switchMiniGame('panda')" id="btnGamePanda" class="flex-1 py-2.5 rounded-xl bg-white text-slate-900 shadow-xs transition flex items-center justify-center gap-1.5 cursor-pointer">
           <span>🐼 Panda Snack Toss</span>
         </button>
         <button onclick="switchMiniGame('spy')" id="btnGameSpy" class="flex-1 py-2.5 rounded-xl text-slate-600 transition flex items-center justify-center gap-1.5 cursor-pointer">
           <span>🕵️ Spy Secret Ciphers</span>
+        </button>
+        <button onclick="switchMiniGame('trivia')" id="btnGameTrivia" class="flex-1 py-2.5 rounded-xl text-slate-600 transition flex items-center justify-center gap-1.5 cursor-pointer">
+          <span>🧠 DC Trivia</span>
         </button>
       </div>
 
@@ -430,6 +433,63 @@
           <button onclick="nextSpyMission()" class="text-purple-600 font-bold hover:underline flex items-center gap-1 cursor-pointer">
             Next Mission Clue <i class="fa-solid fa-arrow-right text-[10px]"></i>
           </button>
+        </div>
+      </div>
+      <!-- GAME 3: DC TRIVIA CHALLENGE -->
+      <div id="gameTriviaCard" class="bg-white rounded-3xl p-5 sm:p-6 border border-slate-200 shadow-sm hidden text-slate-800">
+        <div class="flex items-center justify-between pb-3 border-b border-slate-100 mb-4 gap-2">
+          <div class="flex items-center gap-2">
+            <span class="text-2xl">🧠</span>
+            <div>
+              <h3 class="text-sm font-black text-slate-900">DC Trivia Challenge</h3>
+              <p class="text-xs text-slate-500"><span id="triviaBankCount">200</span> questions about the places on our trip</p>
+            </div>
+          </div>
+          <span class="bg-sky-100 text-sky-800 font-mono text-[10px] font-bold px-2.5 py-1 rounded-full whitespace-nowrap">
+            Best: <span id="triviaBest">0</span>/10
+          </span>
+        </div>
+
+        <!-- START SCREEN -->
+        <div id="triviaStart" class="max-w-md mx-auto text-center space-y-3">
+          <p class="text-xs text-slate-600">Pick a place (or all of them), then answer 10 questions. Choose A, B, C or D!</p>
+          <select id="triviaSiteSelect" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2.5 text-xs font-bold text-slate-800 focus:outline-none focus:ring-2 focus:ring-sky-500"></select>
+          <button onclick="startTriviaRound()" class="w-full bg-sky-600 hover:bg-sky-700 text-white font-black px-6 py-3 rounded-2xl text-sm shadow-md active:scale-95 transition flex items-center justify-center gap-2 cursor-pointer">
+            <i class="fa-solid fa-play"></i> Start 10 Questions
+          </button>
+        </div>
+
+        <!-- QUESTION SCREEN -->
+        <div id="triviaPlay" class="hidden max-w-xl mx-auto">
+          <div class="flex items-center justify-between text-xs mb-2">
+            <span class="font-bold text-slate-500">Question <strong id="triviaQNum" class="text-slate-900">1</strong> of <span id="triviaQTotal">10</span></span>
+            <span class="font-bold text-slate-500">Score: <strong id="triviaScore" class="text-sky-700 font-mono text-sm">0</strong></span>
+          </div>
+          <div class="w-full h-1.5 bg-slate-100 rounded-full overflow-hidden mb-4">
+            <div id="triviaProgress" class="h-full bg-sky-500 transition-all" style="width:0%"></div>
+          </div>
+          <span id="triviaSiteTag" class="inline-block text-[10px] font-black uppercase tracking-wider text-sky-700 bg-sky-50 border border-sky-200 px-2 py-0.5 rounded-full mb-2"></span>
+          <p id="triviaQuestion" class="text-base sm:text-lg font-black text-slate-900 leading-snug mb-4"></p>
+          <div id="triviaChoices" class="grid gap-2"></div>
+          <div id="triviaFeedback" class="text-sm font-bold text-center min-h-[24px] mt-3"></div>
+          <button id="triviaNextBtn" onclick="nextTriviaQuestion()" class="hidden w-full mt-2 bg-slate-900 hover:bg-slate-800 text-white font-black py-3 rounded-2xl text-sm active:scale-95 transition cursor-pointer">
+            Next Question <i class="fa-solid fa-arrow-right text-xs"></i>
+          </button>
+        </div>
+
+        <!-- RESULTS SCREEN -->
+        <div id="triviaResults" class="hidden max-w-md mx-auto text-center space-y-3">
+          <div id="triviaResultEmoji" class="text-5xl">🏆</div>
+          <p class="text-lg font-black text-slate-900" id="triviaResultTitle">Great job!</p>
+          <p class="text-sm text-slate-600" id="triviaResultText"></p>
+          <div class="flex gap-2">
+            <button onclick="startTriviaRound()" class="flex-1 bg-sky-600 hover:bg-sky-700 text-white font-black py-3 rounded-2xl text-sm active:scale-95 transition cursor-pointer">
+              <i class="fa-solid fa-rotate-right"></i> Play Again
+            </button>
+            <button onclick="showTriviaStart()" class="flex-1 bg-slate-100 hover:bg-slate-200 text-slate-800 font-black py-3 rounded-2xl text-sm active:scale-95 transition cursor-pointer">
+              Change Place
+            </button>
+          </div>
         </div>
       </div>
     </section>
@@ -2608,6 +2668,355 @@
     }
 
     // ==========================================
+    // DC TRIVIA QUESTION BANK: [siteKey, question, correct answer, [3 wrong answers]]
+    const TRIVIA_QUESTIONS = [
+      ["white-house", "Who was the first president to live in the White House?", "John Adams", ["George Washington", "Thomas Jefferson", "Abraham Lincoln"]],
+      ["white-house", "What is the White House's street address?", "1600 Pennsylvania Avenue", ["1 Constitution Avenue", "100 Capitol Street", "50 Independence Avenue"]],
+      ["white-house", "Which country's soldiers burned the White House in 1814?", "Great Britain", ["France", "Spain", "Mexico"]],
+      ["white-house", "Which president made \"White House\" the building's official name in 1901?", "Theodore Roosevelt", ["Abraham Lincoln", "John Adams", "Franklin D. Roosevelt"]],
+      ["white-house", "About how many rooms does the White House have?", "132", ["32", "75", "500"]],
+      ["white-house", "What famous office is in the White House's West Wing?", "The Oval Office", ["The Round Room", "The Blue Office", "The Square Office"]],
+      ["white-house", "Who designed the White House?", "James Hoban", ["Pierre L'Enfant", "Thomas Jefferson", "Henry Bacon"]],
+      ["white-house", "In what year did the first president move into the White House?", "1800", ["1776", "1850", "1901"]],
+      ["white-house", "Which oval-shaped White House room is decorated in blue?", "The Blue Room", ["The Green Room", "The Red Room", "The East Room"]],
+      ["white-house", "What is the largest room in the White House, used for big events?", "The East Room", ["The Blue Room", "The Oval Office", "The Map Room"]],
+      ["white-house", "Which president had the inside of the White House rebuilt from 1949 to 1952?", "Harry Truman", ["Dwight Eisenhower", "John F. Kennedy", "Franklin D. Roosevelt"]],
+      ["white-house", "What is the president's helicopter called when he is on board?", "Marine One", ["Air Force One", "Sky One", "Eagle One"]],
+      ["white-house", "Who chose the spot where the White House was built?", "George Washington", ["John Adams", "Thomas Jefferson", "James Madison"]],
+      ["white-house", "About how many gallons of paint does it take to cover the outside of the White House?", "About 570", ["About 5", "About 50", "About 50,000"]],
+      ["pentagon", "How many sides does the Pentagon have?", "5", ["4", "6", "8"]],
+      ["pentagon", "In which state is the Pentagon?", "Virginia", ["Maryland", "Delaware", "Pennsylvania"]],
+      ["pentagon", "The Pentagon is the headquarters of which department?", "Department of Defense", ["Department of State", "Department of the Treasury", "Department of Education"]],
+      ["pentagon", "How many rings (circles of hallways) does the Pentagon have?", "5", ["3", "7", "10"]],
+      ["pentagon", "In what year did construction of the Pentagon begin?", "1941", ["1901", "1965", "1776"]],
+      ["pentagon", "About how long did it take to build the Pentagon?", "About 16 months", ["About 3 weeks", "About 5 years", "About 10 years"]],
+      ["pentagon", "About how many miles of hallways are inside the Pentagon?", "About 17.5 miles", ["About 2 miles", "About 50 miles", "About 100 miles"]],
+      ["pentagon", "To save steel during World War II, what did builders use between floors instead of many elevators?", "Concrete ramps", ["Rope ladders", "Slides", "Escalators"]],
+      ["pentagon", "How many lighted benches are in the outdoor Pentagon Memorial?", "184", ["50", "500", "1,000"]],
+      ["pentagon", "Which Metro lines stop at the Pentagon station?", "Blue and Yellow", ["Red and Green", "Orange only", "Silver only"]],
+      ["pentagon", "About how many people work at the Pentagon?", "About 23,000", ["About 500", "About 2,000", "About 1 million"]],
+      ["pentagon", "Which of these is NOT part of the Department of Defense in peacetime?", "The Coast Guard", ["The Army", "The Navy", "The Air Force"]],
+      ["pentagon", "A shape with five sides is called a...", "Pentagon", ["Hexagon", "Octagon", "Rectangle"]],
+      ["old-town", "Old Town Alexandria was the hometown of which Founding Father?", "George Washington", ["Benjamin Franklin", "John Adams", "Alexander Hamilton"]],
+      ["old-town", "In what year was Alexandria founded?", "1749", ["1607", "1812", "1900"]],
+      ["old-town", "Which river runs along Old Town Alexandria?", "Potomac River", ["Hudson River", "Mississippi River", "Ohio River"]],
+      ["old-town", "About how wide is Old Town's famous Spite House?", "About 7 feet", ["About 2 feet", "About 20 feet", "About 50 feet"]],
+      ["old-town", "What did the Navy build at the Torpedo Factory in 1918?", "Torpedoes", ["Cars", "Toys", "Pianos"]],
+      ["old-town", "What is inside the Torpedo Factory today?", "Artists' studios", ["A torpedo museum only", "A shopping mall", "A train station"]],
+      ["old-town", "At Christ Church in Old Town, whose family pew is still marked?", "George Washington's", ["Abraham Lincoln's", "Thomas Jefferson's", "Theodore Roosevelt's"]],
+      ["old-town", "At which Old Town tavern did George Washington attend his birthday balls?", "Gadsby's Tavern", ["Liberty Tavern", "King's Inn", "Patriot Pub"]],
+      ["old-town", "Alexandria was once part of Washington, D.C. In what year was it given back to Virginia?", "1846", ["1776", "1900", "1961"]],
+      ["old-town", "What kind of shop was the Stabler-Leadbeater Apothecary?", "A pharmacy that sold medicine", ["A bakery", "A shoe shop", "A blacksmith shop"]],
+      ["old-town", "What is the main street that runs through Old Town down to the river?", "King Street", ["Main Street", "Broadway", "Market Street"]],
+      ["old-town", "At Carlyle House in 1755, British General Braddock planned battles for which war?", "The French and Indian War", ["The Revolutionary War", "The Civil War", "The War of 1812"]],
+      ["old-town", "Union soldiers occupied Alexandria during which war?", "The Civil War", ["The Revolutionary War", "World War I", "The War of 1812"]],
+      ["old-town", "Which famous Civil War general grew up in Old Town Alexandria?", "Robert E. Lee", ["Ulysses S. Grant", "William T. Sherman", "George Meade"]],
+      ["natural-history", "What color is the Hope Diamond?", "Deep blue", ["Clear white", "Bright red", "Green"]],
+      ["natural-history", "About how many carats is the Hope Diamond?", "About 45", ["About 5", "About 100", "About 450"]],
+      ["natural-history", "How did jeweler Harry Winston send the Hope Diamond to the museum in 1958?", "By regular U.S. mail", ["In an armored truck", "By helicopter", "On a private jet"]],
+      ["natural-history", "What is the name of the big elephant in the museum's rotunda?", "Henry", ["Jumbo", "Dumbo", "Ellie"]],
+      ["natural-history", "What kind of elephant is Henry?", "African elephant", ["Asian elephant", "Woolly mammoth", "Mastodon"]],
+      ["natural-history", "In what year did the Natural History Museum open?", "1910", ["1776", "1950", "2000"]],
+      ["natural-history", "About how many specimens and artifacts are in the museum's collections?", "More than 145 million", ["About 1,000", "About 1 million", "About 10 billion"]],
+      ["natural-history", "What is the nickname of the museum's dinosaur and fossil hall?", "Deep Time", ["Dino Land", "Bone Zone", "Jurassic Hall"]],
+      ["natural-history", "In which state was the \"Nation's T. rex\" discovered?", "Montana", ["Florida", "Maine", "Hawaii"]],
+      ["natural-history", "What does the name \"Tyrannosaurus rex\" mean?", "Tyrant lizard king", ["Thunder lizard", "Terrible claw", "Swift thief"]],
+      ["natural-history", "What is the name of the life-size right whale model in the Ocean Hall?", "Phoenix", ["Moby", "Willy", "Splash"]],
+      ["natural-history", "Which big hairy spiders do staff feed in the Insect Zoo?", "Tarantulas", ["Black widows", "Daddy longlegs", "Jumping spiders"]],
+      ["natural-history", "The Smithsonian was started with money left by which person?", "James Smithson, a British scientist", ["George Washington", "King George III", "Benjamin Franklin"]],
+      ["natural-history", "What color does the Hope Diamond glow after it is lit with ultraviolet light?", "Red-orange", ["Blue", "Green", "It doesn't glow"]],
+      ["natural-history", "How much does it cost to visit the Natural History Museum?", "It's free", ["$10", "$25", "$50"]],
+      ["natural-history", "Which group of museums does the Natural History Museum belong to?", "The Smithsonian", ["The National Park Service", "The Library of Congress", "The National Archives"]],
+      ["air-space", "Which brothers made the first powered airplane flight?", "The Wright brothers", ["The Lindbergh brothers", "The Earhart brothers", "The Ford brothers"]],
+      ["air-space", "Where did the first powered airplane flight happen?", "Kitty Hawk, North Carolina", ["Dayton, Ohio", "Washington, D.C.", "Houston, Texas"]],
+      ["air-space", "In what year was the first powered airplane flight?", "1903", ["1853", "1927", "1969"]],
+      ["air-space", "What was the name of Charles Lindbergh's plane?", "Spirit of St. Louis", ["Wright Flyer", "Friendship 7", "Columbia"]],
+      ["air-space", "In 1927, Lindbergh flew alone nonstop from New York to which city?", "Paris", ["London", "Rome", "Los Angeles"]],
+      ["air-space", "What was the name of the Apollo 11 command module on display?", "Columbia", ["Eagle", "Liberty", "Discovery"]],
+      ["air-space", "What was the name of the Apollo 11 lunar module that landed on the Moon?", "Eagle", ["Columbia", "Falcon", "Apollo"]],
+      ["air-space", "Who was the first person to walk on the Moon?", "Neil Armstrong", ["Buzz Aldrin", "John Glenn", "Michael Collins"]],
+      ["air-space", "In what year did astronauts first land on the Moon?", "1969", ["1959", "1979", "1989"]],
+      ["air-space", "The Moon rock that visitors can touch came from which mission?", "Apollo 17", ["Apollo 1", "Apollo 13", "Gemini 4"]],
+      ["air-space", "In 1932, Amelia Earhart became the first woman to fly solo across which ocean?", "The Atlantic Ocean", ["The Pacific Ocean", "The Indian Ocean", "The Arctic Ocean"]],
+      ["air-space", "The museum opened in 1976 to celebrate which event?", "America's 200th birthday", ["The first Moon landing", "The end of World War II", "The first airplane flight"]],
+      ["air-space", "Which Space Shuttle is at the museum's Udvar-Hazy Center in Virginia?", "Discovery", ["Endeavour", "Atlantis", "Challenger"]],
+      ["air-space", "The SR-71 Blackbird is famous for being...", "One of the fastest jet airplanes ever", ["The biggest airplane ever", "The first helicopter", "A hot-air balloon"]],
+      ["air-space", "Which astronaut flew the Friendship 7 capsule around Earth in 1962?", "John Glenn", ["Neil Armstrong", "Sally Ride", "Alan Shepard"]],
+      ["wharf", "Since what year has the Wharf's Municipal Fish Market been open?", "1805", ["1905", "1955", "2017"]],
+      ["wharf", "The Municipal Fish Market is the oldest continuously running open-air fish market in which country?", "The United States", ["Canada", "Mexico", "England"]],
+      ["wharf", "Which crab is famous in the D.C. and Maryland area?", "Blue crab", ["King crab", "Hermit crab", "Coconut crab"]],
+      ["wharf", "What seasoning do people around D.C. famously sprinkle on steamed crabs?", "Old Bay", ["Cinnamon sugar", "Ketchup", "Ranch"]],
+      ["wharf", "The fish market vendors sell seafood from what?", "Floating barges", ["Food trucks", "Train cars", "Tree houses"]],
+      ["wharf", "Which body of water does the Wharf sit along?", "The Washington Channel", ["Lake Michigan", "Chesapeake Bay", "The Atlantic Ocean"]],
+      ["wharf", "The Washington Channel is part of which river?", "The Potomac River", ["The Hudson River", "The Ohio River", "The Colorado River"]],
+      ["wharf", "What fun seats can you find on the Wharf's Recreation Pier?", "Swinging benches", ["Bean bags", "Trampolines", "Rocking horses"]],
+      ["wharf", "What is the name of the big concert hall at the Wharf?", "The Anthem", ["The Ballad", "The Chorus", "The Symphony"]],
+      ["wharf", "In what year did the new Wharf neighborhood open its first phase?", "2017", ["1805", "1950", "1999"]],
+      ["wharf", "Which of these places can you reach by water taxi from the Wharf?", "Old Town Alexandria", ["Baltimore", "Philadelphia", "Richmond"]],
+      ["wharf", "A memorial near the Wharf honors people who died on which famous ship?", "The Titanic", ["The Mayflower", "The Santa Maria", "The Lusitania"]],
+      ["wharf", "What color do blue crabs turn when they are steamed?", "Red-orange", ["Purple", "Green", "White"]],
+      ["wharf", "How many legs (counting the claws) does a crab have?", "10", ["6", "8", "12"]],
+      ["spy-museum", "What was the name of George Washington's Revolutionary War spy ring?", "The Culper Ring", ["The Liberty Circle", "The Eagle Club", "The Patriot Band"]],
+      ["spy-museum", "Which country used the Enigma code machine in World War II?", "Germany", ["Japan", "Italy", "France"]],
+      ["spy-museum", "In what year did the Spy Museum move to its new building at L'Enfant Plaza?", "2019", ["2002", "2010", "2024"]],
+      ["spy-museum", "In what year did the International Spy Museum first open?", "2002", ["1952", "1976", "2019"]],
+      ["spy-museum", "Is the International Spy Museum part of the Smithsonian?", "No, it's a private museum", ["Yes, it's a Smithsonian museum", "It's run by the CIA", "It's run by the FBI"]],
+      ["spy-museum", "The Soviet spy gadget nicknamed the \"Kiss of Death\" was hidden inside what?", "A lipstick tube", ["A shoe", "A pen", "A watch"]],
+      ["spy-museum", "What secret tool did Washington's spies use to hide messages?", "Invisible ink", ["Text messages", "Carrier robots", "Radio"]],
+      ["spy-museum", "Which hero of the Underground Railroad also worked as a scout and spy for the Union?", "Harriet Tubman", ["Clara Barton", "Susan B. Anthony", "Betsy Ross"]],
+      ["spy-museum", "What does CIA stand for?", "Central Intelligence Agency", ["Capital Information Army", "Central Investigation Association", "Coded Intelligence Alliance"]],
+      ["spy-museum", "In spy talk, what is a cipher?", "A secret code", ["A hidden camera", "A disguise", "A getaway car"]],
+      ["spy-museum", "In spy talk, what is a \"mole\"?", "A spy hidden inside the enemy's organization", ["A tunnel digger", "A secret map", "A fake mustache"]],
+      ["spy-museum", "What was the name of the Soviet Union's main spy agency?", "The KGB", ["The FBI", "MI6", "The CIA"]],
+      ["spy-museum", "What is the name of Britain's foreign spy agency?", "MI6", ["KGB", "NSA", "Scotland Yard"]],
+      ["spy-museum", "Decode it! Shift each letter of \"IBU\" back by one letter. What word do you get?", "HAT", ["CAT", "BAT", "HIT"]],
+      ["spy-museum", "At the start of the Spy Museum's Undercover Mission, what does each visitor get?", "A secret cover identity", ["A real badge", "A spy car", "A pet dog"]],
+      ["monument", "About how tall is the Washington Monument?", "555 feet", ["155 feet", "305 feet", "1,000 feet"]],
+      ["monument", "Who does the Washington Monument honor?", "George Washington", ["Abraham Lincoln", "Thomas Jefferson", "John Adams"]],
+      ["monument", "What is the shape of the Washington Monument called?", "An obelisk", ["A pyramid", "A dome", "A pagoda"]],
+      ["monument", "In what year was the Washington Monument's cornerstone laid?", "1848", ["1776", "1800", "1900"]],
+      ["monument", "Why does the stone change color about 150 feet up?", "Building stopped for years, and new stone was used later", ["It was painted", "Lightning hit it", "It's a special design"]],
+      ["monument", "In what year was the Washington Monument finished?", "1884", ["1848", "1865", "1922"]],
+      ["monument", "The Washington Monument was the tallest structure in the world until which was built?", "The Eiffel Tower", ["The Empire State Building", "Big Ben", "The Statue of Liberty"]],
+      ["monument", "What metal is the tip of the Washington Monument made of?", "Aluminum", ["Gold", "Copper", "Iron"]],
+      ["monument", "How many steps are inside the Washington Monument?", "896", ["96", "300", "2,000"]],
+      ["monument", "About how long does the elevator take to reach the top?", "About 70 seconds", ["About 5 seconds", "About 10 minutes", "About 30 minutes"]],
+      ["monument", "How many carved memorial stones are set into the inside walls?", "193", ["13", "50", "1,000"]],
+      ["monument", "An earthquake in which year cracked the monument and closed it until 2014?", "2011", ["1906", "1989", "2020"]],
+      ["monument", "How many American flags circle the base of the Washington Monument?", "50", ["13", "25", "100"]],
+      ["monument", "What stone mostly covers the outside of the monument?", "White marble", ["Red brick", "Black granite", "Sandstone"]],
+      ["archives", "Which of these is NOT one of the three \"Charters of Freedom\" at the Archives?", "The Gettysburg Address", ["The Declaration of Independence", "The Constitution", "The Bill of Rights"]],
+      ["archives", "In what year was the Declaration of Independence adopted?", "1776", ["1787", "1791", "1812"]],
+      ["archives", "In what year was the U.S. Constitution written?", "1787", ["1776", "1800", "1865"]],
+      ["archives", "The Bill of Rights is made up of the first how many amendments?", "10", ["5", "12", "27"]],
+      ["archives", "Who wrote the biggest signature on the Declaration of Independence?", "John Hancock", ["George Washington", "Benjamin Franklin", "Thomas Jefferson"]],
+      ["archives", "Which gas fills the cases that protect the Charters of Freedom?", "Argon", ["Oxygen", "Helium", "Carbon dioxide"]],
+      ["archives", "Where were the Declaration and Constitution hidden for safety during World War II?", "Fort Knox, Kentucky", ["The White House basement", "A cave in Colorado", "A ship at sea"]],
+      ["archives", "Who was the main author of the Declaration of Independence?", "Thomas Jefferson", ["George Washington", "John Adams", "James Madison"]],
+      ["archives", "How many columns surround the outside of the National Archives Building?", "72", ["12", "36", "100"]],
+      ["archives", "The Magna Carta on display at the Archives comes from which country?", "England", ["France", "Italy", "Spain"]],
+      ["archives", "Where were the Declaration and Constitution kept before moving to the Archives in 1952?", "The Library of Congress", ["The Smithsonian", "The Capitol", "Mount Vernon"]],
+      ["archives", "What happens on the Archives' steps every Fourth of July?", "The Declaration is read aloud", ["A pie-eating contest", "A rocket launch", "A parade of horses"]],
+      ["archives", "The Archives' architect, John Russell Pope, also designed which memorial?", "The Jefferson Memorial", ["The Lincoln Memorial", "The Washington Monument", "The WWII Memorial"]],
+      ["archives", "How many pages long is the original U.S. Constitution?", "4", ["1", "20", "100"]],
+      ["archives", "Which document begins with the words \"We the People\"?", "The Constitution", ["The Declaration of Independence", "The Bill of Rights", "The Magna Carta"]],
+      ["lincoln", "Abraham Lincoln was which number president?", "16th", ["1st", "3rd", "26th"]],
+      ["lincoln", "About how tall is the statue of Lincoln sitting in the memorial?", "19 feet", ["6 feet", "50 feet", "100 feet"]],
+      ["lincoln", "How many columns surround the Lincoln Memorial?", "36", ["12", "50", "13"]],
+      ["lincoln", "What do the Lincoln Memorial's 36 columns stand for?", "The states in the Union when Lincoln died", ["Lincoln's age", "Days of the Civil War", "His Cabinet members"]],
+      ["lincoln", "The Lincoln Memorial was designed to look like which ancient building?", "The Parthenon in Greece", ["The Colosseum in Rome", "The Great Pyramid in Egypt", "Stonehenge in England"]],
+      ["lincoln", "Which short 1863 speech by Lincoln is carved on the memorial's wall?", "The Gettysburg Address", ["The I Have a Dream speech", "The Declaration of Independence", "The Emancipation Speech"]],
+      ["lincoln", "Which famous speech did Martin Luther King Jr. give on the memorial's steps in 1963?", "I Have a Dream", ["Four Freedoms", "Ask Not", "Tear Down This Wall"]],
+      ["lincoln", "Marian Anderson, who performed at the memorial in 1939, was a famous...", "Singer", ["Pilot", "Scientist", "Baseball player"]],
+      ["lincoln", "In what year was the Lincoln Memorial dedicated?", "1922", ["1865", "1900", "1963"]],
+      ["lincoln", "The Lincoln Memorial appears on the back of which bill?", "The $5 bill", ["The $1 bill", "The $20 bill", "The $100 bill"]],
+      ["lincoln", "Who designed the statue of Lincoln?", "Daniel Chester French", ["Henry Bacon", "Pierre L'Enfant", "Gutzon Borglum"]],
+      ["lincoln", "About how long is the Reflecting Pool?", "About 2,000 feet", ["About 50 feet", "About 200 feet", "About 20,000 feet"]],
+      ["lincoln", "How many gold stars are on the Freedom Wall at the WWII Memorial?", "4,048", ["48", "400", "10,000"]],
+      ["lincoln", "How many pillars does the WWII Memorial have?", "56", ["13", "50", "100"]],
+      ["lincoln", "Which of Lincoln's sons attended the memorial's dedication in 1922?", "Robert Todd Lincoln", ["Tad Lincoln", "Willie Lincoln", "Eddie Lincoln"]],
+      ["national-zoo", "What are the names of the National Zoo's giant pandas?", "Bao Li and Qing Bao", ["Mei Xiang and Tian Tian", "Ling-Ling and Hsing-Hsing", "Bei Bei and Xiao Qi Ji"]],
+      ["national-zoo", "What do giant pandas mostly eat?", "Bamboo", ["Fish", "Berries", "Insects"]],
+      ["national-zoo", "Giant pandas come from which country?", "China", ["Japan", "Australia", "Brazil"]],
+      ["national-zoo", "The zoo's first pandas arrived in 1972 after which president visited China?", "Richard Nixon", ["John F. Kennedy", "Ronald Reagan", "Jimmy Carter"]],
+      ["national-zoo", "In what year was the National Zoo founded?", "1889", ["1776", "1950", "2001"]],
+      ["national-zoo", "The zoo was started partly to save which animal from disappearing?", "The American bison", ["The bald eagle", "The giant panda", "The gray wolf"]],
+      ["national-zoo", "How much does it cost to get into the National Zoo?", "It's free", ["$10", "$30", "$100"]],
+      ["national-zoo", "The National Zoo is inside which big D.C. park?", "Rock Creek Park", ["Central Park", "Yellowstone", "Golden Gate Park"]],
+      ["national-zoo", "What is the O Line at the zoo?", "Cables that orangutans use to travel high above visitors", ["A train for visitors", "An otter pool", "A line for ice cream"]],
+      ["national-zoo", "About how big is the National Zoo?", "163 acres", ["16 acres", "1,600 acres", "16,000 acres"]],
+      ["national-zoo", "What kind of animal is a golden lion tamarin?", "A small monkey", ["A big cat", "A bird", "A lizard"]],
+      ["national-zoo", "Which animal did the zoo help save from extinction?", "The black-footed ferret", ["The dodo", "The woolly mammoth", "The T. rex"]],
+      ["national-zoo", "About how many animals live at the National Zoo?", "About 2,100", ["About 50", "About 500", "About 50,000"]],
+      ["national-zoo", "A newborn giant panda cub is about the size of a...", "Stick of butter", ["Basketball", "Cat", "Small dog"]],
+      ["national-zoo", "About how many hours a day can a giant panda spend eating?", "Up to 14 hours", ["1 hour", "3 hours", "All 24 hours"]],
+      ["museum-bible", "In what year did the Museum of the Bible open?", "2017", ["1917", "1976", "2001"]],
+      ["museum-bible", "What was the Museum of the Bible's building used for before it was a museum?", "A refrigerated warehouse", ["A train station", "A hospital", "A school"]],
+      ["museum-bible", "About how tall are the museum's bronze front doors?", "40 feet", ["8 feet", "15 feet", "100 feet"]],
+      ["museum-bible", "The front doors show text from which book of the Bible?", "Genesis", ["Psalms", "Revelation", "Exodus"]],
+      ["museum-bible", "What covers the ceiling of the museum's Grand Hall?", "A giant 140-foot digital screen", ["A mirror", "A glass aquarium", "Real stars"]],
+      ["museum-bible", "What is the name of the museum's flying-ride experience over D.C.?", "Washington Revelation", ["Capital Coaster", "Sky Story", "Freedom Flight"]],
+      ["museum-bible", "The museum has a life-size recreation of which 1st-century village?", "Nazareth", ["Rome", "Athens", "Cairo"]],
+      ["museum-bible", "What did experts discover about the museum's Dead Sea Scroll fragments?", "They were modern forgeries", ["They were the oldest ever found", "They were made of gold", "They were written in English"]],
+      ["museum-bible", "What was the first major book Johannes Gutenberg printed with movable type?", "A Bible", ["A dictionary", "A newspaper", "A cookbook"]],
+      ["museum-bible", "What grows in the museum's rooftop garden?", "Plants mentioned in the Bible", ["Only cactus", "Giant pumpkins", "Tropical fruit trees"]],
+      ["museum-bible", "In which languages was the Bible originally written?", "Hebrew, Aramaic and Greek", ["Latin and English", "French and German", "Spanish and Italian"]],
+      ["museum-bible", "Which Metro station is closest to the Museum of the Bible?", "Federal Center SW", ["Dupont Circle", "Union Station", "Woodley Park"]],
+      ["museum-bible", "In 2021, the museum returned thousands of items to which countries?", "Iraq and Egypt", ["France and Spain", "Canada and Mexico", "China and Japan"]],
+      ["museum-bible", "The family that founded the museum owns which company?", "Hobby Lobby", ["Walmart", "Target", "Costco"]],
+      ["capitol", "Which group meets in the U.S. Capitol to make laws?", "Congress", ["The Supreme Court", "The President's Cabinet", "The governors"]],
+      ["capitol", "What are the two parts of Congress?", "The Senate and the House of Representatives", ["The Army and the Navy", "The Cabinet and the Court", "The North and the South"]],
+      ["capitol", "Who laid the Capitol's cornerstone in 1793?", "George Washington", ["John Adams", "Thomas Jefferson", "Abraham Lincoln"]],
+      ["capitol", "What is the name of the statue on top of the Capitol dome?", "The Statue of Freedom", ["Lady Liberty", "The Spirit of America", "Columbia"]],
+      ["capitol", "What is the Capitol dome made of?", "Cast iron", ["Wood", "Gold", "Plastic"]],
+      ["capitol", "What is the name of the painting high inside the Capitol dome?", "The Apotheosis of Washington", ["The Mona Lisa", "The Last Supper", "Washington Crossing the Delaware"]],
+      ["capitol", "Who painted the artwork inside the Capitol dome?", "Constantino Brumidi", ["Leonardo da Vinci", "Pablo Picasso", "Vincent van Gogh"]],
+      ["capitol", "How many statues does each state send to the Capitol's statue collection?", "2", ["1", "5", "10"]],
+      ["capitol", "Who burned the Capitol in 1814?", "British troops", ["French troops", "A lightning storm", "Confederate troops"]],
+      ["capitol", "Washington, D.C.'s four quadrants (NW, NE, SW, SE) meet at which building?", "The U.S. Capitol", ["The White House", "The Washington Monument", "Union Station"]],
+      ["capitol", "How many senators are in the U.S. Senate?", "100", ["50", "435", "535"]],
+      ["capitol", "How many voting members are in the House of Representatives?", "435", ["100", "50", "1,000"]],
+      ["capitol", "In what year did the underground Capitol Visitor Center open?", "2008", ["1908", "1963", "2020"]],
+      ["capitol", "Which president lay in state in the Capitol Rotunda in 1865?", "Abraham Lincoln", ["George Washington", "Thomas Jefferson", "Andrew Jackson"]],
+      ["capitol", "The Capitol's dome was being built during which war?", "The Civil War", ["The Revolutionary War", "World War I", "The War of 1812"]],
+      ["lafayette", "Lafayette Square is named after which hero of the American Revolution?", "The Marquis de Lafayette", ["George Washington", "Paul Revere", "Nathan Hale"]],
+      ["lafayette", "Which country was the Marquis de Lafayette from?", "France", ["England", "Spain", "Germany"]],
+      ["lafayette", "Whose statue on horseback stands in the center of Lafayette Square?", "Andrew Jackson", ["George Washington", "Ulysses S. Grant", "Abraham Lincoln"]],
+      ["lafayette", "What was special about the Andrew Jackson statue when it was made in 1853?", "It was the first bronze horse-and-rider statue cast in America", ["It was made of chocolate", "It was the tallest statue in the world", "It could move"]],
+      ["lafayette", "What is St. John's Church on Lafayette Square nicknamed?", "The Church of the Presidents", ["The Little White Church", "The Capitol Chapel", "The Liberty Church"]],
+      ["lafayette", "Every president since which one has attended a service at St. John's Church?", "James Madison", ["George Washington", "Abraham Lincoln", "John F. Kennedy"]],
+      ["lafayette", "What is Blair House, across the street from Lafayette Square?", "The President's Guest House for world leaders", ["A hotel for tourists", "The Vice President's home", "A post office"]],
+      ["lafayette", "Decatur House was built for which naval hero?", "Stephen Decatur", ["John Paul Jones", "Oliver Hazard Perry", "David Farragut"]],
+      ["lafayette", "What were the women who protested outside the White House in 1917 called?", "The Silent Sentinels", ["The Freedom Riders", "The Daughters of Liberty", "The Rough Riders"]],
+      ["lafayette", "What did the Silent Sentinels want?", "Women's right to vote", ["Lower taxes", "A new capital city", "More parks"]],
+      ["lafayette", "The four corner statues in Lafayette Square honor heroes from where?", "Other countries who helped in the American Revolution", ["The Civil War", "The U.S. Navy", "Space exploration"]],
+      ["lafayette", "Thaddeus Kościuszko, honored with a statue in the square, came from which country?", "Poland", ["Italy", "Sweden", "Ireland"]],
+      ["lafayette", "Since 1995, Pennsylvania Avenue in front of the White House has been closed to what?", "Cars", ["People", "Dogs", "Bicycles"]],
+      ["lafayette", "Lafayette Square was split from the White House grounds when which president cut a road through in 1804?", "Thomas Jefferson", ["George Washington", "John Adams", "James Madison"]],
+      ["dc", "What does \"D.C.\" stand for?", "District of Columbia", ["Democratic City", "Downtown Capital", "Delaware County"]],
+      ["dc", "Who designed Washington, D.C.'s street plan in 1791?", "Pierre L'Enfant", ["Benjamin Franklin", "James Hoban", "Thomas Edison"]],
+      ["dc", "In what year did Washington, D.C. become the nation's capital?", "1800", ["1776", "1850", "1900"]],
+      ["dc", "Which country gave Washington, D.C. its famous cherry trees in 1912?", "Japan", ["China", "France", "Canada"]],
+      ["dc", "What is the long, grassy park between the Capitol and the Lincoln Memorial called?", "The National Mall", ["Central Park", "The Great Lawn", "Liberty Field"]],
+      ["dc", "Which state borders Washington, D.C. on the north and east?", "Maryland", ["Virginia", "Delaware", "Pennsylvania"]],
+      ["dc", "Besides the Potomac, which other river flows through Washington, D.C.?", "The Anacostia River", ["The Hudson River", "The Rio Grande", "The Charles River"]],
+      ["dc", "Washington, D.C. was named after George Washington and which explorer?", "Christopher Columbus", ["Lewis and Clark", "Ferdinand Magellan", "Marco Polo"]],
+      ["dc", "What is Washington, D.C.'s subway system called?", "Metro", ["The Tube", "The T", "The L"]],
+      ["dc", "Is Washington, D.C. one of the 50 states?", "No, it's a federal district", ["Yes, it's the 50th state", "Yes, it's the 1st state", "It's part of Virginia"]],
+      ["dc", "How much does it cost to visit most Smithsonian museums in D.C.?", "Nothing, they're free", ["$5", "$20", "$50"]],
+      ["dc", "Which branch of government does the Supreme Court belong to?", "The judicial branch", ["The legislative branch", "The executive branch", "The military branch"]],
+      ["dc", "Which branch of government does the President lead?", "The executive branch", ["The judicial branch", "The legislative branch", "The state branch"]]
+    ];
+
+    const TRIVIA_ROUND_SIZE = 10;
+    let triviaRound = [], triviaIndex = 0, triviaScoreVal = 0, triviaSite = 'all';
+
+    function triviaSiteName(key) {
+      if (key === 'dc') return 'Washington, D.C.';
+      return (SITE_KNOWLEDGE_BASE[key] && SITE_KNOWLEDGE_BASE[key].title) || key;
+    }
+
+    function triviaStore(key, value) {
+      try {
+        if (value === undefined) return JSON.parse(localStorage.getItem(key));
+        localStorage.setItem(key, JSON.stringify(value));
+      } catch (e) { return null; }
+    }
+
+    function shuffleArray(arr) {
+      const a = arr.slice();
+      for (let i = a.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [a[i], a[j]] = [a[j], a[i]];
+      }
+      return a;
+    }
+
+    function initTrivia() {
+      const select = document.getElementById('triviaSiteSelect');
+      if (!select.options.length) {
+        const counts = {};
+        TRIVIA_QUESTIONS.forEach(q => { counts[q[0]] = (counts[q[0]] || 0) + 1; });
+        select.innerHTML = `<option value="all">🌎 All places (${TRIVIA_QUESTIONS.length} questions)</option>` +
+          Object.keys(counts).map(k => `<option value="${k}">${triviaSiteName(k)} (${counts[k]})</option>`).join('');
+        document.getElementById('triviaBankCount').textContent = TRIVIA_QUESTIONS.length;
+      }
+      document.getElementById('triviaBest').textContent = triviaStore('dc_trivia_best') || 0;
+    }
+
+    function showTriviaStart() {
+      document.getElementById('triviaStart').classList.remove('hidden');
+      document.getElementById('triviaPlay').classList.add('hidden');
+      document.getElementById('triviaResults').classList.add('hidden');
+    }
+
+    function startTriviaRound() {
+      triviaSite = document.getElementById('triviaSiteSelect').value || 'all';
+      const pool = TRIVIA_QUESTIONS.map((q, i) => i).filter(i => triviaSite === 'all' || TRIVIA_QUESTIONS[i][0] === triviaSite);
+
+      // Prefer questions not seen yet, so all questions get a turn before repeats
+      const seenKey = 'dc_trivia_seen_' + triviaSite;
+      let seen = triviaStore(seenKey) || [];
+      let fresh = pool.filter(i => !seen.includes(i));
+      if (fresh.length < Math.min(TRIVIA_ROUND_SIZE, pool.length)) { seen = []; fresh = pool.slice(); }
+      triviaRound = shuffleArray(fresh).slice(0, TRIVIA_ROUND_SIZE);
+      triviaStore(seenKey, seen.concat(triviaRound));
+
+      triviaIndex = 0;
+      triviaScoreVal = 0;
+      document.getElementById('triviaQTotal').textContent = triviaRound.length;
+      document.getElementById('triviaStart').classList.add('hidden');
+      document.getElementById('triviaResults').classList.add('hidden');
+      document.getElementById('triviaPlay').classList.remove('hidden');
+      showTriviaQuestion();
+    }
+
+    function showTriviaQuestion() {
+      const [site, question, correct, wrong] = TRIVIA_QUESTIONS[triviaRound[triviaIndex]];
+      const choices = shuffleArray([correct, ...wrong]);
+      document.getElementById('triviaQNum').textContent = triviaIndex + 1;
+      document.getElementById('triviaScore').textContent = triviaScoreVal;
+      document.getElementById('triviaProgress').style.width = `${(triviaIndex / triviaRound.length) * 100}%`;
+      document.getElementById('triviaSiteTag').textContent = triviaSiteName(site);
+      document.getElementById('triviaQuestion').textContent = question;
+      document.getElementById('triviaFeedback').textContent = '';
+      document.getElementById('triviaNextBtn').classList.add('hidden');
+
+      const box = document.getElementById('triviaChoices');
+      box.innerHTML = '';
+      choices.forEach((choice, i) => {
+        const btn = document.createElement('button');
+        btn.className = 'trivia-choice w-full text-left flex items-center gap-3 bg-slate-50 hover:bg-sky-50 border-2 border-slate-200 hover:border-sky-300 rounded-2xl px-3 py-3 text-sm font-bold text-slate-800 transition cursor-pointer';
+        btn.dataset.correct = choice === correct ? '1' : '0';
+        btn.innerHTML = `<span class="w-8 h-8 shrink-0 rounded-full bg-white border-2 border-slate-300 flex items-center justify-center font-black text-slate-700">${'ABCD'[i]}</span><span></span>`;
+        btn.lastChild.textContent = choice;
+        btn.onclick = () => answerTrivia(btn, correct);
+        box.appendChild(btn);
+      });
+    }
+
+    function answerTrivia(btn, correct) {
+      const buttons = document.querySelectorAll('#triviaChoices .trivia-choice');
+      buttons.forEach(b => {
+        b.disabled = true;
+        b.classList.remove('hover:bg-sky-50', 'hover:border-sky-300', 'cursor-pointer');
+        if (b.dataset.correct === '1') b.classList.add('!bg-emerald-50', '!border-emerald-500');
+      });
+      const feedback = document.getElementById('triviaFeedback');
+      if (btn.dataset.correct === '1') {
+        triviaScoreVal++;
+        feedback.innerHTML = '<span class="text-emerald-600">✅ Correct! Nice work, explorer!</span>';
+      } else {
+        btn.classList.add('!bg-rose-50', '!border-rose-500');
+        feedback.innerHTML = '';
+        const span = document.createElement('span');
+        span.className = 'text-rose-600';
+        span.textContent = `❌ Not quite. The answer is: ${correct}`;
+        feedback.appendChild(span);
+      }
+      document.getElementById('triviaScore').textContent = triviaScoreVal;
+      const nextBtn = document.getElementById('triviaNextBtn');
+      nextBtn.innerHTML = triviaIndex === triviaRound.length - 1 ? 'See My Score 🏆' : 'Next Question <i class="fa-solid fa-arrow-right text-xs"></i>';
+      nextBtn.classList.remove('hidden');
+    }
+
+    function nextTriviaQuestion() {
+      triviaIndex++;
+      if (triviaIndex < triviaRound.length) { showTriviaQuestion(); return; }
+
+      const total = triviaRound.length;
+      const pct = triviaScoreVal / total;
+      const best = Math.max(triviaStore('dc_trivia_best') || 0, triviaScoreVal);
+      triviaStore('dc_trivia_best', best);
+      document.getElementById('triviaBest').textContent = best;
+      document.getElementById('triviaProgress').style.width = '100%';
+      document.getElementById('triviaResultEmoji').textContent = pct === 1 ? '🏆' : pct >= 0.7 ? '🌟' : pct >= 0.4 ? '👍' : '📚';
+      document.getElementById('triviaResultTitle').textContent = pct === 1 ? 'Perfect score! DC Expert!' : pct >= 0.7 ? 'Awesome job, explorer!' : pct >= 0.4 ? 'Good try! Keep exploring!' : 'Keep learning, you will get there!';
+      document.getElementById('triviaResultText').textContent = `You got ${triviaScoreVal} out of ${total} right` + (triviaSite === 'all' ? '.' : ` about ${triviaSiteName(triviaSite)}.`);
+      document.getElementById('triviaPlay').classList.add('hidden');
+      document.getElementById('triviaResults').classList.remove('hidden');
+    }
+
     // MINI-GAME 2: SPY CIPHER DECODER
     // ==========================================
     const spyMissions = [
@@ -2621,17 +3030,20 @@
     let currentSpyMission = 0;
 
     function switchMiniGame(game) {
-      const isPanda = (game === 'panda');
-      document.getElementById('gamePandaCard').classList.toggle('hidden', !isPanda);
-      document.getElementById('gameSpyCard').classList.toggle('hidden', isPanda);
+      const games = { panda: ['gamePandaCard', 'btnGamePanda'], spy: ['gameSpyCard', 'btnGameSpy'], trivia: ['gameTriviaCard', 'btnGameTrivia'] };
+      Object.entries(games).forEach(([key, [cardId, btnId]]) => {
+        const on = key === game;
+        document.getElementById(cardId).classList.toggle('hidden', !on);
+        document.getElementById(btnId).className = on ? 'flex-1 py-2.5 rounded-xl bg-white text-slate-900 shadow-xs transition flex items-center justify-center gap-1.5 cursor-pointer' : 'flex-1 py-2.5 rounded-xl text-slate-600 transition flex items-center justify-center gap-1.5 cursor-pointer';
+      });
+      if (game !== 'panda' && typeof pandaGameRunning !== 'undefined' && pandaGameRunning) endPandaGame();
 
-      document.getElementById('btnGamePanda').className = isPanda ? 'flex-1 py-2.5 rounded-xl bg-white text-slate-900 shadow-xs transition flex items-center justify-center gap-1.5 cursor-pointer' : 'flex-1 py-2.5 rounded-xl text-slate-600 transition flex items-center justify-center gap-1.5 cursor-pointer';
-      document.getElementById('btnGameSpy').className = !isPanda ? 'flex-1 py-2.5 rounded-xl bg-white text-slate-900 shadow-xs transition flex items-center justify-center gap-1.5 cursor-pointer' : 'flex-1 py-2.5 rounded-xl text-slate-600 transition flex items-center justify-center gap-1.5 cursor-pointer';
-
-      if (isPanda) {
+      if (game === 'panda') {
         setTimeout(initPandaCanvas, 60);
-      } else {
+      } else if (game === 'spy') {
         loadSpyMission(currentSpyMission);
+      } else {
+        initTrivia();
       }
     }
 
