@@ -268,6 +268,10 @@
               <div id="packingProgressBar" class="h-full bg-gradient-to-r from-blue-500 to-indigo-600 transition-all duration-300" style="width: 0%"></div>
             </div>
 
+            <button type="button" onclick="openAlexaModal()" class="w-full mb-4 bg-sky-50 hover:bg-sky-100 border border-sky-200 text-sky-800 font-bold py-2.5 rounded-xl text-xs transition flex items-center justify-center gap-2 cursor-pointer">
+              <i class="fa-solid fa-microphone"></i> Send to Alexa (voice commands)
+            </button>
+
             <form onsubmit="addPackingItem(event)" class="space-y-2">
               <div class="flex flex-col sm:flex-row gap-2">
                 <input type="text" id="newPackingInput" placeholder="Add item (e.g. Camera, Nintendo)..." class="flex-1 bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2 text-xs text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500" required />
@@ -530,6 +534,61 @@
       </div>
     </section>
 
+  </div>
+
+  <!-- ALEXA PACKING LIST MODAL -->
+  <div id="alexaModal" class="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-xs hidden flex items-end sm:items-center justify-center p-0 sm:p-4">
+    <div class="bg-white w-full max-w-lg rounded-t-3xl sm:rounded-2xl p-5 sm:p-6 shadow-2xl max-h-[85vh] overflow-y-auto">
+      <div class="flex justify-between items-start pb-3 border-b border-slate-100">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-xl bg-sky-100 text-sky-700 flex items-center justify-center text-lg">
+            <i class="fa-solid fa-microphone"></i>
+          </div>
+          <div>
+            <span class="text-[10px] font-black uppercase text-sky-600 tracking-wider block">Packing List</span>
+            <h3 class="text-base sm:text-lg font-black text-slate-900 leading-snug">Send to Alexa</h3>
+          </div>
+        </div>
+        <button onclick="closeAlexaModal()" class="w-8 h-8 rounded-full bg-slate-100 text-slate-500 hover:text-slate-900 flex items-center justify-center cursor-pointer">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <div class="mt-4 space-y-4 text-xs">
+        <div class="bg-sky-50 p-3.5 rounded-xl border border-sky-200 text-sky-950 leading-relaxed">
+          Stand near your Echo and say each line below. Tap a line after Alexa confirms it to keep your place.
+          This makes a separate list in your Alexa app; checking items off here won't change it there.
+        </div>
+
+        <div>
+          <h4 class="font-black text-slate-900 uppercase tracking-wider text-[11px] mb-2">1. Create the list (once)</h4>
+          <div class="alexa-cmd rounded-xl border-2 border-slate-200 bg-slate-50 px-3 py-2.5 font-bold text-slate-800">"Alexa, create a list called <span class="alexa-list-name"></span>."</div>
+        </div>
+
+        <div>
+          <h4 class="font-black text-slate-900 uppercase tracking-wider text-[11px] mb-2">2. Add what's left to pack (<span id="alexaItemCount">0</span>)</h4>
+          <div id="alexaCommandList" class="space-y-1.5"></div>
+        </div>
+
+        <div>
+          <h4 class="font-black text-slate-900 uppercase tracking-wider text-[11px] mb-2">3. While you pack</h4>
+          <ul class="space-y-1.5 text-slate-700">
+            <li>🔊 "Alexa, what's on my <span class="alexa-list-name"></span> list?"</li>
+            <li>✅ "Alexa, remove <em>sunscreen</em> from my <span class="alexa-list-name"></span> list."</li>
+            <li>➕ "Alexa, add <em>umbrella</em> to my <span class="alexa-list-name"></span> list."</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="mt-5 pt-3 border-t border-slate-100 flex items-center justify-between gap-2">
+        <button onclick="copyAlexaCommands()" id="alexaCopyBtn" class="flex-1 bg-sky-600 hover:bg-sky-700 text-white font-bold py-2 px-3 rounded-xl text-center text-xs transition shadow-xs flex items-center justify-center gap-1.5 cursor-pointer">
+          <i class="fa-regular fa-copy"></i> Copy all commands
+        </button>
+        <button onclick="closeAlexaModal()" class="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold rounded-xl text-xs transition cursor-pointer">
+          Close
+        </button>
+      </div>
+    </div>
   </div>
 
   <!-- SITE DETAIL MODAL (SUMMARY & IMPORTANCE CARD) -->
@@ -2334,6 +2393,65 @@
       customDinners = {};
       localStorage.removeItem('dc_custom_dinners_v12');
       renderDay(activeDayIndex);
+    }
+
+    // SEND PACKING LIST TO ALEXA (voice commands for Alexa's built-in lists)
+    const ALEXA_LIST_NAME = 'DC Trip';
+
+    function alexaSpokenName(name) {
+      return name
+        .replace(/\([^)]*\)/g, '')   // drop notes in parentheses
+        .replace(/\s*[&\/+]\s*/g, ' and ')
+        .replace(/[^A-Za-z0-9' ,.-]/g, ' ')
+        .replace(/\s+/g, ' ')
+        .trim();
+    }
+
+    function getAlexaCommands() {
+      const left = packingItems.filter(i => !i.checked);
+      return left.map(i => `Alexa, add ${alexaSpokenName(i.name)} to my ${ALEXA_LIST_NAME} list.`);
+    }
+
+    function openAlexaModal() {
+      document.querySelectorAll('.alexa-list-name').forEach(el => el.textContent = ALEXA_LIST_NAME);
+      const cmds = getAlexaCommands();
+      document.getElementById('alexaItemCount').textContent = cmds.length;
+      const box = document.getElementById('alexaCommandList');
+      box.innerHTML = '';
+      if (!cmds.length) {
+        box.innerHTML = '<p class="text-slate-500">Everything is already checked off. Nothing left to send!</p>';
+      }
+      cmds.forEach(cmd => {
+        const row = document.createElement('button');
+        row.type = 'button';
+        row.className = 'w-full text-left flex items-start gap-2.5 rounded-xl border-2 border-slate-200 bg-white px-3 py-2.5 font-bold text-slate-800 transition cursor-pointer';
+        row.innerHTML = '<span class="mt-0.5 w-5 h-5 shrink-0 rounded-full border-2 border-slate-300 flex items-center justify-center text-[10px] text-transparent">✓</span><span></span>';
+        row.lastChild.textContent = `"${cmd}"`;
+        row.onclick = () => {
+          const done = row.classList.toggle('opacity-50');
+          row.firstChild.className = done
+            ? 'mt-0.5 w-5 h-5 shrink-0 rounded-full border-2 bg-emerald-500 border-emerald-500 flex items-center justify-center text-[10px] text-white'
+            : 'mt-0.5 w-5 h-5 shrink-0 rounded-full border-2 border-slate-300 flex items-center justify-center text-[10px] text-transparent';
+          row.lastChild.classList.toggle('line-through', done);
+        };
+        box.appendChild(row);
+      });
+      document.getElementById('alexaModal').classList.remove('hidden');
+    }
+
+    function closeAlexaModal() {
+      document.getElementById('alexaModal').classList.add('hidden');
+    }
+
+    function copyAlexaCommands() {
+      const text = [`Alexa, create a list called ${ALEXA_LIST_NAME}.`, ...getAlexaCommands()].join('\n');
+      const btn = document.getElementById('alexaCopyBtn');
+      const done = () => { btn.innerHTML = '<i class="fa-solid fa-check"></i> Copied!'; setTimeout(() => { btn.innerHTML = '<i class="fa-regular fa-copy"></i> Copy all commands'; }, 2000); };
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(done).catch(() => { prompt('Copy these commands:', text); });
+      } else {
+        prompt('Copy these commands:', text);
+      }
     }
 
     // CHECKLIST LOGIC WITH PERSISTENCE
