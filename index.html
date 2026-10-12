@@ -454,6 +454,14 @@
         </button>
       </div>
 
+      <!-- MUSEUM PHOTO (shown only for museums) -->
+      <figure id="modalSiteImageWrap" class="hidden mt-4 rounded-xl overflow-hidden border border-slate-200 bg-slate-100">
+        <img id="modalSiteImage" src="" alt="" loading="lazy" class="w-full h-48 sm:h-56 object-cover" onerror="document.getElementById('modalSiteImageWrap').classList.add('hidden')">
+        <figcaption class="px-3 py-1.5 text-[10px] text-slate-500 bg-white">
+          <a id="modalSiteImageCredit" href="#" target="_blank" rel="noopener" class="hover:text-indigo-600">Photo: Wikimedia Commons</a>
+        </figcaption>
+      </figure>
+
       <div class="mt-4 space-y-4 text-xs">
         <!-- WHAT IS IT -->
         <div class="bg-slate-50 p-3.5 rounded-xl border border-slate-200">
@@ -477,6 +485,14 @@
             <i class="fa-solid fa-binoculars text-amber-600"></i> What Kids (Ages 8 &amp; 11) Should Look For:
           </h4>
           <p id="modalSiteKids" class="text-amber-900 leading-relaxed font-normal">...</p>
+        </div>
+
+        <!-- TOP 10 QUICK FACTS -->
+        <div id="modalSiteFactsWrap" class="bg-emerald-50 p-3.5 rounded-xl border border-emerald-200">
+          <h4 class="font-bold text-emerald-950 uppercase tracking-wider text-[11px] flex items-center gap-1.5 mb-2">
+            <i class="fa-solid fa-list-ol text-emerald-600"></i> 10 Important Facts
+          </h4>
+          <ol id="modalSiteFacts" class="list-decimal pl-5 space-y-1.5 text-emerald-950 leading-relaxed font-normal marker:font-bold marker:text-emerald-700"></ol>
         </div>
       </div>
 
@@ -878,6 +894,212 @@
         what: "A 7-acre public park located immediately north of the White House, named in honor of General Marquis de Lafayette, hero of the American Revolution.",
         why: "Often called 'The People's Common,' it is the premier public vantage point for viewing the White House. Bordered by historic homes and St. John's Church (the 'Church of the Presidents').",
         kids: "Stand right along the North Lawn fence for the best unobstructed postcard family photo with the White House in the background!"
+      }
+    };
+
+    // TOP 10 QUICK FACTS FOR EVERY SITE
+    const SITE_FACTS = {
+      "white-house": [
+        "George Washington picked the site in 1791 but never lived there. John Adams became the first resident in November 1800.",
+        "Irish-born architect James Hoban won a design competition, and the cornerstone was laid on October 13, 1792.",
+        "British troops set it on fire on August 24, 1814, during the War of 1812. It was rebuilt and reoccupied by 1817.",
+        "It was called the President's House or Executive Mansion until Theodore Roosevelt made \"White House\" the official name in 1901.",
+        "The residence has 132 rooms, 35 bathrooms and 6 levels.",
+        "It has 412 doors, 147 windows, 28 fireplaces, 8 staircases and 3 elevators.",
+        "It takes about 570 gallons of white paint to cover the outside walls.",
+        "The West Wing was added in 1902, and the first Oval Office was built in 1909 under President Taft.",
+        "From 1949 to 1952, President Truman had the whole interior gutted and rebuilt because the old wooden structure was close to collapsing.",
+        "It is one of very few homes of a head of state where the public can take free tours."
+      ],
+      "pentagon": [
+        "Construction began on September 11, 1941, exactly 60 years before the 9/11 attacks.",
+        "It was finished in just about 16 months, opening on January 15, 1943, in the middle of World War II.",
+        "It has 5 sides, 5 floors above ground and 5 concentric rings, connected by about 17.5 miles of corridors.",
+        "With about 6.5 million square feet, it is one of the largest office buildings in the world.",
+        "Roughly 23,000 military and civilian employees work there.",
+        "To save steel for the war effort, builders used concrete ramps between floors instead of relying on many elevators.",
+        "It was built with twice the normal number of restrooms because of Virginia's segregation laws at the time, though the building itself was never segregated.",
+        "It has 7,754 windows.",
+        "On September 11, 2001, American Airlines Flight 77 struck the west side; 184 people in the building and on the plane were killed.",
+        "The outdoor Pentagon Memorial, opened in 2008, has 184 lighted benches, one for each victim, arranged by age."
+      ],
+      "old-town": [
+        "Alexandria was founded in 1749 when lots along the Potomac were sold at public auction.",
+        "George Washington considered it his hometown: he kept a townhouse there, shopped at its markets and worshipped at Christ Church (built 1773), where his pew is still marked.",
+        "Gadsby's Tavern hosted Washington's birthday balls in 1798 and 1799, and he reviewed troops from its steps.",
+        "At Carlyle House (1753), British General Braddock met with five colonial governors in 1755 to plan the French and Indian War campaign.",
+        "Alexandria was once part of the 100-square-mile District of Columbia, but it was returned to Virginia in 1846.",
+        "Union troops occupied the city from May 1861 to the end of the Civil War, making it one of the longest-occupied Southern towns.",
+        "The Torpedo Factory Art Center was built by the U.S. Navy in 1918 to make torpedoes; today it holds dozens of working artists' studios.",
+        "The Stabler-Leadbeater Apothecary operated as a family pharmacy from 1792 to 1933, and its shelves of original bottles are still in place.",
+        "The Spite House at 523 Queen Street is only about 7 feet wide, built in 1830 by a homeowner tired of people using his alley.",
+        "Old Town was named a historic district in 1946, one of the earliest in the nation, which is why so many 18th-century buildings survive."
+      ],
+      "natural-history": [
+        "The museum opened its doors in 1910 and was one of the first Smithsonian buildings on the National Mall's north side.",
+        "Its collections hold more than 145 million specimens and artifacts, the largest natural history collection in the world.",
+        "The Smithsonian exists thanks to British scientist James Smithson, who left his fortune to the United States even though he never visited it.",
+        "The 45.52-carat Hope Diamond was donated by jeweler Harry Winston in 1958, and he sent it through the regular U.S. mail in a plain package.",
+        "Henry the elephant has greeted visitors in the rotunda since 1959 and stands about 13 feet tall at the shoulder.",
+        "The \"Nation's T. rex\" was discovered in Montana in 1988 and is one of the most complete T. rex skeletons ever found.",
+        "The David H. Koch Hall of Fossils (Deep Time) reopened in 2019 after a five-year renovation and covers 3.7 billion years of life.",
+        "The Sant Ocean Hall features a life-size model of a North Atlantic right whale named Phoenix, about 45 feet long.",
+        "The Insect Zoo has live insects and spiders, and staff hold tarantula feedings several times a day.",
+        "Admission is free, and it is one of the most visited museums in the world, with millions of visitors each year."
+      ],
+      "air-space": [
+        "The museum opened on July 1, 1976, as part of America's Bicentennial celebration.",
+        "It displays the original 1903 Wright Flyer, which made the first powered, controlled airplane flight at Kitty Hawk, North Carolina.",
+        "Charles Lindbergh's Spirit of St. Louis, flown on the first solo nonstop transatlantic flight in 1927, hangs in the museum.",
+        "You can see Columbia, the Apollo 11 command module that carried Neil Armstrong, Buzz Aldrin and Michael Collins to the Moon in 1969.",
+        "A piece of Moon rock collected on Apollo 17 is mounted so visitors can touch it.",
+        "Amelia Earhart's red Lockheed Vega 5B, used for her 1932 solo flight across the Atlantic, is on display.",
+        "The building was designed by architect Gyo Obata and is clad in pink Tennessee marble.",
+        "A major renovation that began in 2018 rebuilt every gallery and the building's outside walls.",
+        "Its second site, the Udvar-Hazy Center near Dulles Airport, holds Space Shuttle Discovery and the SR-71 Blackbird.",
+        "Admission is free, and it is one of the most visited museums in the United States."
+      ],
+      "wharf": [
+        "The Municipal Fish Market has operated here since 1805, making it the oldest continuously operating open-air fish market in the U.S.",
+        "Its seafood vendors sell from floating barges that rise and fall with the tide.",
+        "The Wharf stretches about a mile along the Washington Channel, an arm of the Potomac River.",
+        "The modern Wharf district opened its first phase in October 2017 and its second phase in 2022.",
+        "Southwest Waterfront is one of D.C.'s oldest neighborhoods and was part of Pierre L'Enfant's original 1791 city plan.",
+        "Recreation Pier has swinging benches over the water and fire pits for chilly evenings.",
+        "The Anthem, a concert hall that holds about 6,000 people, is one of the area's main music venues.",
+        "Water taxis run from the Wharf to Old Town Alexandria and Georgetown.",
+        "The Titanic Memorial, honoring the men who gave up lifeboat seats in 1912, stands nearby at the channel's southern end.",
+        "Next door, Fort McNair, first set up in 1791, is one of the oldest Army posts in the United States still in use."
+      ],
+      "spy-museum": [
+        "The museum first opened in 2002 in Penn Quarter and moved to its larger building at L'Enfant Plaza in 2019.",
+        "It has the largest collection of international espionage artifacts on public display in the world.",
+        "Its board has included former intelligence officers from the CIA, FBI and even the Soviet KGB.",
+        "It is a private nonprofit museum, not part of the Smithsonian, so admission is ticketed.",
+        "George Washington ran his own spy network, the Culper Ring, which used code numbers and invisible ink during the Revolutionary War.",
+        "One display is a German Enigma machine, the code device whose cracking helped the Allies win World War II.",
+        "The collection includes a lipstick-sized single-shot pistol used by Soviet agents, nicknamed the \"Kiss of Death.\"",
+        "Harriet Tubman worked as a scout and spy for the Union Army during the Civil War.",
+        "The building's outer \"veil\" of angled black panels was designed by the architecture firm behind the Centre Pompidou in Paris.",
+        "Visitors get a cover identity at the start and are tested on it during the interactive Undercover Mission."
+      ],
+      "monument": [
+        "The monument is 555 feet, 5⅛ inches tall, the tallest structure in Washington, D.C.",
+        "Its cornerstone was laid on July 4, 1848.",
+        "Construction stopped from 1854 to 1877 because of money problems and the Civil War, which is why the stone changes color about 150 feet up.",
+        "The capstone was set on December 6, 1884, and the monument opened to the public in 1888.",
+        "When finished, it was the tallest structure in the world until the Eiffel Tower passed it in 1889.",
+        "The tip is a 100-ounce aluminum pyramid; aluminum was a rare, precious metal in 1884.",
+        "Inside are 193 carved memorial stones donated by states, cities, groups and foreign countries.",
+        "The walls are 15 feet thick at the base and about 18 inches thick at the top.",
+        "There are 896 steps, but visitors ride an elevator that reaches the top in about 70 seconds.",
+        "A 2011 earthquake cracked the stone and closed it until 2014; it closed again from 2016 to 2019 to modernize the elevator."
+      ],
+      "archives": [
+        "The building was completed in 1935 and designed by John Russell Pope, who also designed the Jefferson Memorial.",
+        "Its outside is ringed by 72 Corinthian columns.",
+        "The Declaration of Independence and the Constitution moved here from the Library of Congress in 1952.",
+        "During World War II, the Declaration and Constitution were hidden for safekeeping at Fort Knox, Kentucky.",
+        "Since 2003, the documents have been sealed in cases filled with argon gas to slow aging.",
+        "The Declaration has faded mostly from sunlight and from an 1820s copying process that pulled ink off the parchment.",
+        "The National Archives keeps billions of pages of government records, plus millions of photos, maps and films.",
+        "A 1297 copy of Magna Carta, the English charter that inspired American ideas of rights, is on display.",
+        "Its bronze front doors are each about 38 feet tall and weigh about 6.5 tons.",
+        "Every July 4, the Declaration of Independence is read aloud on the building's steps."
+      ],
+      "lincoln": [
+        "The memorial was dedicated on May 30, 1922, and Lincoln's son Robert Todd Lincoln attended.",
+        "Architect Henry Bacon modeled it on the Parthenon in Athens.",
+        "Its 36 outer columns stand for the 36 states in the Union when Lincoln died in 1865.",
+        "Daniel Chester French designed the 19-foot statue, carved by the Piccirilli brothers from 28 blocks of Georgia white marble.",
+        "The Gettysburg Address and Lincoln's Second Inaugural Address are carved into the inside walls.",
+        "On Easter Sunday 1939, singer Marian Anderson performed for about 75,000 people after being refused a nearby concert hall because she was Black.",
+        "Martin Luther King Jr. gave his \"I Have a Dream\" speech from its steps on August 28, 1963.",
+        "The memorial appears on the back of the $5 bill and appeared on the penny from 1959 to 2008.",
+        "The Reflecting Pool in front is about 2,000 feet long and was completed in 1923.",
+        "The World War II Memorial, opened in 2004, has 56 pillars and 4,048 gold stars, each standing for 100 Americans who died in the war."
+      ],
+      "national-zoo": [
+        "Congress founded the National Zoo in 1889, partly to protect American bison, which were close to extinction.",
+        "Its 163 acres in Rock Creek Park were laid out with help from landscape architect Frederick Law Olmsted.",
+        "It is part of the Smithsonian, so admission is free.",
+        "The first giant pandas, Ling-Ling and Hsing-Hsing, arrived in 1972 as a gift after President Nixon's visit to China.",
+        "Giant pandas Bao Li and Qing Bao arrived from China in October 2024 and made their public debut in January 2025.",
+        "The zoo cares for about 2,100 animals from roughly 400 species.",
+        "Orangutans can travel between buildings on the O Line, a set of cables and towers about 50 feet above visitors' heads.",
+        "The zoo helped bring the black-footed ferret and the golden lion tamarin back from the edge of extinction.",
+        "Its Smithsonian Conservation Biology Institute in Front Royal, Virginia, covers about 3,200 acres for breeding and research.",
+        "Animals are most active in the morning, so arriving at opening time gives the best chance to see them moving and eating."
+      ],
+      "museum-bible": [
+        "The museum opened on November 17, 2017.",
+        "Its building began as a 1923 refrigerated warehouse that stored food for the city.",
+        "The two 40-foot bronze entrance doors are cast with the text of Genesis 1 from the Gutenberg Bible.",
+        "It is a private nonprofit museum founded by the Green family, owners of Hobby Lobby.",
+        "The Grand Hall has a 140-foot digital ceiling that shows changing artwork.",
+        "In 2020, researchers confirmed that all 16 of the museum's Dead Sea Scroll fragments were modern forgeries, and the museum now uses them to teach about fakes.",
+        "In 2021, the museum returned thousands of items to Iraq and Egypt after learning they had been taken illegally.",
+        "Its collection includes rare early printed Bibles and handwritten manuscripts from many centuries.",
+        "The rooftop garden grows plants mentioned in the Bible and has views of the Capitol.",
+        "It sits about two blocks south of the National Mall, near the Federal Center SW Metro station."
+      ],
+      "capitol": [
+        "George Washington laid the cornerstone on September 18, 1793.",
+        "The original design came from William Thornton, an amateur architect who won a design contest.",
+        "British troops burned the Capitol in August 1814 during the War of 1812; a rainstorm helped save the building's shell.",
+        "The cast-iron dome, finished in 1866, weighs about 9 million pounds.",
+        "The 19.5-foot Statue of Freedom on top was installed in 1863; Philip Reid, an enslaved worker, helped cast it.",
+        "Constantino Brumidi painted The Apotheosis of Washington on the dome's inside in 1865; it sits about 180 feet above the floor.",
+        "National Statuary Hall holds statues sent by the states; each state contributes two, for 100 in all.",
+        "The underground Capitol Visitor Center opened in 2008 and is about three-quarters the size of the Capitol itself.",
+        "Abraham Lincoln lay in state in the Rotunda in 1865 on a platform (catafalque) still used for those honored today.",
+        "The Capitol is the center point of D.C.'s street grid, dividing the city into NW, NE, SW and SE quadrants."
+      ],
+      "lafayette": [
+        "The park was originally part of the White House grounds until Thomas Jefferson had Pennsylvania Avenue cut through in 1804.",
+        "It was renamed for the Marquis de Lafayette in 1824, during his famous return tour of the United States.",
+        "The center statue of Andrew Jackson (1853) was the first bronze horse-and-rider statue cast in America, balanced on its hind legs.",
+        "The four corner statues honor foreign heroes of the Revolution: Lafayette, Rochambeau, von Steuben and Kościuszko.",
+        "St. John's Church (1816) is called the \"Church of the Presidents\"; every president since James Madison has attended a service there.",
+        "Decatur House (1818) on the square was built for naval hero Commodore Stephen Decatur.",
+        "Blair House, across Pennsylvania Avenue, is the President's Guest House for visiting world leaders.",
+        "Soldiers camped in the park during the War of 1812 and the Civil War.",
+        "In 1917, suffragists called the Silent Sentinels picketed the White House here, demanding women's right to vote.",
+        "Pennsylvania Avenue in front of the White House has been closed to cars since 1995, making it a pedestrian plaza."
+      ]
+    };
+
+    // ONE PHOTO FOR EACH MUSEUM (freely licensed, from Wikimedia Commons)
+    const SITE_IMAGES = {
+      "natural-history": {
+        "src": "https://commons.wikimedia.org/wiki/Special:FilePath/National_Museum_of_Natural_History_-_2026_%2855255088887%29.jpg?width=960",
+        "alt": "The museum's columned main entrance on the National Mall",
+        "credit": "Photo: Wikimedia Commons",
+        "creditUrl": "https://commons.wikimedia.org/wiki/File:National_Museum_of_Natural_History_-_2026_%2855255088887%29.jpg"
+      },
+      "air-space": {
+        "src": "https://commons.wikimedia.org/wiki/Special:FilePath/National_Air_and_Space_Museum_%2855256212753%29.jpg?width=960",
+        "alt": "The museum's National Mall entrance",
+        "credit": "Photo: Wikimedia Commons",
+        "creditUrl": "https://commons.wikimedia.org/wiki/File:National_Air_and_Space_Museum_%2855256212753%29.jpg"
+      },
+      "spy-museum": {
+        "src": "https://commons.wikimedia.org/wiki/Special:FilePath/2019_International_Spy_Museum_03.jpg?width=960",
+        "alt": "The Spy Museum's building at L'Enfant Plaza",
+        "credit": "Photo: Wikimedia Commons",
+        "creditUrl": "https://commons.wikimedia.org/wiki/File:2019_International_Spy_Museum_03.jpg"
+      },
+      "archives": {
+        "src": "https://commons.wikimedia.org/wiki/Special:FilePath/US_National_Archives_Building.jpg?width=960",
+        "alt": "The National Archives Building on Constitution Avenue",
+        "credit": "Photo: Wikimedia Commons",
+        "creditUrl": "https://commons.wikimedia.org/wiki/File:US_National_Archives_Building.jpg"
+      },
+      "museum-bible": {
+        "src": "https://commons.wikimedia.org/wiki/Special:FilePath/Museum_of_the_Bible_%2853839146587%29.jpg?width=960",
+        "alt": "The Museum of the Bible's brick building and glass roof",
+        "credit": "Photo: Wikimedia Commons",
+        "creditUrl": "https://commons.wikimedia.org/wiki/File:Museum_of_the_Bible_%2853839146587%29.jpg"
       }
     };
 
@@ -1739,6 +1961,32 @@
       document.getElementById('modalSiteWhy').textContent = data.why;
       document.getElementById('modalSiteKids').textContent = data.kids;
       document.getElementById('modalSiteIcon').className = `fa-solid ${data.icon || 'fa-landmark'}`;
+
+      // 10 important facts
+      const facts = SITE_FACTS[siteKey] || [];
+      const factsList = document.getElementById('modalSiteFacts');
+      factsList.innerHTML = '';
+      facts.forEach(f => {
+        const li = document.createElement('li');
+        li.textContent = f;
+        factsList.appendChild(li);
+      });
+      document.getElementById('modalSiteFactsWrap').classList.toggle('hidden', facts.length === 0);
+
+      // Museum photo
+      const img = SITE_IMAGES[siteKey];
+      const imgWrap = document.getElementById('modalSiteImageWrap');
+      const imgEl = document.getElementById('modalSiteImage');
+      if (img) {
+        imgEl.src = img.src;
+        imgEl.alt = img.alt;
+        document.getElementById('modalSiteImageCredit').href = img.creditUrl;
+        imgWrap.classList.remove('hidden');
+      } else {
+        imgEl.removeAttribute('src');
+        imgEl.alt = '';
+        imgWrap.classList.add('hidden');
+      }
 
       // Find official website from current computed trip
       const allComputed = getComputedTripData();
