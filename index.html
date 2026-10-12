@@ -31,13 +31,13 @@
         <div>
           <div class="flex items-center gap-2">
             <span class="inline-block w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-            <span class="text-[11px] font-black uppercase tracking-wider text-slate-500">Smart Routing & Trip Hub</span>
+            <span class="text-[11px] font-black uppercase tracking-wider text-slate-500">Live Trip Companion</span>
           </div>
           <h1 class="text-xl lg:text-2xl font-black text-slate-900 leading-tight">Washington, DC Vacation</h1>
         </div>
       </div>
 
-      <!-- Desktop View Navigation & Actions -->
+      <!-- Desktop Navigation & Quick Actions -->
       <div class="flex items-center gap-2 sm:gap-3">
         <div class="hidden lg:flex items-center bg-slate-100 p-1 rounded-xl border border-slate-200 text-xs font-bold">
           <button onclick="switchMainView('itinerary')" id="deskNavItinerary" class="px-3.5 py-2 rounded-lg bg-white text-blue-600 shadow-xs transition flex items-center gap-2">
@@ -52,8 +52,8 @@
         </div>
 
         <button onclick="toggleFlightDrawer()" class="h-10 px-3.5 rounded-xl bg-blue-50 border border-blue-200 text-blue-700 flex items-center gap-1.5 text-xs font-bold hover:bg-blue-100 active:scale-95 transition shadow-xs">
-          <i class="fa-solid fa-door-open text-blue-600"></i>
-          <span>Live Gates & Flights</span>
+          <i class="fa-solid fa-plane-departure text-blue-600"></i>
+          <span>Live Gates (Both Flights)</span>
         </button>
         <button onclick="toggleInfoModal()" class="w-10 h-10 rounded-xl bg-slate-100 border border-slate-200 flex items-center justify-center text-slate-600 hover:bg-slate-200 active:scale-95 transition">
           <i class="fa-solid fa-circle-info text-base"></i>
@@ -73,7 +73,7 @@
         <span id="flightTickerText" class="text-slate-300 font-medium">Leave 2232 Shenley Park Ln</span>
         <span class="hidden md:inline-block text-slate-500">|</span>
         <span class="inline-flex items-center gap-1 bg-slate-800/90 text-amber-300 px-2 py-0.5 rounded border border-slate-700 text-[11px] font-mono font-bold">
-          <i class="fa-solid fa-route text-[10px]"></i> Auto-Switching: &gt;20m walk turns to UberXL
+          <i class="fa-solid fa-door-open text-[10px]"></i> Both Flights Monitored: AA 3357 &amp; AA 4800
         </span>
       </div>
       <div class="flex items-center gap-2">
@@ -103,23 +103,23 @@
             <div id="dayNavContainer" class="flex lg:flex-col gap-2 overflow-x-auto lg:overflow-visible no-scrollbar pb-1 lg:pb-0">
               <button onclick="switchDay(0)" class="day-tab flex-1 lg:w-full text-left px-3.5 py-2.5 rounded-xl text-xs font-bold transition bg-slate-900 text-white shadow-xs flex items-center justify-between" data-day="0">
                 <span>Thu, Oct 15</span>
-                <span class="text-[10px] font-normal opacity-80 hidden lg:inline">Depart & Settle In</span>
+                <span class="text-[10px] font-normal opacity-80 hidden lg:inline">Depart &amp; Settle In</span>
               </button>
               <button onclick="switchDay(1)" class="day-tab flex-1 lg:w-full text-left px-3.5 py-2.5 rounded-xl text-xs font-bold transition bg-slate-100 hover:bg-slate-200 text-slate-700 flex items-center justify-between" data-day="1">
                 <span>Fri, Oct 16</span>
-                <span class="text-[10px] font-normal opacity-70 hidden lg:inline">White House & Old Town</span>
+                <span class="text-[10px] font-normal opacity-70 hidden lg:inline">White House &amp; Old Town</span>
               </button>
               <button onclick="switchDay(2)" class="day-tab flex-1 lg:w-full text-left px-3.5 py-2.5 rounded-xl text-xs font-bold transition bg-slate-100 hover:bg-slate-200 text-slate-700 flex items-center justify-between" data-day="2">
                 <span>Sat, Oct 17</span>
-                <span class="text-[10px] font-normal opacity-70 hidden lg:inline">Smithsonian & The Wharf</span>
+                <span class="text-[10px] font-normal opacity-70 hidden lg:inline">Smithsonian &amp; The Wharf</span>
               </button>
               <button onclick="switchDay(3)" class="day-tab flex-1 lg:w-full text-left px-3.5 py-2.5 rounded-xl text-xs font-bold transition bg-slate-100 hover:bg-slate-200 text-slate-700 flex items-center justify-between" data-day="3">
                 <span>Sun, Oct 18</span>
-                <span class="text-[10px] font-normal opacity-70 hidden lg:inline">Spy Museum & Lincoln</span>
+                <span class="text-[10px] font-normal opacity-70 hidden lg:inline">Spy Museum &amp; Lincoln</span>
               </button>
               <button onclick="switchDay(4)" class="day-tab flex-1 lg:w-full text-left px-3.5 py-2.5 rounded-xl text-xs font-bold transition bg-slate-100 hover:bg-slate-200 text-slate-700 flex items-center justify-between" data-day="4">
                 <span>Mon, Oct 19</span>
-                <span class="text-[10px] font-normal opacity-70 hidden lg:inline">Pandas & Capitol Tour</span>
+                <span class="text-[10px] font-normal opacity-70 hidden lg:inline">Pandas &amp; Capitol Tour</span>
               </button>
               <button onclick="switchDay(5)" class="day-tab flex-1 lg:w-full text-left px-3.5 py-2.5 rounded-xl text-xs font-bold transition bg-slate-100 hover:bg-slate-200 text-slate-700 flex items-center justify-between" data-day="5">
                 <span>Tue, Oct 20</span>
@@ -128,33 +128,33 @@
             </div>
           </div>
 
-          <!-- Smart Routing Notice Card -->
+          <!-- Dynamic Routing Notice -->
           <div class="bg-indigo-50 border border-indigo-200 rounded-2xl p-4 text-xs text-indigo-900 shadow-2xs">
             <h4 class="font-bold flex items-center gap-1.5 text-indigo-950 mb-1">
-              <i class="fa-solid fa-person-walking text-indigo-600"></i> Max 20–30m Walk Rule Active
+              <i class="fa-solid fa-person-walking text-indigo-600"></i> Max 20–30m Walk Rule
             </h4>
             <p class="text-[11px] leading-relaxed text-indigo-800">
-              When you change any dinner location, walking legs over <strong>1.0 mile (~20 mins)</strong> automatically convert to <strong>UberXL</strong> rides with live fare & travel time updates.
+              When you change any dinner location, walking legs over <strong>1.0 mile (~20 mins)</strong> automatically switch to <strong>UberXL</strong> rides.
             </p>
             <button onclick="resetAllDinners()" class="mt-2.5 text-[10px] font-bold text-indigo-700 hover:text-indigo-900 bg-white border border-indigo-200 px-2 py-1 rounded-lg transition">
               Reset Dinners to Original
             </button>
           </div>
 
-          <!-- Banner to Jump to Kids Zone -->
+          <!-- Kids Zone Jump -->
           <div onclick="switchMainView('kids')" class="cursor-pointer bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white rounded-2xl p-4 shadow-xs transition active:scale-98">
             <div class="flex items-center gap-3">
               <span class="text-3xl">🐼</span>
               <div>
                 <span class="text-[10px] font-black uppercase tracking-wider text-amber-200 block">Games on the Go</span>
                 <h4 class="text-sm font-black">Open DC Kids Zone! 🎮</h4>
-                <p class="text-[11px] text-amber-100 mt-0.5">Spy Ciphers & Panda Snack Toss</p>
+                <p class="text-[11px] text-amber-100 mt-0.5">Spy Ciphers &amp; Panda Snack Toss</p>
               </div>
             </div>
           </div>
         </aside>
 
-        <!-- CENTER COLUMN: DYNAMIC ITINERARY STOPS -->
+        <!-- CENTER COLUMN: ITINERARY STOPS -->
         <section class="lg:col-span-6 space-y-4">
           <div id="daySummary" class="bg-gradient-to-br from-indigo-600 via-blue-600 to-indigo-800 text-white p-5 rounded-2xl shadow-md"></div>
           <div id="transitSummaryWidget" class="bg-white border border-slate-200 rounded-2xl p-4 shadow-xs flex items-center justify-between text-xs"></div>
@@ -162,14 +162,14 @@
           <div class="flex items-center gap-2 overflow-x-auto no-scrollbar text-xs">
             <button onclick="filterTimeline('all')" class="filter-chip px-3.5 py-1.5 rounded-full font-bold bg-slate-800 text-white shadow-xs" data-filter="all">All Stops</button>
             <button onclick="filterTimeline('site')" class="filter-chip px-3.5 py-1.5 rounded-full font-medium bg-white text-slate-600 border border-slate-200 hover:bg-slate-50" data-filter="site">🏛️ Sights</button>
-            <button onclick="filterTimeline('transit')" class="filter-chip px-3.5 py-1.5 rounded-full font-medium bg-white text-slate-600 border border-slate-200 hover:bg-slate-50" data-filter="transit">🚗 Rides & Walks</button>
+            <button onclick="filterTimeline('transit')" class="filter-chip px-3.5 py-1.5 rounded-full font-medium bg-white text-slate-600 border border-slate-200 hover:bg-slate-50" data-filter="transit">🚗 Rides &amp; Walks</button>
             <button onclick="filterTimeline('food')" class="filter-chip px-3.5 py-1.5 rounded-full font-medium bg-white text-slate-600 border border-slate-200 hover:bg-slate-50" data-filter="food">🍽️ Food</button>
           </div>
 
           <div id="timelineContainer" class="space-y-3 relative before:absolute before:inset-0 before:left-5 before:w-0.5 before:bg-slate-300"></div>
         </section>
 
-        <!-- RIGHT COLUMN: DESKTOP GATES & MONITOR -->
+        <!-- RIGHT COLUMN: DESKTOP GATES MONITOR -->
         <aside class="hidden lg:block lg:col-span-3 space-y-4">
           <div class="bg-white rounded-2xl p-4 border border-slate-200 shadow-xs">
             <div class="flex items-center justify-between pb-3 border-b border-slate-100">
@@ -179,6 +179,7 @@
               </button>
             </div>
 
+            <!-- Outbound Flight Card -->
             <div class="mt-3 p-3 bg-blue-50/70 rounded-xl border border-blue-200/80">
               <div class="flex items-center justify-between text-xs">
                 <span class="font-bold text-blue-900">AA 3357 (ATL ➔ DCA)</span>
@@ -187,11 +188,11 @@
               <div class="grid grid-cols-2 gap-1.5 mt-2 text-[11px] bg-white p-2 rounded-lg border border-blue-100">
                 <div>
                   <span class="text-[9px] text-slate-400 uppercase font-black block">ATL Dep Gate</span>
-                  <span class="font-bold text-slate-900 font-mono" id="deskOutboundDepGate">Gate T12 (North)</span>
+                  <span class="font-bold text-slate-900 font-mono">Gate T12 (North)</span>
                 </div>
                 <div>
                   <span class="text-[9px] text-slate-400 uppercase font-black block">DCA Arr Gate</span>
-                  <span class="font-bold text-slate-900 font-mono" id="deskOutboundArrGate">Gate 38 (Term 2)</span>
+                  <span class="font-bold text-slate-900 font-mono">Gate 38 (Term 2)</span>
                 </div>
               </div>
               <div class="mt-2 flex items-center justify-between text-[11px]">
@@ -202,6 +203,7 @@
               </div>
             </div>
 
+            <!-- Return Flight Card -->
             <div class="mt-3 p-3 bg-amber-50/70 rounded-xl border border-amber-200/80">
               <div class="flex items-center justify-between text-xs">
                 <span class="font-bold text-amber-900">AA 4800 (DCA ➔ ATL)</span>
@@ -210,15 +212,15 @@
               <div class="grid grid-cols-2 gap-1.5 mt-2 text-[11px] bg-white p-2 rounded-lg border border-amber-100">
                 <div>
                   <span class="text-[9px] text-slate-400 uppercase font-black block">DCA Dep Gate</span>
-                  <span class="font-bold text-slate-900 font-mono" id="deskReturnDepGate">Gate 35B (Term 2)</span>
+                  <span class="font-bold text-slate-900 font-mono">Gate 35B / C29</span>
                 </div>
                 <div>
                   <span class="text-[9px] text-slate-400 uppercase font-black block">ATL Arr Gate</span>
-                  <span class="font-bold text-slate-900 font-mono" id="deskReturnArrGate">Gate T9 (North)</span>
+                  <span class="font-bold text-slate-900 font-mono">Gate T9 / T10</span>
                 </div>
               </div>
               <div class="mt-2 flex items-center justify-between text-[11px]">
-                <span class="text-slate-500"><i class="fa-solid fa-suitcase-rolling text-[10px]"></i> Claim: <strong>Carousel 2</strong></span>
+                <span class="text-slate-500"><i class="fa-solid fa-suitcase-rolling text-[10px]"></i> Claim: <strong>Carousel 2 / 7</strong></span>
                 <a href="https://www.flightaware.com/live/flight/AAL4800" target="_blank" class="text-amber-700 font-bold hover:underline flex items-center gap-1">
                   Radar <i class="fa-solid fa-arrow-up-right-from-square text-[9px]"></i>
                 </a>
@@ -226,7 +228,7 @@
             </div>
 
             <button onclick="toggleFlightDrawer()" class="w-full mt-3 py-2 text-center text-xs font-bold text-blue-600 bg-blue-50/50 hover:bg-blue-50 rounded-xl transition">
-              View Airport Terminal Maps & Gates
+              Open Full Flight &amp; Gate Drawer
             </button>
           </div>
         </aside>
@@ -241,7 +243,7 @@
           🎒 Packing (<span id="packingCount">0</span>)
         </button>
         <button onclick="switchChecklistTab('passes')" id="tabPassesBtn" class="flex-1 py-2 rounded-lg text-slate-600 transition">
-          🎟️ Passes & Bookings (<span id="passesCount">0</span>)
+          🎟️ Passes &amp; Bookings (<span id="passesCount">0</span>)
         </button>
       </div>
 
@@ -268,7 +270,6 @@
               <div id="packingProgressBar" class="h-full bg-gradient-to-r from-blue-500 to-indigo-600 transition-all duration-300" style="width: 0%"></div>
             </div>
 
-            <!-- ADD ITEM -->
             <form onsubmit="addPackingItem(event)" class="space-y-2">
               <div class="flex flex-col sm:flex-row gap-2">
                 <input type="text" id="newPackingInput" placeholder="Add item (e.g. Camera, Nintendo)..." class="flex-1 bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2 text-xs text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500" required />
@@ -284,7 +285,6 @@
               </div>
             </form>
 
-            <!-- CATEGORY MODIFIER PANEL -->
             <div id="categoryManagerPanel" class="mt-4 pt-4 border-t border-slate-100 hidden bg-slate-50/70 p-4 rounded-xl border">
               <div class="flex items-center justify-between mb-2">
                 <h4 class="text-xs font-black uppercase text-slate-700 flex items-center gap-1.5">
@@ -312,7 +312,7 @@
           <div class="bg-amber-50 border border-amber-200 rounded-2xl p-4 text-xs text-amber-900 flex items-start gap-3 shadow-xs">
             <i class="fa-solid fa-shield-halved text-amber-700 text-lg mt-0.5"></i>
             <div>
-              <p class="font-bold text-sm">Official ID & Security Protocol</p>
+              <p class="font-bold text-sm">Official ID &amp; Security Protocol</p>
               <p class="text-xs text-amber-800 mt-1 leading-relaxed">
                 Physical REAL IDs or Passports required for all adults at White House, Pentagon, and U.S. Capitol tours. Strictly no backpacks at the White House.
               </p>
@@ -322,8 +322,8 @@
           <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-xs">
             <div class="flex items-center justify-between mb-3">
               <div>
-                <h3 class="text-sm font-black uppercase tracking-wider text-slate-900">Reservations & Timed Passes</h3>
-                <p class="text-xs text-slate-500">Government tours & confirmed restaurant tables</p>
+                <h3 class="text-sm font-black uppercase tracking-wider text-slate-900">Reservations &amp; Timed Passes</h3>
+                <p class="text-xs text-slate-500">Government tours &amp; confirmed restaurant tables</p>
               </div>
               <span id="passesCountBadge" class="text-xs font-bold bg-blue-50 text-blue-700 px-2.5 py-1 rounded-full"></span>
             </div>
@@ -335,30 +335,32 @@
       </div>
     </section>
 
-    <!-- VIEW 3: KIDS ZONE MINI-GAMES VIEW -->
+    <!-- VIEW 3: KIDS ZONE MINI-GAMES VIEW (FIXED & FULLY FUNCTIONAL) -->
     <section id="kidsView" class="hidden max-w-4xl mx-auto space-y-6">
       <div class="bg-gradient-to-r from-amber-500 via-rose-500 to-indigo-600 rounded-3xl p-6 text-white shadow-md relative overflow-hidden">
         <div class="relative z-10">
-          <span class="bg-white/20 backdrop-blur-md px-3 py-1 rounded-full text-xs font-black uppercase tracking-wider">Ages 8 & 11 · Washington DC Edition</span>
-          <h2 class="text-2xl sm:text-3xl font-black mt-2">🎮 DC Junior Explorer & Games</h2>
+          <span class="bg-white/20 backdrop-blur-md px-3 py-1 rounded-full text-xs font-black uppercase tracking-wider">Ages 8 &amp; 11 · Washington DC Edition</span>
+          <h2 class="text-2xl sm:text-3xl font-black mt-2">🎮 DC Junior Explorer &amp; Games</h2>
           <p class="text-xs sm:text-sm text-amber-100 max-w-xl mt-1">Play mini-games tied to the places you are visiting this week!</p>
         </div>
         <div class="absolute right-3 -bottom-4 text-7xl opacity-20 select-none">🐼🕵️🚀</div>
       </div>
 
+      <!-- GAME SELECTOR TABS -->
       <div class="flex bg-slate-200/90 p-1 rounded-2xl max-w-md mx-auto text-xs font-black">
-        <button onclick="switchMiniGame('panda')" id="btnGamePanda" class="flex-1 py-2.5 rounded-xl bg-white text-slate-900 shadow-xs transition flex items-center justify-center gap-1.5">
+        <button onclick="switchMiniGame('panda')" id="btnGamePanda" class="flex-1 py-2.5 rounded-xl bg-white text-slate-900 shadow-xs transition flex items-center justify-center gap-1.5 cursor-pointer">
           <span>🐼 Panda Snack Toss</span>
         </button>
-        <button onclick="switchMiniGame('spy')" id="btnGameSpy" class="flex-1 py-2.5 rounded-xl text-slate-600 transition flex items-center justify-center gap-1.5">
+        <button onclick="switchMiniGame('spy')" id="btnGameSpy" class="flex-1 py-2.5 rounded-xl text-slate-600 transition flex items-center justify-center gap-1.5 cursor-pointer">
           <span>🕵️ Spy Secret Ciphers</span>
         </button>
       </div>
 
+      <!-- GAME 1: PANDA BAMBOO TOSS -->
       <div id="gamePandaCard" class="bg-white rounded-3xl p-5 sm:p-6 border border-slate-200 shadow-sm text-center">
         <div class="flex items-center justify-between mb-3 text-xs">
           <span class="font-black text-emerald-700 bg-emerald-50 border border-emerald-200 px-3 py-1 rounded-full">
-            🐾 Feed Bao Li & Qing Bao
+            🐾 Feed Bao Li &amp; Qing Bao
           </span>
           <div class="flex items-center gap-3">
             <span class="font-bold text-slate-500">Score: <strong id="pandaScore" class="text-emerald-600 text-sm font-mono">0</strong></span>
@@ -366,19 +368,35 @@
           </div>
         </div>
 
+        <p class="text-xs text-slate-500 mb-3">Slide the basket with your finger or mouse (or use the arrow buttons below) to catch bamboo and apples! Don't let 3 treats drop!</p>
+
+        <!-- GAME CANVAS WRAPPER -->
         <div class="relative max-w-md mx-auto bg-gradient-to-b from-sky-100 to-emerald-50 rounded-2xl border-2 border-slate-300 overflow-hidden shadow-inner h-[320px]">
           <canvas id="pandaCanvas" width="400" height="320" class="w-full h-full block cursor-pointer"></canvas>
-          <div id="pandaStartOverlay" class="absolute inset-0 bg-slate-900/50 backdrop-blur-2xs flex flex-col items-center justify-center text-white p-4">
+          
+          <div id="pandaStartOverlay" class="absolute inset-0 bg-slate-900/60 backdrop-blur-xs flex flex-col items-center justify-center text-white p-4">
             <span class="text-5xl mb-2">🐼</span>
             <h3 class="text-lg font-black" id="pandaOverlayTitle">Panda Bamboo Catcher</h3>
             <p class="text-xs text-slate-200 mt-1 mb-4" id="pandaOverlaySubtitle">Catch bamboo for the National Zoo pandas!</p>
-            <button onclick="startPandaGame()" class="bg-emerald-500 hover:bg-emerald-600 text-white font-black px-6 py-2.5 rounded-2xl text-xs shadow-md active:scale-95 transition flex items-center gap-2">
+            <button onclick="startPandaGame()" class="bg-emerald-500 hover:bg-emerald-600 text-white font-black px-6 py-2.5 rounded-2xl text-xs shadow-md active:scale-95 transition flex items-center gap-2 cursor-pointer">
               <i class="fa-solid fa-play"></i> Start Playing
             </button>
           </div>
         </div>
+
+        <!-- ON-SCREEN PHONE CONTROLS -->
+        <div class="mt-4 flex items-center justify-center gap-4">
+          <button onclick="movePandaBasket(-45)" class="w-14 h-12 bg-slate-200 hover:bg-slate-300 text-slate-800 font-bold rounded-2xl flex items-center justify-center shadow-xs active:scale-90 transition text-lg cursor-pointer">
+            <i class="fa-solid fa-arrow-left"></i>
+          </button>
+          <span class="text-xs text-slate-400 font-semibold">Tap arrows or drag basket</span>
+          <button onclick="movePandaBasket(45)" class="w-14 h-12 bg-slate-200 hover:bg-slate-300 text-slate-800 font-bold rounded-2xl flex items-center justify-center shadow-xs active:scale-90 transition text-lg cursor-pointer">
+            <i class="fa-solid fa-arrow-right"></i>
+          </button>
+        </div>
       </div>
 
+      <!-- GAME 2: SPY CIPHER DECODER -->
       <div id="gameSpyCard" class="bg-white rounded-3xl p-5 sm:p-6 border border-slate-200 shadow-sm hidden text-slate-800">
         <div class="flex items-center justify-between pb-3 border-b border-slate-100 mb-4">
           <div class="flex items-center gap-2">
@@ -393,27 +411,34 @@
           </span>
         </div>
 
-        <div class="bg-slate-900 text-emerald-400 font-mono p-4 rounded-2xl mb-4 text-center">
-          <span class="text-[10px] uppercase tracking-wider text-slate-400 block mb-1">Encrypted Clue:</span>
-          <p id="encryptedClueText" class="text-lg sm:text-xl font-bold tracking-widest text-amber-300">...</p>
-          <p id="cipherHintText" class="text-[11px] text-slate-400 mt-2 font-sans italic">Hint: ...</p>
+        <div class="bg-slate-900 text-emerald-400 font-mono p-5 rounded-2xl mb-4 text-center border border-slate-800">
+          <span class="text-[10px] uppercase tracking-wider text-slate-400 block mb-1">Encrypted Classified Clue:</span>
+          <p id="encryptedClueText" class="text-xl sm:text-2xl font-bold tracking-widest text-amber-300 my-1">...</p>
+          <p id="cipherHintText" class="text-xs text-slate-400 mt-2 font-sans italic">Hint: ...</p>
         </div>
 
         <div class="max-w-md mx-auto space-y-3">
           <div class="flex gap-2">
-            <input type="text" id="spyAnswerInput" placeholder="Enter solution..." class="flex-1 bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2 text-xs text-slate-900 font-mono uppercase focus:outline-none focus:ring-2 focus:ring-purple-500" />
-            <button onclick="checkSpyAnswer()" class="bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded-xl text-xs font-bold shadow-xs active:scale-95 transition">
+            <input type="text" id="spyAnswerInput" onkeydown="handleSpyKeydown(event)" placeholder="Enter solution here..." class="flex-1 bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 text-xs text-slate-900 font-mono uppercase focus:outline-none focus:ring-2 focus:ring-purple-500" />
+            <button onclick="checkSpyAnswer()" class="bg-purple-600 hover:bg-purple-700 text-white px-5 py-2.5 rounded-xl text-xs font-bold shadow-xs active:scale-95 transition cursor-pointer">
               Decrypt 🔓
             </button>
           </div>
-          <div id="spyFeedback" class="text-xs font-bold text-center h-4"></div>
+          <div id="spyFeedback" class="text-xs font-bold text-center min-h-[20px]"></div>
+        </div>
+
+        <div class="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
+          <span>Mission Progress: <strong id="spyMissionCount" class="text-slate-800">1 / 5</strong></span>
+          <button onclick="nextSpyMission()" class="text-purple-600 font-bold hover:underline flex items-center gap-1 cursor-pointer">
+            Next Mission Clue <i class="fa-solid fa-arrow-right text-[10px]"></i>
+          </button>
         </div>
       </div>
     </section>
 
   </div>
 
-  <!-- DINNER MODAL: CHOOSE PRESET OR ENTER CUSTOM RESTAURANT -->
+  <!-- DINNER MODAL: SELECT PRESET OR CUSTOM RESTAURANT -->
   <div id="dinnerModal" class="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-xs hidden flex items-end sm:items-center justify-center p-0 sm:p-4">
     <div class="bg-white w-full max-w-md rounded-t-3xl sm:rounded-2xl p-5 sm:p-6 shadow-2xl max-h-[85vh] overflow-y-auto">
       <div class="flex justify-between items-center pb-3 border-b border-slate-100">
@@ -427,38 +452,34 @@
       </div>
 
       <p class="text-xs text-slate-500 mt-2">
-        Changing dinner recalculates transit times. If the walk from the afternoon stop is <strong>&gt;20–30 mins</strong>, it will automatically switch to UberXL!
+        Changing dinner automatically recalculates transit times. If the walk is <strong>&gt;20–30 mins</strong>, it switches to UberXL.
       </p>
 
-      <!-- PRESET OPTIONS -->
       <div class="mt-4">
-        <label class="block text-xs font-bold text-slate-700 mb-1.5">Pick a Popular DC Alternative:</label>
-        <div class="space-y-1.5" id="dinnerPresetsContainer">
-          <!-- Populated via JS -->
-        </div>
+        <label class="block text-xs font-bold text-slate-700 mb-1.5">Pick a Popular Alternative:</label>
+        <div class="space-y-1.5" id="dinnerPresetsContainer"></div>
       </div>
 
-      <!-- CUSTOM RESTAURANT INPUT -->
       <div class="mt-4 pt-4 border-t border-slate-100">
         <label class="block text-xs font-bold text-slate-700 mb-1.5">Or Enter Any Custom Restaurant:</label>
         <div class="space-y-2">
-          <input type="text" id="customDinnerName" placeholder="Restaurant Name (e.g., Founding Farmers)" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 text-xs text-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-500" />
-          <input type="text" id="customDinnerAddress" placeholder="Address (e.g., 1924 Pennsylvania Ave NW)" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 text-xs text-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-500" />
+          <input type="text" id="customDinnerName" placeholder="Restaurant Name (e.g., Carmine's)" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 text-xs text-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-500" />
+          <input type="text" id="customDinnerAddress" placeholder="Address (e.g., 425 7th St NW)" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 text-xs text-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-500" />
           <button onclick="saveCustomDinner()" class="w-full bg-slate-900 hover:bg-slate-800 text-white font-bold py-2 rounded-xl text-xs shadow-xs transition">
-            Apply Custom Dinner & Recalculate
+            Apply Custom Dinner &amp; Recalculate
           </button>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- LIVE FLIGHT STATUS MODAL -->
+  <!-- COMPLETE LIVE FLIGHT & GATES DRAWER (SHOWING BOTH OUTBOUND & RETURN) -->
   <div id="flightDrawer" class="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-xs hidden flex items-end sm:items-center justify-center p-0 sm:p-4">
     <div class="bg-white w-full max-w-lg rounded-t-3xl sm:rounded-2xl p-5 sm:p-6 shadow-2xl max-h-[90vh] overflow-y-auto">
       <div class="flex justify-between items-center pb-3 border-b border-slate-100">
         <div class="flex items-center gap-2">
           <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-ping"></span>
-          <h2 class="text-base font-black text-slate-900">Live Active Gates & Flight Tracker</h2>
+          <h2 class="text-base font-black text-slate-900">Live Active Gates &amp; Flight Tracker</h2>
         </div>
         <button onclick="toggleFlightDrawer()" class="w-8 h-8 rounded-full bg-slate-100 text-slate-500 hover:text-slate-900 flex items-center justify-center">
           <i class="fa-solid fa-xmark"></i>
@@ -467,9 +488,9 @@
 
       <div class="bg-slate-900 text-white p-3.5 rounded-2xl mt-3 flex items-center justify-between">
         <div>
-          <span class="text-[10px] uppercase font-bold text-slate-400 block tracking-wider">Gate Information Service</span>
+          <span class="text-[10px] uppercase font-bold text-slate-400 block tracking-wider">Flight Monitoring Service</span>
           <p class="text-xs font-bold text-emerald-400 mt-0.5 flex items-center gap-1.5">
-            <i class="fa-solid fa-satellite text-[10px]"></i> Live FIDS Connected
+            <i class="fa-solid fa-satellite text-[10px]"></i> Live FIDS Feeds Connected
           </p>
         </div>
         <button onclick="refreshFlightData()" id="refreshBtn" class="px-3.5 py-1.5 rounded-xl bg-slate-800 border border-slate-700 text-xs font-bold text-slate-200 active:scale-95 transition flex items-center gap-1.5 hover:bg-slate-700">
@@ -477,17 +498,32 @@
         </button>
       </div>
 
-      <!-- Outbound Flight Card -->
+      <div class="grid grid-cols-2 gap-2 mt-3 text-xs">
+        <div class="bg-slate-50 border border-slate-200 p-2.5 rounded-xl">
+          <span class="text-[10px] uppercase font-bold text-slate-400 block">AA Confirmation</span>
+          <span class="font-mono font-bold text-slate-900 text-sm">[removed]</span>
+        </div>
+        <div class="bg-slate-50 border border-slate-200 p-2.5 rounded-xl">
+          <span class="text-[10px] uppercase font-bold text-slate-400 block">Expedia Itin</span>
+          <span class="font-mono font-bold text-slate-900 text-sm">[removed]</span>
+        </div>
+      </div>
+
+      <!-- FLIGHT 1: OUTBOUND CARD -->
       <div class="mt-4 p-4 rounded-2xl bg-gradient-to-br from-blue-50 to-indigo-50/50 border border-blue-200 shadow-xs">
         <div class="flex items-center justify-between mb-2">
-          <span class="px-2 py-0.5 rounded-md text-[10px] font-black bg-blue-600 text-white uppercase">Outbound Flight</span>
+          <div class="flex items-center gap-1.5">
+            <span class="px-2 py-0.5 rounded-md text-[10px] font-black bg-blue-600 text-white uppercase">Outbound Flight</span>
+            <span class="text-xs font-bold text-slate-800">Thu, Oct 15</span>
+          </div>
           <span class="text-xs font-mono font-black text-blue-700 bg-blue-100 px-2 py-0.5 rounded">AA 3357</span>
         </div>
+
         <div class="flex items-center justify-between my-3 text-slate-900">
           <div>
             <span class="text-2xl font-black">ATL</span>
             <p class="text-xs font-bold text-slate-600">2:33 PM</p>
-            <p class="text-[10px] text-slate-400">Terminal North</p>
+            <p class="text-[10px] text-slate-400">Atlanta (Terminal North)</p>
           </div>
           <div class="flex-1 px-3 text-center">
             <span class="text-[10px] font-semibold text-slate-400">1h 53m · Nonstop</span>
@@ -495,13 +531,123 @@
               <div class="h-0.5 w-full bg-blue-300"></div>
               <i class="fa-solid fa-plane text-xs text-blue-600 absolute"></i>
             </div>
-            <span class="text-[10px] text-emerald-700 bg-emerald-100 font-bold px-2 py-0.5 rounded-full inline-block">On Time</span>
+            <span id="outboundStatusBadge" class="text-[10px] text-emerald-700 bg-emerald-100 font-bold px-2 py-0.5 rounded-full inline-block">On Time · Confirmed</span>
           </div>
           <div class="text-right">
             <span class="text-2xl font-black">DCA</span>
             <p class="text-xs font-bold text-slate-600">4:26 PM</p>
-            <p class="text-[10px] text-slate-400">Terminal 2</p>
+            <p class="text-[10px] text-slate-400">Washington Reagan</p>
           </div>
+        </div>
+
+        <div class="bg-white rounded-xl p-3 border border-blue-200 mb-3 space-y-2">
+          <div class="flex items-center justify-between text-xs pb-1.5 border-b border-slate-100">
+            <span class="text-slate-500 font-semibold flex items-center gap-1.5">
+              <i class="fa-solid fa-plane-departure text-blue-600"></i> Dep Gate (ATL):
+            </span>
+            <span class="font-mono font-black text-slate-900 bg-blue-50 px-2 py-0.5 rounded border border-blue-200">
+              Concourse T · Gate T12
+            </span>
+          </div>
+          <div class="flex items-center justify-between text-xs pb-1.5 border-b border-slate-100">
+            <span class="text-slate-500 font-semibold flex items-center gap-1.5">
+              <i class="fa-solid fa-plane-arrival text-emerald-600"></i> Arr Gate (DCA):
+            </span>
+            <span class="font-mono font-black text-slate-900 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200">
+              Terminal 2 · Gate 38
+            </span>
+          </div>
+          <div class="flex items-center justify-between text-[11px] text-slate-600">
+            <span class="flex items-center gap-1.5">
+              <i class="fa-solid fa-suitcase-rolling text-slate-400"></i> DCA Baggage Carousel:
+            </span>
+            <span class="font-bold text-slate-900 font-mono">Baggage Claim 4</span>
+          </div>
+        </div>
+
+        <div class="pt-1 flex items-center justify-between text-[11px] text-slate-600 mb-3">
+          <span>Seats: <strong class="text-slate-900 font-mono">16A, 16C, 16D, 16F</strong></span>
+          <span>Embraer 175 (Envoy Air)</span>
+        </div>
+
+        <div class="grid grid-cols-2 gap-2 pt-1">
+          <a href="https://www.flightaware.com/live/flight/AAL3357" target="_blank" class="bg-blue-600 hover:bg-blue-700 text-white text-center py-2 px-2 rounded-xl text-xs font-bold shadow-xs active:scale-95 transition flex items-center justify-center gap-1.5">
+            <i class="fa-solid fa-satellite-dish"></i> Live Radar (FlightAware)
+          </a>
+          <a href="https://www.google.com/search?q=American+Airlines+flight+3357+status+and+gates" target="_blank" class="bg-white hover:bg-slate-50 border border-blue-300 text-blue-700 text-center py-2 px-2 rounded-xl text-xs font-bold shadow-xs active:scale-95 transition flex items-center justify-center gap-1.5">
+            <i class="fa-brands fa-google"></i> Google Gate Info
+          </a>
+        </div>
+      </div>
+
+      <!-- FLIGHT 2: RETURN CARD -->
+      <div class="mt-4 p-4 rounded-2xl bg-gradient-to-br from-amber-50 to-orange-50/50 border border-amber-200 shadow-xs">
+        <div class="flex items-center justify-between mb-2">
+          <div class="flex items-center gap-1.5">
+            <span class="px-2 py-0.5 rounded-md text-[10px] font-black bg-amber-600 text-white uppercase">Return Flight</span>
+            <span class="text-xs font-bold text-slate-800">Tue, Oct 20</span>
+          </div>
+          <span class="text-xs font-mono font-black text-amber-700 bg-amber-100 px-2 py-0.5 rounded">AA 4800</span>
+        </div>
+
+        <div class="flex items-center justify-between my-3 text-slate-900">
+          <div>
+            <span class="text-2xl font-black">DCA</span>
+            <p class="text-xs font-bold text-slate-600">1:59 PM</p>
+            <p class="text-[10px] text-slate-400">Washington (Terminal 2)</p>
+          </div>
+          <div class="flex-1 px-3 text-center">
+            <span class="text-[10px] font-semibold text-slate-400">2h 09m · Nonstop</span>
+            <div class="relative flex items-center justify-center my-1">
+              <div class="h-0.5 w-full bg-amber-300"></div>
+              <i class="fa-solid fa-plane text-xs text-amber-600 absolute"></i>
+            </div>
+            <span id="returnStatusBadge" class="text-[10px] text-emerald-700 bg-emerald-100 font-bold px-2 py-0.5 rounded-full inline-block">Scheduled · Confirmed</span>
+          </div>
+          <div class="text-right">
+            <span class="text-2xl font-black">ATL</span>
+            <p class="text-xs font-bold text-slate-600">4:08 PM</p>
+            <p class="text-[10px] text-slate-400">Atlanta</p>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-xl p-3 border border-amber-200 mb-3 space-y-2">
+          <div class="flex items-center justify-between text-xs pb-1.5 border-b border-slate-100">
+            <span class="text-slate-500 font-semibold flex items-center gap-1.5">
+              <i class="fa-solid fa-plane-departure text-amber-600"></i> Dep Gate (DCA):
+            </span>
+            <span class="font-mono font-black text-slate-900 bg-amber-50 px-2 py-0.5 rounded border border-amber-200">
+              Terminal 2 · Gate 35B / C29
+            </span>
+          </div>
+          <div class="flex items-center justify-between text-xs pb-1.5 border-b border-slate-100">
+            <span class="text-slate-500 font-semibold flex items-center gap-1.5">
+              <i class="fa-solid fa-plane-arrival text-emerald-600"></i> Arr Gate (ATL):
+            </span>
+            <span class="font-mono font-black text-slate-900 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200">
+              Concourse T · Gate T9 / T10
+            </span>
+          </div>
+          <div class="flex items-center justify-between text-[11px] text-slate-600">
+            <span class="flex items-center gap-1.5">
+              <i class="fa-solid fa-suitcase-rolling text-slate-400"></i> ATL Baggage Carousel:
+            </span>
+            <span class="font-bold text-slate-900 font-mono">Terminal North · Carousel 2 / 7</span>
+          </div>
+        </div>
+
+        <div class="pt-1 flex items-center justify-between text-[11px] text-slate-600 mb-3">
+          <span>Seats: <strong class="text-slate-900 font-mono">15A, 15C, 15D, 15F</strong></span>
+          <span>Embraer 175 (Republic Airways)</span>
+        </div>
+
+        <div class="grid grid-cols-2 gap-2 pt-1">
+          <a href="https://www.flightaware.com/live/flight/AAL4800" target="_blank" class="bg-amber-600 hover:bg-amber-700 text-white text-center py-2 px-2 rounded-xl text-xs font-bold shadow-xs active:scale-95 transition flex items-center justify-center gap-1.5">
+            <i class="fa-solid fa-satellite-dish"></i> Live Radar (FlightAware)
+          </a>
+          <a href="https://www.google.com/search?q=American+Airlines+flight+4800+status+and+gates" target="_blank" class="bg-white hover:bg-slate-50 border border-amber-300 text-amber-800 text-center py-2 px-2 rounded-xl text-xs font-bold shadow-xs active:scale-95 transition flex items-center justify-center gap-1.5">
+            <i class="fa-brands fa-google"></i> Google Gate Info
+          </a>
         </div>
       </div>
     </div>
@@ -511,7 +657,7 @@
   <div id="infoModal" class="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-xs hidden flex items-end sm:items-center justify-center p-0 sm:p-4">
     <div class="bg-white w-full max-w-md rounded-t-3xl sm:rounded-2xl p-5 shadow-2xl max-h-[85vh] overflow-y-auto">
       <div class="flex justify-between items-center mb-3">
-        <h2 class="text-base font-black text-slate-900">Trip Hub & Addresses</h2>
+        <h2 class="text-base font-black text-slate-900">Trip Hub &amp; Addresses</h2>
         <button onclick="toggleInfoModal()" class="w-8 h-8 rounded-full bg-slate-100 text-slate-500 hover:text-slate-900 flex items-center justify-center">
           <i class="fa-solid fa-xmark"></i>
         </button>
@@ -522,12 +668,21 @@
           <span class="text-[10px] font-black uppercase tracking-wider text-slate-500">Departure Residence</span>
           <p class="font-bold text-slate-900 text-sm mt-0.5">2232 Shenley Park Ln</p>
           <p class="text-slate-600 mt-0.5">Duluth, GA 30097</p>
+          <p class="text-[11px] text-blue-600 font-bold mt-1">UberXL pickup scheduled for 11:30 AM Thu Oct 15</p>
         </div>
 
         <div class="p-3.5 rounded-xl bg-slate-50 border border-slate-200">
           <span class="text-[10px] font-black uppercase tracking-wider text-slate-500">Base Hotel</span>
           <p class="font-bold text-slate-900 text-sm mt-0.5">Holiday Inn Washington-Central</p>
           <p class="text-slate-600 mt-0.5">1501 Rhode Island Ave NW, Washington, DC 20005</p>
+          <div class="mt-2.5 flex items-center gap-3">
+            <a href="https://www.ihg.com/holidayinn/hotels/us/en/washington/wascc/hoteldetail" target="_blank" class="inline-flex items-center gap-1 text-blue-600 font-bold hover:underline">
+              <i class="fa-solid fa-globe"></i> Official Site
+            </a>
+            <a href="tel:2024832000" class="inline-flex items-center gap-1 text-slate-600 font-bold hover:underline">
+              <i class="fa-solid fa-phone"></i> Call
+            </a>
+          </div>
         </div>
       </div>
     </div>
@@ -553,12 +708,10 @@
     </button>
   </nav>
 
-  <!-- JAVASCRIPT LOGIC & DYNAMIC ROUTING ENGINE -->
+  <!-- JAVASCRIPT LOGIC & GAMES ENGINE -->
   <script>
-    // BASE COORDINATES
-    const HOTEL_COORDS = { lat: 38.9079, lng: -77.0354 }; // 1501 Rhode Island Ave NW
+    const HOTEL_COORDS = { lat: 38.9079, lng: -77.0354 };
 
-    // POPULAR PRESET RESTAURANTS FOR QUICK SWAPPING
     const PRESET_DINNERS = [
       { name: "Old Ebbitt Grill (DC Classic)", address: "675 15th St NW, Washington, DC", lat: 38.8980, lng: -77.0336, website: "https://www.ebbitt.com/" },
       { name: "Rasika (Penn Quarter - Modern Indian)", address: "633 D St NW, Washington, DC", lat: 38.8948, lng: -77.0212, website: "https://www.rasikarestaurant.com/" },
@@ -570,7 +723,6 @@
       { name: "Carmine's Italian (Family Style - Penn Qtr)", address: "425 7th St NW, Washington, DC", lat: 38.8953, lng: -77.0219, website: "https://www.carminesnyc.com/locations/washington-dc" }
     ];
 
-    // INITIAL BASE SCHEDULE WITH REAL COORDINATES
     const initialTripData = [
       {
         day: "Thu, Oct 15",
@@ -880,39 +1032,70 @@
             type: "flight", time: "1:59 PM – 4:08 PM", title: "AA 4800: Washington (DCA) ➔ Atlanta (ATL)",
             location: "Reagan National Airport (DCA)",
             website: "https://www.flyreagan.com/",
-            desc: "Departs DCA 1:59 PM (Terminal 2 Gate 35B). Nonstop to ATL arriving 4:08 PM (Gate T9). Claim 2. Conf: [removed].",
-            flightMeta: { depGate: "DCA Gate 35B (Term 2)", arrGate: "ATL Gate T9 (North)", carousel: "Claim 2" },
+            desc: "Departs DCA 1:59 PM (Terminal 2 Gate 35B/C29). Nonstop to ATL arriving 4:08 PM (Gate T9/T10). Claim 2/7. Conf: [removed].",
+            flightMeta: { depGate: "DCA Gate 35B / C29", arrGate: "ATL Gate T9 / T10", carousel: "Claim 2 / 7" },
             icon: "fa-plane-departure"
           }
         ]
       }
     ];
 
-    // RESTORE CUSTOM DINNERS FROM LOCAL STORAGE OR USE DEFAULTS
-    let customDinners = JSON.parse(localStorage.getItem('dc_custom_dinners_v1')) || {};
+    const defaultCategories = ['Essentials', 'Hygiene', 'Clothing', 'Electronics'];
+    const defaultPacking = [
+      { id: "p1", name: "REAL IDs & Passports (Every adult)", category: "Essentials", checked: false },
+      { id: "p2", name: "Toothbrushes & Kids Toothpaste", category: "Hygiene", checked: false },
+      { id: "p3", name: "Makeup & Skincare Kit", category: "Hygiene", checked: false },
+      { id: "p4", name: "Hairbrush, comb & hair ties", category: "Hygiene", checked: false },
+      { id: "p5", name: "Moisturizer & Lip Balm (Fall weather)", category: "Hygiene", checked: false },
+      { id: "p6", name: "Kids & Adults Comfortable Walking Shoes", category: "Clothing", checked: false },
+      { id: "p7", name: "Light jackets / windbreakers (cool evenings)", category: "Clothing", checked: false },
+      { id: "p8", name: "6 days of outfits + spare for kids", category: "Clothing", checked: false },
+      { id: "p9", name: "Phone chargers & portable power banks (all-day battery)", category: "Electronics", checked: false },
+      { id: "p10", name: "Kids wired headphones & tablets", category: "Electronics", checked: false },
+      { id: "p11", name: "Prescription medications & Children's Tylenol", category: "Essentials", checked: false },
+      { id: "p12", name: "Granola bars / fruit snacks for museum lines", category: "Essentials", checked: false }
+    ];
+
+    const defaultPasses = [
+      { id: "b1", title: "American Airlines Flights (ATL ⇄ DCA)", conf: "[removed] (Expedia: [removed])", time: "AA 3357 & AA 4800", checked: true },
+      { id: "b2", title: "Holiday Inn Washington-Central (5 nights)", conf: "Direct Booking / Expedia", time: "Check-in Oct 15 @ 3 PM", checked: true },
+      { id: "b3", title: "White House Tour Confirmation", conf: "Congressional Pass", time: "Fri, Oct 16 @ 9:00 AM", checked: true },
+      { id: "b4", title: "The Pentagon Official Tour", conf: "Pentagon Tours System", time: "Fri, Oct 16 @ 1:00 PM (12 PM check-in)", checked: true },
+      { id: "b5", title: "Tokyo Japanese Steakhouse Dinner", conf: "Table for 5", time: "Fri, Oct 16 @ 4:30 PM", checked: true },
+      { id: "b6", title: "Air & Space Museum Timed Passes", conf: "Smithsonian Free Passes", time: "Sat, Oct 17 @ 1:30 PM", checked: true },
+      { id: "b7", title: "Makers Union Wharf Dinner", conf: "Table for 5", time: "Sat, Oct 17 @ 6:00 PM", checked: false },
+      { id: "b8", title: "International Spy Museum Tickets", conf: "Spy Museum Online", time: "Sun, Oct 18 @ 10:00 AM", checked: false },
+      { id: "b9", title: "Washington Monument Timed Elevator", conf: "Recreation.gov Ticket", time: "Sun, Oct 18 @ 12:30 PM", checked: true },
+      { id: "b10", title: "National Archives Timed Entry", conf: "Archives.gov Pass", time: "Sun, Oct 18 @ 2:15 PM", checked: true },
+      { id: "b11", title: "Rasika Penn Quarter Dinner", conf: "OpenTable / Resy", time: "Sun, Oct 18 @ 6:00 PM", checked: true },
+      { id: "b12", title: "National Zoo Free Timed Passes (Pandas)", conf: "Smithsonian Zoo Passes", time: "Mon, Oct 19 @ 8:30 AM", checked: true },
+      { id: "b13", title: "Museum of the Bible Tickets", conf: "MOTB Online", time: "Mon, Oct 19 @ ~12:15 PM", checked: false },
+      { id: "b14", title: "U.S. Capitol Guided Tour", conf: "Visitor Center Pass", time: "Mon, Oct 19 @ 3:20 PM", checked: true },
+      { id: "b15", title: "Old Ebbitt Grill Dinner", conf: "Table for 5 (Key reservation!)", time: "Mon, Oct 19 @ 5:30 PM", checked: true }
+    ];
+
+    let customDinners = JSON.parse(localStorage.getItem('dc_custom_dinners_v10')) || {};
+    let packingCategories = JSON.parse(localStorage.getItem('dc_categories_v10')) || defaultCategories;
+    let packingItems = JSON.parse(localStorage.getItem('dc_packing_items_v10')) || defaultPacking;
+    let passesItems = JSON.parse(localStorage.getItem('dc_passes_items_v10')) || defaultPasses;
     let activeDayIndex = 0;
     let activeFilter = 'all';
 
-    // HAVERSINE DISTANCE FORMULA (MILES)
-    function calcDistanceMiles(coord1, coord2) {
-      if (!coord1 || !coord2) return 1.0;
-      const R = 3958.8; // Radius of the Earth in miles
-      const dLat = (coord2.lat - coord1.lat) * Math.PI / 180;
-      const dLon = (coord2.lng - coord1.lng) * Math.PI / 180;
-      const a = 
-        Math.sin(dLat/2) * Math.sin(dLat/2) +
-        Math.cos(coord1.lat * Math.PI / 180) * Math.cos(coord2.lat * Math.PI / 180) * 
-        Math.sin(dLon/2) * Math.sin(dLon/2);
+    function calcDistanceMiles(c1, c2) {
+      if (!c1 || !c2) return 1.0;
+      const R = 3958.8;
+      const dLat = (c2.lat - c1.lat) * Math.PI / 180;
+      const dLon = (c2.lng - c1.lng) * Math.PI / 180;
+      const a = Math.sin(dLat/2) * Math.sin(dLat/2) +
+                Math.cos(c1.lat * Math.PI / 180) * Math.cos(c2.lat * Math.PI / 180) * 
+                Math.sin(dLon/2) * Math.sin(dLon/2);
       const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
-      // Apply 1.25x street grid routing factor for DC
       return (R * c) * 1.25;
     }
 
-    // DYNAMIC TRIP DATA BUILDER
     function getComputedTripData() {
       return initialTripData.map((dayData, dIdx) => {
         const computed = { ...dayData };
-        // Apply saved custom dinner if set
         if (customDinners[dIdx]) {
           computed.dinner = customDinners[dIdx];
         }
@@ -920,11 +1103,9 @@
         const items = [...computed.fixedStopsBefore];
 
         if (computed.dinner && computed.afternoonStop) {
-          // 1. CALCULATE LEG: AFTERNOON STOP -> DINNER
           const distToDinner = calcDistanceMiles(computed.afternoonStop.coords, computed.dinner.coords);
-          const walkTimeMins = Math.round(distToDinner * 20); // ~20 min/mile for family with kids
+          const walkTimeMins = Math.round(distToDinner * 20);
 
-          // RULE: If > 1.0 mile (~20 minutes) -> AUTO-SWITCH TO UBERXL
           if (walkTimeMins > 20) {
             const driveMins = Math.max(8, Math.round(distToDinner * 4.5 + 5));
             const estLow = Math.max(14, Math.round(10 + distToDinner * 3.5));
@@ -935,7 +1116,7 @@
               time: "~5:15 PM",
               title: `UberXL to Dinner (${computed.dinner.name})`,
               location: `${computed.afternoonStop.name} to ${computed.dinner.name}`,
-              desc: `Distance is ${distToDinner.toFixed(1)} miles (would be ~${walkTimeMins} min walk). Auto-routed to UberXL to avoid tiring out the kids.`,
+              desc: `Distance is ${distToDinner.toFixed(1)} miles (~${walkTimeMins} min walk). Auto-routed to UberXL to avoid tiring out the kids.`,
               uberMeta: { estFare: `$${estLow}–$${estHigh}`, time: `${driveMins} min`, seats: "Seats 5" },
               icon: "fa-car-side"
             });
@@ -946,13 +1127,12 @@
               time: "~5:40 PM",
               title: `Walk to Dinner (${computed.dinner.name})`,
               location: `${computed.afternoonStop.name} to ${computed.dinner.name}`,
-              desc: `Easy, scenic family stroll (${distToDinner.toFixed(2)} miles). Flat sidewalks with strollers and kids.`,
+              desc: `Easy, scenic family stroll (${distToDinner.toFixed(2)} miles). Flat sidewalks for the kids.`,
               walkMeta: { steps: `~${steps.toLocaleString()} steps`, dist: `${distToDinner.toFixed(2)} mi`, time: `${walkTimeMins} min` },
               icon: "fa-person-walking"
             });
           }
 
-          // 2. DINNER STOP CARD
           items.push({
             type: "food",
             time: computed.dinner.time,
@@ -965,7 +1145,6 @@
             icon: "fa-utensils"
           });
 
-          // 3. RETURN TO HOTEL LEG
           const distToHotel = calcDistanceMiles(computed.dinner.coords, HOTEL_COORDS);
           const returnWalkMins = Math.round(distToHotel * 20);
 
@@ -1002,13 +1181,11 @@
       });
     }
 
-    // RENDER ITINERARY WITH SMART TRANSIT
     function renderDay(index) {
       activeDayIndex = index;
       const allComputed = getComputedTripData();
       const data = allComputed[index];
 
-      // Summary Card
       document.getElementById('daySummary').innerHTML = `
         <div class="flex items-center justify-between opacity-80 text-xs font-black uppercase tracking-wider mb-1">
           <span>${data.day}</span>
@@ -1018,7 +1195,6 @@
         <p class="text-xs sm:text-sm text-blue-100 mt-1 font-medium">${data.tagline}</p>
       `;
 
-      // Movement breakdown
       const uberCount = data.items.filter(i => i.type === 'transit-uber').length;
       const walkCount = data.items.filter(i => i.type === 'transit-walk').length;
       const metroCount = data.items.filter(i => i.type === 'transit-metro').length;
@@ -1053,14 +1229,12 @@
       }
 
       container.innerHTML = filtered.map((item, i) => {
-        // 1. UBER XL CARD
         if (item.type === 'transit-uber') {
           return `
             <div class="relative pl-9">
               <div class="absolute left-2.5 -translate-x-1/2 top-4 w-7 h-7 rounded-full bg-slate-900 border-2 border-amber-400 flex items-center justify-center text-amber-400 shadow-xs z-10 animate-bounce-slow">
                 <i class="fa-solid fa-car-side text-xs"></i>
               </div>
-
               <div class="bg-gradient-to-r from-slate-900 to-slate-800 text-white rounded-2xl p-4 border border-slate-700 shadow-xs">
                 <div class="flex items-center justify-between text-xs mb-1">
                   <div class="flex items-center gap-1.5">
@@ -1080,14 +1254,12 @@
           `;
         }
 
-        // 2. WALKING CARD
         if (item.type === 'transit-walk') {
           return `
             <div class="relative pl-9">
               <div class="absolute left-2.5 -translate-x-1/2 top-4 w-7 h-7 rounded-full bg-emerald-600 border-2 border-white flex items-center justify-center text-white shadow-xs z-10">
                 <i class="fa-solid fa-person-walking text-xs"></i>
               </div>
-
               <div class="bg-emerald-50/80 border border-emerald-200 rounded-2xl p-3.5 text-slate-800 shadow-xs">
                 <div class="flex items-center justify-between text-xs mb-1">
                   <div class="flex items-center gap-1.5">
@@ -1106,7 +1278,6 @@
           `;
         }
 
-        // 3. METRO CARD
         if (item.type === 'transit-metro') {
           return `
             <div class="relative pl-9">
@@ -1125,7 +1296,6 @@
           `;
         }
 
-        // 4. FLIGHT CARD
         if (item.type === 'flight') {
           return `
             <div class="relative pl-9">
@@ -1154,7 +1324,6 @@
           `;
         }
 
-        // 5. FOOD / SIGHT CARD WITH CHANGE DINNER BUTTON
         const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(item.location || item.title)}`;
 
         return `
@@ -1162,7 +1331,6 @@
             <div class="absolute left-2.5 -translate-x-1/2 top-4 w-7 h-7 rounded-full bg-white border-2 border-slate-800 flex items-center justify-center text-slate-800 shadow-xs z-10">
               <i class="fa-solid ${item.icon} text-xs"></i>
             </div>
-
             <div class="bg-white rounded-2xl p-4 border border-slate-200 shadow-xs transition hover:border-slate-300">
               <div class="flex items-center justify-between gap-2 mb-1.5">
                 <span class="text-xs font-bold text-slate-900">${item.time}</span>
@@ -1171,7 +1339,7 @@
                     ${item.type}
                   </span>
                   ${item.isDinner ? `
-                    <button onclick="openDinnerModal(${item.dayIndex})" class="bg-indigo-50 hover:bg-indigo-100 text-indigo-700 font-bold text-[10px] px-2.5 py-1 rounded-lg border border-indigo-200 transition flex items-center gap-1">
+                    <button onclick="openDinnerModal(${item.dayIndex})" class="bg-indigo-50 hover:bg-indigo-100 text-indigo-700 font-bold text-[10px] px-2.5 py-1 rounded-lg border border-indigo-200 transition flex items-center gap-1 cursor-pointer">
                       <i class="fa-solid fa-utensils"></i> Change Dinner
                     </button>
                   ` : ''}
@@ -1223,16 +1391,14 @@
       renderDay(activeDayIndex);
     }
 
-    // DINNER MODAL & RE-ROUTING HANDLERS
     let editingDayIndex = 0;
-
     function openDinnerModal(dIdx) {
       editingDayIndex = dIdx;
       document.getElementById('dinnerModalDayLabel').textContent = `Day ${dIdx + 1} (${initialTripData[dIdx].day})`;
       
       const container = document.getElementById('dinnerPresetsContainer');
       container.innerHTML = PRESET_DINNERS.map(preset => `
-        <button onclick="applyPresetDinner('${preset.name}')" class="w-full text-left p-2.5 rounded-xl border border-slate-200 hover:border-indigo-400 hover:bg-indigo-50/50 transition flex items-center justify-between text-xs">
+        <button onclick="applyPresetDinner('${preset.name}')" class="w-full text-left p-2.5 rounded-xl border border-slate-200 hover:border-indigo-400 hover:bg-indigo-50/50 transition flex items-center justify-between text-xs cursor-pointer">
           <div>
             <strong class="text-slate-900 block">${preset.name}</strong>
             <span class="text-[11px] text-slate-500">${preset.address}</span>
@@ -1261,7 +1427,7 @@
         coords: { lat: preset.lat, lng: preset.lng }
       };
 
-      localStorage.setItem('dc_custom_dinners_v1', JSON.stringify(customDinners));
+      localStorage.setItem('dc_custom_dinners_v10', JSON.stringify(customDinners));
       closeDinnerModal();
       renderDay(editingDayIndex);
     }
@@ -1271,7 +1437,6 @@
       const addr = document.getElementById('customDinnerAddress').value.trim();
       if (!name) return;
 
-      // Approximate coordinates around central downtown DC
       const approxCoords = {
         lat: 38.8950 + (Math.random() - 0.5) * 0.02,
         lng: -77.0300 + (Math.random() - 0.5) * 0.02
@@ -1286,7 +1451,7 @@
         coords: approxCoords
       };
 
-      localStorage.setItem('dc_custom_dinners_v1', JSON.stringify(customDinners));
+      localStorage.setItem('dc_custom_dinners_v10', JSON.stringify(customDinners));
       document.getElementById('customDinnerName').value = '';
       document.getElementById('customDinnerAddress').value = '';
       closeDinnerModal();
@@ -1296,29 +1461,259 @@
     function resetAllDinners() {
       if (!confirm("Reset all changed dinners back to the original trip itinerary?")) return;
       customDinners = {};
-      localStorage.removeItem('dc_custom_dinners_v1');
+      localStorage.removeItem('dc_custom_dinners_v10');
       renderDay(activeDayIndex);
     }
 
-    // CHECKLIST & MODAL STUBS
+    // CHECKLIST LOGIC
+    function updateCategoryDropdowns() {
+      const select = document.getElementById('newPackingCategory');
+      if (select) {
+        select.innerHTML = packingCategories.map(cat => `<option value="${cat}">${cat}</option>`).join('');
+      }
+      const badgesContainer = document.getElementById('categoryBadgesList');
+      if (badgesContainer) {
+        badgesContainer.innerHTML = packingCategories.map(cat => `
+          <div class="inline-flex items-center gap-1.5 bg-white border border-slate-300 text-slate-800 px-3 py-1.5 rounded-xl text-xs font-bold shadow-2xs">
+            <span>${cat}</span>
+            <button type="button" onclick="renameCategory('${cat}')" title="Rename" class="text-indigo-600 hover:text-indigo-800 p-0.5 ml-1 cursor-pointer">
+              <i class="fa-solid fa-pencil text-[11px]"></i>
+            </button>
+            <button type="button" onclick="removeCategory('${cat}')" title="Delete" class="text-slate-400 hover:text-rose-500 p-0.5 ml-0.5 cursor-pointer">
+              <i class="fa-solid fa-trash-can text-[11px]"></i>
+            </button>
+          </div>
+        `).join('');
+      }
+    }
+
+    function toggleCategoryManager() {
+      document.getElementById('categoryManagerPanel').classList.toggle('hidden');
+    }
+
+    function addNewCategory() {
+      const input = document.getElementById('newCategoryInput');
+      const val = input.value.trim();
+      if (!val) return;
+      if (packingCategories.some(c => c.toLowerCase() === val.toLowerCase())) {
+        alert("This category already exists!");
+        return;
+      }
+      packingCategories.push(val);
+      localStorage.setItem('dc_categories_v10', JSON.stringify(packingCategories));
+      input.value = '';
+      updateCategoryDropdowns();
+      renderChecklists();
+    }
+
+    function renameCategory(oldName) {
+      const newName = prompt(`Rename "${oldName}" to:`, oldName);
+      if (!newName || newName.trim() === '' || newName.trim() === oldName) return;
+      const cleanName = newName.trim();
+      if (packingCategories.some(c => c.toLowerCase() === cleanName.toLowerCase() && c !== oldName)) {
+        alert("Category already exists!");
+        return;
+      }
+      packingCategories = packingCategories.map(c => c === oldName ? cleanName : c);
+      localStorage.setItem('dc_categories_v10', JSON.stringify(packingCategories));
+
+      packingItems = packingItems.map(item => item.category === oldName ? { ...item, category: cleanName } : item);
+      localStorage.setItem('dc_packing_items_v10', JSON.stringify(packingItems));
+
+      updateCategoryDropdowns();
+      renderChecklists();
+    }
+
+    function changeItemCategory(itemId) {
+      const item = packingItems.find(i => i.id === itemId);
+      if (!item) return;
+      const newCat = prompt(`Move "${item.name}" to which category?\nAvailable: ${packingCategories.join(', ')}`, item.category);
+      if (!newCat) return;
+      const matchedCat = packingCategories.find(c => c.toLowerCase() === newCat.trim().toLowerCase());
+      if (!matchedCat) {
+        alert(`Category "${newCat}" does not exist.`);
+        return;
+      }
+      packingItems = packingItems.map(i => i.id === itemId ? { ...i, category: matchedCat } : i);
+      localStorage.setItem('dc_packing_items_v10', JSON.stringify(packingItems));
+      renderChecklists();
+    }
+
+    function removeCategory(catToRemove) {
+      if (packingCategories.length <= 1) {
+        alert("Must keep at least one category.");
+        return;
+      }
+      const affectedItems = packingItems.filter(i => i.category === catToRemove);
+      if (affectedItems.length > 0) {
+        const fallbackCat = packingCategories.find(c => c !== catToRemove) || 'Essentials';
+        const ok = confirm(`Move ${affectedItems.length} item(s) to "${fallbackCat}" and delete "${catToRemove}"?`);
+        if (!ok) return;
+        packingItems = packingItems.map(item => item.category === catToRemove ? { ...item, category: fallbackCat } : item);
+        localStorage.setItem('dc_packing_items_v10', JSON.stringify(packingItems));
+      }
+      packingCategories = packingCategories.filter(c => c !== catToRemove);
+      localStorage.setItem('dc_categories_v10', JSON.stringify(packingCategories));
+      updateCategoryDropdowns();
+      renderChecklists();
+    }
+
+    function renderChecklists() {
+      const totalPacking = packingItems.length;
+      const checkedPacking = packingItems.filter(i => i.checked).length;
+      const pct = totalPacking === 0 ? 0 : Math.round((checkedPacking / totalPacking) * 100);
+
+      document.getElementById('packingCount').textContent = `${checkedPacking}/${totalPacking}`;
+      document.getElementById('packingPercent').textContent = `${pct}%`;
+      document.getElementById('packingProgressBar').style.width = `${pct}%`;
+
+      let html = '';
+      packingCategories.forEach(cat => {
+        const catItems = packingItems.filter(i => i.category === cat);
+        html += `
+          <div class="bg-white rounded-2xl p-4 border border-slate-200 shadow-xs">
+            <div class="flex items-center justify-between mb-2.5">
+              <h4 class="text-xs font-black uppercase tracking-wider text-slate-700 flex items-center gap-1.5">
+                <i class="fa-solid fa-folder-open text-indigo-500 text-[11px]"></i>
+                <span>${cat}</span>
+              </h4>
+              <div class="flex items-center gap-1">
+                <span class="text-[10px] font-bold text-slate-400 bg-slate-50 border border-slate-200 px-2 py-0.5 rounded-full">
+                  ${catItems.filter(i => i.checked).length}/${catItems.length}
+                </span>
+                <button onclick="renameCategory('${cat}')" class="text-slate-400 hover:text-indigo-600 p-1 cursor-pointer" title="Rename category">
+                  <i class="fa-solid fa-pencil text-[10px]"></i>
+                </button>
+              </div>
+            </div>
+            ${catItems.length === 0 ? `
+              <p class="text-xs text-slate-400 italic py-1">No items in this category.</p>
+            ` : `
+              <div class="space-y-2">
+                ${catItems.map(item => `
+                  <div class="flex items-center justify-between text-xs py-1 hover:bg-slate-50 px-2 rounded-lg transition group">
+                    <label class="flex items-center gap-2.5 flex-1 cursor-pointer select-none">
+                      <input type="checkbox" onchange="togglePackingCheck('${item.id}')" ${item.checked ? 'checked' : ''} class="w-4 h-4 rounded border-slate-300 text-indigo-600 focus:ring-0 cursor-pointer" />
+                      <span class="${item.checked ? 'line-through text-slate-400' : 'text-slate-800 font-medium'}">${item.name}</span>
+                    </label>
+                    <div class="flex items-center gap-1.5 opacity-80 group-hover:opacity-100">
+                      <button onclick="changeItemCategory('${item.id}')" title="Move category" class="text-slate-400 hover:text-indigo-600 p-1 cursor-pointer">
+                        <i class="fa-solid fa-arrow-right-arrow-left text-[10px]"></i>
+                      </button>
+                      <button onclick="deletePackingItem('${item.id}')" title="Delete item" class="text-slate-300 hover:text-rose-500 p-1 cursor-pointer">
+                        <i class="fa-solid fa-trash-can text-xs"></i>
+                      </button>
+                    </div>
+                  </div>
+                `).join('')}
+              </div>
+            `}
+          </div>
+        `;
+      });
+      document.getElementById('packingListContainer').innerHTML = html;
+
+      const totalPasses = passesItems.length;
+      const checkedPasses = passesItems.filter(i => i.checked).length;
+      document.getElementById('passesCount').textContent = `${checkedPasses}/${totalPasses}`;
+      document.getElementById('passesCountBadge').textContent = `${checkedPasses} of ${totalPasses} Verified`;
+
+      document.getElementById('passesListContainer').innerHTML = passesItems.map(item => `
+        <div class="bg-slate-50/80 rounded-xl p-3.5 border border-slate-200 shadow-xs flex items-start justify-between gap-3 hover:bg-slate-50 transition">
+          <div class="flex-1">
+            <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-blue-100 text-blue-800 font-mono">${item.time}</span>
+            <h4 class="text-xs font-black text-slate-900 mt-1">${item.title}</h4>
+            <p class="text-[11px] text-slate-500 font-mono mt-0.5 font-medium">${item.conf}</p>
+          </div>
+          <input type="checkbox" onchange="togglePassCheck('${item.id}')" ${item.checked ? 'checked' : ''} class="w-5 h-5 mt-1 rounded border-slate-300 text-emerald-600 focus:ring-0 cursor-pointer" />
+        </div>
+      `).join('');
+    }
+
+    function togglePackingCheck(id) {
+      packingItems = packingItems.map(item => item.id === id ? { ...item, checked: !item.checked } : item);
+      localStorage.setItem('dc_packing_items_v10', JSON.stringify(packingItems));
+      renderChecklists();
+    }
+
+    function deletePackingItem(id) {
+      packingItems = packingItems.filter(item => item.id !== id);
+      localStorage.setItem('dc_packing_items_v10', JSON.stringify(packingItems));
+      renderChecklists();
+    }
+
+    function addPackingItem(e) {
+      e.preventDefault();
+      const input = document.getElementById('newPackingInput');
+      const categorySelect = document.getElementById('newPackingCategory');
+      const text = input.value.trim();
+      const selectedCategory = categorySelect.value || 'Essentials';
+      if (!text) return;
+
+      packingItems.push({ id: 'user_' + Date.now(), name: text, category: selectedCategory, checked: false });
+      localStorage.setItem('dc_packing_items_v10', JSON.stringify(packingItems));
+      input.value = '';
+      renderChecklists();
+    }
+
+    function togglePassCheck(id) {
+      passesItems = passesItems.map(item => item.id === id ? { ...item, checked: !item.checked } : item);
+      localStorage.setItem('dc_passes_items_v10', JSON.stringify(passesItems));
+      renderChecklists();
+    }
+
+    function switchChecklistTab(tab) {
+      if (tab === 'packing') {
+        document.getElementById('packingPanel').classList.remove('hidden');
+        document.getElementById('passesPanel').classList.add('hidden');
+        document.getElementById('tabPackingBtn').className = 'flex-1 py-2 rounded-lg bg-white text-slate-900 shadow-xs transition';
+        document.getElementById('tabPassesBtn').className = 'flex-1 py-2 rounded-lg text-slate-600 transition';
+      } else {
+        document.getElementById('packingPanel').classList.add('hidden');
+        document.getElementById('passesPanel').classList.remove('hidden');
+        document.getElementById('tabPassesBtn').className = 'flex-1 py-2 rounded-lg bg-white text-slate-900 shadow-xs transition';
+        document.getElementById('tabPackingBtn').className = 'flex-1 py-2 rounded-lg text-slate-600 transition';
+      }
+    }
+
+    // MAIN VIEW SWITCHER (SCHEDULE vs CHECKLIST vs KIDS ZONE)
     function switchMainView(view) {
       document.getElementById('itineraryView').classList.toggle('hidden', view !== 'itinerary');
       document.getElementById('checklistView').classList.toggle('hidden', view !== 'checklist');
       document.getElementById('kidsView').classList.toggle('hidden', view !== 'kids');
 
-      document.getElementById('deskNavItinerary').className = (view === 'itinerary') ? 'px-3.5 py-2 rounded-lg bg-white text-blue-600 shadow-xs transition flex items-center gap-2' : 'px-3.5 py-2 rounded-lg text-slate-600 hover:text-slate-900 transition flex items-center gap-2';
-      document.getElementById('deskNavChecklist').className = (view === 'checklist') ? 'px-3.5 py-2 rounded-lg bg-white text-indigo-600 shadow-xs transition flex items-center gap-2' : 'px-3.5 py-2 rounded-lg text-slate-600 hover:text-slate-900 transition flex items-center gap-2';
-      document.getElementById('deskNavKids').className = (view === 'kids') ? 'px-3.5 py-2 rounded-lg bg-amber-500 text-white shadow-xs transition flex items-center gap-1.5 font-black' : 'px-3.5 py-2 rounded-lg text-amber-600 hover:text-amber-700 transition flex items-center gap-1.5 bg-amber-50/50';
+      document.getElementById('deskNavItinerary').className = (view === 'itinerary') ? 'px-3.5 py-2 rounded-lg bg-white text-blue-600 shadow-xs transition flex items-center gap-2 cursor-pointer' : 'px-3.5 py-2 rounded-lg text-slate-600 hover:text-slate-900 transition flex items-center gap-2 cursor-pointer';
+      document.getElementById('deskNavChecklist').className = (view === 'checklist') ? 'px-3.5 py-2 rounded-lg bg-white text-indigo-600 shadow-xs transition flex items-center gap-2 cursor-pointer' : 'px-3.5 py-2 rounded-lg text-slate-600 hover:text-slate-900 transition flex items-center gap-2 cursor-pointer';
+      document.getElementById('deskNavKids').className = (view === 'kids') ? 'px-3.5 py-2 rounded-lg bg-amber-500 text-white shadow-xs transition flex items-center gap-1.5 font-black cursor-pointer' : 'px-3.5 py-2 rounded-lg text-amber-600 hover:text-amber-700 transition flex items-center gap-1.5 bg-amber-50/50 cursor-pointer';
 
-      document.getElementById('mobNavItinerary').className = (view === 'itinerary') ? 'flex flex-col items-center gap-1 text-blue-600' : 'flex flex-col items-center gap-1 text-slate-400 hover:text-slate-600';
-      document.getElementById('mobNavChecklist').className = (view === 'checklist') ? 'flex flex-col items-center gap-1 text-indigo-600' : 'flex flex-col items-center gap-1 text-slate-400 hover:text-slate-600';
-      document.getElementById('mobNavKids').className = (view === 'kids') ? 'flex flex-col items-center gap-1 text-amber-500 font-bold' : 'flex flex-col items-center gap-1 text-slate-400 hover:text-slate-600';
+      document.getElementById('mobNavItinerary').className = (view === 'itinerary') ? 'flex flex-col items-center gap-1 text-blue-600 cursor-pointer' : 'flex flex-col items-center gap-1 text-slate-400 hover:text-slate-600 cursor-pointer';
+      document.getElementById('mobNavChecklist').className = (view === 'checklist') ? 'flex flex-col items-center gap-1 text-indigo-600 cursor-pointer' : 'flex flex-col items-center gap-1 text-slate-400 hover:text-slate-600 cursor-pointer';
+      document.getElementById('mobNavKids').className = (view === 'kids') ? 'flex flex-col items-center gap-1 text-amber-500 font-bold cursor-pointer' : 'flex flex-col items-center gap-1 text-slate-400 hover:text-slate-600 cursor-pointer';
+
+      if (view === 'checklist') {
+        if (window.innerWidth < 1024) switchChecklistTab('packing');
+        updateCategoryDropdowns();
+        renderChecklists();
+      } else if (view === 'kids') {
+        setTimeout(() => {
+          initPandaCanvas();
+          loadSpyMission(currentSpyMission);
+        }, 50);
+      }
     }
 
     function toggleFlightDrawer() { document.getElementById('flightDrawer').classList.toggle('hidden'); }
     function toggleInfoModal() { document.getElementById('infoModal').classList.toggle('hidden'); }
 
-    // COUNTDOWN
+    function refreshFlightData() {
+      const btn = document.getElementById('refreshBtn');
+      if (btn) btn.innerHTML = `<i class="fa-solid fa-spinner fa-spin text-xs"></i> Syncing Gates...`;
+      setTimeout(() => {
+        if (btn) btn.innerHTML = `<i class="fa-solid fa-check text-xs text-emerald-400"></i> Both Gates Synced`;
+        setTimeout(() => { if (btn) btn.innerHTML = `<i class="fa-solid fa-arrows-rotate text-xs"></i> Sync Gates`; }, 2200);
+      }, 950);
+    }
+
     function updateCountdown() {
       const departureTime = new Date("October 15, 2026 11:30:00 EDT").getTime();
       const now = new Date().getTime();
@@ -1335,10 +1730,251 @@
       }
     }
 
-    // INITIAL RENDER
+    // ==========================================
+    // MINI-GAME 1: PANDA BAMBOO TOSS (ROBUST ENGINE)
+    // ==========================================
+    let pCanvas, pCtx;
+    let pandaBasket = { x: 170, y: 275, width: 65, height: 26 };
+    let pandaItems = [];
+    let pandaScore = 0;
+    let pandaLives = 3;
+    let pandaGameRunning = false;
+    let pandaAnimId = null;
+    let pandaHighScore = localStorage.getItem('dc_panda_hi') || 0;
+    let canvasEventsAttached = false;
+
+    function initPandaCanvas() {
+      pCanvas = document.getElementById('pandaCanvas');
+      if (!pCanvas) return;
+      pCtx = pCanvas.getContext('2d');
+      document.getElementById('pandaHighScore').textContent = pandaHighScore;
+
+      // Draw initial idle canvas
+      drawPandaScene();
+
+      if (!canvasEventsAttached) {
+        // Touch move
+        pCanvas.addEventListener('touchmove', function(e) {
+          if (!pandaGameRunning) return;
+          const rect = pCanvas.getBoundingClientRect();
+          const scaleX = 400 / rect.width;
+          const touch = e.touches[0];
+          const touchX = (touch.clientX - rect.left) * scaleX;
+          pandaBasket.x = Math.max(5, Math.min(330, touchX - pandaBasket.width / 2));
+          e.preventDefault();
+        }, { passive: false });
+
+        // Touch start
+        pCanvas.addEventListener('touchstart', function(e) {
+          if (!pandaGameRunning) return;
+          const rect = pCanvas.getBoundingClientRect();
+          const scaleX = 400 / rect.width;
+          const touch = e.touches[0];
+          const touchX = (touch.clientX - rect.left) * scaleX;
+          pandaBasket.x = Math.max(5, Math.min(330, touchX - pandaBasket.width / 2));
+        }, { passive: true });
+
+        // Mouse move
+        pCanvas.addEventListener('mousemove', function(e) {
+          if (!pandaGameRunning) return;
+          const rect = pCanvas.getBoundingClientRect();
+          const scaleX = 400 / rect.width;
+          const mouseX = (e.clientX - rect.left) * scaleX;
+          pandaBasket.x = Math.max(5, Math.min(330, mouseX - pandaBasket.width / 2));
+        });
+
+        canvasEventsAttached = true;
+      }
+    }
+
+    function movePandaBasket(delta) {
+      if (!pandaGameRunning) return;
+      pandaBasket.x = Math.max(5, Math.min(330, pandaBasket.x + delta));
+    }
+
+    window.addEventListener('keydown', function(e) {
+      if (!pandaGameRunning) return;
+      if (e.key === 'ArrowLeft') movePandaBasket(-35);
+      if (e.key === 'ArrowRight') movePandaBasket(35);
+    });
+
+    function startPandaGame() {
+      document.getElementById('pandaStartOverlay').classList.add('hidden');
+      pandaScore = 0;
+      pandaLives = 3;
+      pandaItems = [];
+      pandaGameRunning = true;
+      document.getElementById('pandaScore').textContent = pandaScore;
+      if (pandaAnimId) cancelAnimationFrame(pandaAnimId);
+      pandaGameLoop();
+    }
+
+    function drawPandaScene() {
+      if (!pCtx) return;
+      pCtx.clearRect(0, 0, 400, 320);
+
+      // Grass base
+      pCtx.fillStyle = '#059669';
+      pCtx.fillRect(0, 305, 400, 15);
+
+      // Safe basket draw (No roundRect dependency)
+      pCtx.fillStyle = '#1e293b';
+      pCtx.fillRect(pandaBasket.x, pandaBasket.y, pandaBasket.width, pandaBasket.height);
+      
+      // Decorative basket rim
+      pCtx.fillStyle = '#10b981';
+      pCtx.fillRect(pandaBasket.x, pandaBasket.y - 3, pandaBasket.width, 4);
+
+      // Panda face icon
+      pCtx.font = '22px sans-serif';
+      pCtx.fillText('🐼', pandaBasket.x + 20, pandaBasket.y + 21);
+    }
+
+    function pandaGameLoop() {
+      if (!pandaGameRunning) return;
+
+      drawPandaScene();
+
+      // Spawn falling treats
+      if (Math.random() < 0.04) {
+        pandaItems.push({
+          x: Math.random() * 340 + 20,
+          y: -20,
+          speed: 2.2 + Math.min(pandaScore * 0.08, 4.5),
+          icon: Math.random() > 0.35 ? '🎋' : (Math.random() > 0.5 ? '🍎' : '🎍')
+        });
+      }
+
+      // Update and draw treats
+      for (let i = pandaItems.length - 1; i >= 0; i--) {
+        const item = pandaItems[i];
+        item.y += item.speed;
+
+        pCtx.font = '22px sans-serif';
+        pCtx.fillText(item.icon, item.x, item.y);
+
+        // Catch collision
+        if (
+          item.y >= pandaBasket.y - 10 &&
+          item.y <= pandaBasket.y + pandaBasket.height + 5 &&
+          item.x + 15 >= pandaBasket.x &&
+          item.x <= pandaBasket.x + pandaBasket.width
+        ) {
+          pandaScore += 10;
+          document.getElementById('pandaScore').textContent = pandaScore;
+          pandaItems.splice(i, 1);
+          continue;
+        }
+
+        // Drop below screen
+        if (item.y > 325) {
+          pandaItems.splice(i, 1);
+          pandaLives--;
+          if (pandaLives <= 0) {
+            endPandaGame();
+            return;
+          }
+        }
+      }
+
+      // Render remaining lives
+      pCtx.font = '16px sans-serif';
+      let hearts = '';
+      for (let l = 0; l < pandaLives; l++) hearts += '❤️';
+      pCtx.fillText(hearts, 15, 25);
+
+      pandaAnimId = requestAnimationFrame(pandaGameLoop);
+    }
+
+    function endPandaGame() {
+      pandaGameRunning = false;
+      if (pandaAnimId) cancelAnimationFrame(pandaAnimId);
+      if (pandaScore > pandaHighScore) {
+        pandaHighScore = pandaScore;
+        localStorage.setItem('dc_panda_hi', pandaHighScore);
+        document.getElementById('pandaHighScore').textContent = pandaHighScore;
+      }
+      const overlay = document.getElementById('pandaStartOverlay');
+      document.getElementById('pandaOverlayTitle').textContent = `Game Over! Score: ${pandaScore}`;
+      document.getElementById('pandaOverlaySubtitle').textContent = pandaScore >= 100 ? 'Awesome job! Bao Li & Qing Bao are full!' : 'Great try! Play again to beat your record!';
+      overlay.classList.remove('hidden');
+    }
+
+    // ==========================================
+    // MINI-GAME 2: SPY CIPHER DECODER
+    // ==========================================
+    const spyMissions = [
+      { cipher: "W-H-I-T-E  H-O-U-S-E", display: "X-I-J-U-F  I-P-V-T-F (Shift -1)", answer: "WHITE HOUSE", hint: "The President lives here on Pennsylvania Ave!" },
+      { cipher: "P-A-N-D-A-S", display: "Q-B-O-E-B-T (Shift -1)", answer: "PANDAS", hint: "Bao Li & Qing Bao at the National Zoo!" },
+      { cipher: "L-I-N-C-O-L-N", display: "M-J-O-D-P-M-O (Shift -1)", answer: "LINCOLN", hint: "16th President by the Reflecting Pool." },
+      { cipher: "C-A-P-I-T-O-L", display: "D-B-Q-J-U-P-M (Shift -1)", answer: "CAPITOL", hint: "Where Congress makes laws under the white dome!" },
+      { cipher: "S-P-Y", display: "T-Q-Z (Shift -1)", answer: "SPY", hint: "What you will become on Sunday at L'Enfant Plaza!" }
+    ];
+
+    let currentSpyMission = 0;
+
+    function switchMiniGame(game) {
+      const isPanda = (game === 'panda');
+      document.getElementById('gamePandaCard').classList.toggle('hidden', !isPanda);
+      document.getElementById('gameSpyCard').classList.toggle('hidden', isPanda);
+
+      document.getElementById('btnGamePanda').className = isPanda ? 'flex-1 py-2.5 rounded-xl bg-white text-slate-900 shadow-xs transition flex items-center justify-center gap-1.5 cursor-pointer' : 'flex-1 py-2.5 rounded-xl text-slate-600 transition flex items-center justify-center gap-1.5 cursor-pointer';
+      document.getElementById('btnGameSpy').className = !isPanda ? 'flex-1 py-2.5 rounded-xl bg-white text-slate-900 shadow-xs transition flex items-center justify-center gap-1.5 cursor-pointer' : 'flex-1 py-2.5 rounded-xl text-slate-600 transition flex items-center justify-center gap-1.5 cursor-pointer';
+
+      if (isPanda) {
+        initPandaCanvas();
+      } else {
+        loadSpyMission(currentSpyMission);
+      }
+    }
+
+    function loadSpyMission(index) {
+      const m = spyMissions[index];
+      document.getElementById('encryptedClueText').textContent = m.display;
+      document.getElementById('cipherHintText').textContent = `Clue: ${m.hint}`;
+      document.getElementById('spyMissionCount').textContent = `${index + 1} / ${spyMissions.length}`;
+      document.getElementById('spyAnswerInput').value = '';
+      document.getElementById('spyFeedback').textContent = '';
+    }
+
+    function handleSpyKeydown(e) {
+      if (e.key === 'Enter') {
+        checkSpyAnswer();
+      }
+    }
+
+    function checkSpyAnswer() {
+      const input = document.getElementById('spyAnswerInput').value.trim().toUpperCase();
+      const current = spyMissions[currentSpyMission];
+      const feedback = document.getElementById('spyFeedback');
+
+      if (input === current.answer) {
+        feedback.innerHTML = `<span class="text-emerald-600">✅ DECRYPTED! Mission accomplished Agent!</span>`;
+        if (currentSpyMission < spyMissions.length - 1) {
+          setTimeout(() => {
+            currentSpyMission++;
+            loadSpyMission(currentSpyMission);
+          }, 1000);
+        } else {
+          document.getElementById('spyAgentRank').textContent = "Rank: MASTER SPY 🎖️";
+          feedback.innerHTML = `<span class="text-purple-600">🏆 All Missions Decoded! You are ready for the Spy Museum!</span>`;
+        }
+      } else {
+        feedback.innerHTML = `<span class="text-rose-500">❌ Access Denied. Check your cipher shift!</span>`;
+      }
+    }
+
+    function nextSpyMission() {
+      currentSpyMission = (currentSpyMission + 1) % spyMissions.length;
+      loadSpyMission(currentSpyMission);
+    }
+
+    // INITIAL SETUP
     renderDay(0);
-    setInterval(updateCountdown, 1000);
+    updateCategoryDropdowns();
+    renderChecklists();
     updateCountdown();
+    setInterval(updateCountdown, 1000);
   </script>
 </body>
 </html>
