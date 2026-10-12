@@ -514,7 +514,7 @@
         </button>
       </div>
 
-      <!-- MUSEUM PHOTO (shown only for museums) -->
+      <!-- SITE PHOTO -->
       <figure id="modalSiteImageWrap" class="hidden mt-4 rounded-xl overflow-hidden border border-slate-200 bg-slate-100">
         <img id="modalSiteImage" src="" alt="" loading="lazy" class="w-full h-48 sm:h-56 object-cover" onerror="document.getElementById('modalSiteImageWrap').classList.add('hidden')">
         <figcaption class="px-3 py-1.5 text-[10px] text-slate-500 bg-white">
@@ -1132,8 +1132,26 @@
       ]
     };
 
-    // ONE PHOTO FOR EACH MUSEUM (freely licensed, from Wikimedia Commons)
+    // ONE PHOTO FOR EVERY SITE (freely licensed, from Wikimedia Commons)
     const SITE_IMAGES = {
+      "white-house": {
+        "src": "https://commons.wikimedia.org/wiki/Special:FilePath/WhiteHouseSouthFacadeHDR.jpg?width=960",
+        "alt": "The White House's south side and lawn",
+        "credit": "Photo: Wikimedia Commons",
+        "creditUrl": "https://commons.wikimedia.org/wiki/File:WhiteHouseSouthFacadeHDR.jpg"
+      },
+      "pentagon": {
+        "src": "https://commons.wikimedia.org/wiki/Special:FilePath/The_Pentagon%2C_Headquarters_of_the_US_Department_of_Defense_%28cropped2%29.jpg?width=960",
+        "alt": "Aerial view of the five-sided Pentagon",
+        "credit": "Photo: Wikimedia Commons",
+        "creditUrl": "https://commons.wikimedia.org/wiki/File:The_Pentagon%2C_Headquarters_of_the_US_Department_of_Defense_%28cropped2%29.jpg"
+      },
+      "old-town": {
+        "src": "https://commons.wikimedia.org/wiki/Special:FilePath/King_Street_Alexandria.jpg?width=960",
+        "alt": "Historic shops along King Street in Old Town Alexandria",
+        "credit": "Photo: Wikimedia Commons",
+        "creditUrl": "https://commons.wikimedia.org/wiki/File:King_Street_Alexandria.jpg"
+      },
       "natural-history": {
         "src": "https://commons.wikimedia.org/wiki/Special:FilePath/National_Museum_of_Natural_History_-_2026_%2855255088887%29.jpg?width=960",
         "alt": "The museum's columned main entrance on the National Mall",
@@ -1146,11 +1164,23 @@
         "credit": "Photo: Wikimedia Commons",
         "creditUrl": "https://commons.wikimedia.org/wiki/File:National_Air_and_Space_Museum_%2855256212753%29.jpg"
       },
+      "wharf": {
+        "src": "https://commons.wikimedia.org/wiki/Special:FilePath/Wharf_Marina.jpg?width=960",
+        "alt": "Boats in the marina at The Wharf",
+        "credit": "Photo: Wikimedia Commons",
+        "creditUrl": "https://commons.wikimedia.org/wiki/File:Wharf_Marina.jpg"
+      },
       "spy-museum": {
         "src": "https://commons.wikimedia.org/wiki/Special:FilePath/2019_International_Spy_Museum_03.jpg?width=960",
         "alt": "The Spy Museum's building at L'Enfant Plaza",
         "credit": "Photo: Wikimedia Commons",
         "creditUrl": "https://commons.wikimedia.org/wiki/File:2019_International_Spy_Museum_03.jpg"
+      },
+      "monument": {
+        "src": "https://commons.wikimedia.org/wiki/Special:FilePath/Washington_Monument_2022.jpg?width=960",
+        "alt": "The Washington Monument against a blue sky",
+        "credit": "Photo: Wikimedia Commons",
+        "creditUrl": "https://commons.wikimedia.org/wiki/File:Washington_Monument_2022.jpg"
       },
       "archives": {
         "src": "https://commons.wikimedia.org/wiki/Special:FilePath/US_National_Archives_Building.jpg?width=960",
@@ -1158,11 +1188,35 @@
         "credit": "Photo: Wikimedia Commons",
         "creditUrl": "https://commons.wikimedia.org/wiki/File:US_National_Archives_Building.jpg"
       },
+      "lincoln": {
+        "src": "https://commons.wikimedia.org/wiki/Special:FilePath/Lincoln_Memorial_east_side.JPG?width=960",
+        "alt": "The front of the Lincoln Memorial",
+        "credit": "Photo: Wikimedia Commons",
+        "creditUrl": "https://commons.wikimedia.org/wiki/File:Lincoln_Memorial_east_side.JPG"
+      },
+      "national-zoo": {
+        "src": "https://commons.wikimedia.org/wiki/Special:FilePath/Qing_Bao_Panda.jpg?width=960",
+        "alt": "Giant panda Qing Bao eating bamboo at the National Zoo",
+        "credit": "Photo: Wikimedia Commons",
+        "creditUrl": "https://commons.wikimedia.org/wiki/File:Qing_Bao_Panda.jpg"
+      },
       "museum-bible": {
         "src": "https://commons.wikimedia.org/wiki/Special:FilePath/Museum_of_the_Bible_%2853839146587%29.jpg?width=960",
         "alt": "The Museum of the Bible's brick building and glass roof",
         "credit": "Photo: Wikimedia Commons",
         "creditUrl": "https://commons.wikimedia.org/wiki/File:Museum_of_the_Bible_%2853839146587%29.jpg"
+      },
+      "capitol": {
+        "src": "https://commons.wikimedia.org/wiki/Special:FilePath/US_Capitol_east_side.JPG?width=960",
+        "alt": "The east front of the U.S. Capitol",
+        "credit": "Photo: Wikimedia Commons",
+        "creditUrl": "https://commons.wikimedia.org/wiki/File:US_Capitol_east_side.JPG"
+      },
+      "lafayette": {
+        "src": "https://commons.wikimedia.org/wiki/Special:FilePath/North_Portico_of_the_White_House_photo_Don_Ramey_Logan.jpg?width=960",
+        "alt": "Andrew Jackson's statue in Lafayette Square with the White House behind",
+        "credit": "Photo: Wikimedia Commons",
+        "creditUrl": "https://commons.wikimedia.org/wiki/File:North_Portico_of_the_White_House_photo_Don_Ramey_Logan.jpg"
       }
     };
 
