@@ -944,7 +944,7 @@
 
   <!-- JAVASCRIPT LOGIC & DYNAMIC ROUTING ENGINE -->
   <script>
-    const HOTEL_COORDS = { lat: 38.9079, lng: -77.0354 };
+    const HOTEL_COORDS = { lat: 38.908141, lng: -77.034904 };
 
     // DETAILED HISTORICAL & EDUCATIONAL CARD DATABASE
     const SITE_KNOWLEDGE_BASE = {
@@ -1365,12 +1365,57 @@
       return hit ? hit.number : null;
     }
 
-    function getUberDeepLink(dropoffName, coords) {
-      const formattedName = encodeURIComponent(dropoffName || "Destination");
-      if (coords && coords.lat && coords.lng) {
-        return `https://m.uber.com/ul/?action=setPickup&client_id=dcfamilytrip&pickup=my_location&dropoff[formatted_address]=${formattedName}&dropoff[latitude]=${coords.lat}&dropoff[longitude]=${coords.lng}`;
-      }
-      return `https://m.uber.com/ul/?action=setPickup&client_id=dcfamilytrip&pickup=my_location&dropoff[formatted_address]=${formattedName}`;
+    // EXACT UBER DROP-OFF PINS (checked against OpenStreetMap, Oct 2026).
+    // Uber snaps to whatever business is closest to the pin, so these sit right
+    // at each entrance or drop-off curb. "match" is looked for in the leg's
+    // destination name, so dinners and saved custom dinners pick these up too.
+    const UBER_PINS = [
+      { match: "Holiday Inn",       nickname: "Holiday Inn Washington DC - Central / White House", address: "1501 Rhode Island Ave NW, Washington, DC 20005", lat: 38.908141, lng: -77.034904 },
+      { match: "ATL",               nickname: "ATL Domestic Terminal North (American Airlines)", address: "6000 N Terminal Pkwy, Atlanta, GA 30320", lat: 33.6407, lng: -84.4277 },
+      { match: "Reagan National",   nickname: "Reagan National Airport (DCA) Terminal 2", address: "2401 Smith Blvd, Arlington, VA 22202", lat: 38.853416, lng: -77.044042 },
+      { match: "Old Town",          nickname: "Old Town Alexandria - King St & Union St (Torpedo Factory)", address: "105 N Union St, Alexandria, VA 22314", lat: 38.804856, lng: -77.039795 },
+      { match: "Natural History",   nickname: "National Museum of Natural History (Constitution Ave entrance)", address: "10th St & Constitution Ave NW, Washington, DC 20560", lat: 38.8921, lng: -77.0260 },
+      { match: "Wharf",             nickname: "Municipal Fish Market at The Wharf", address: "1100 Maine Ave SW, Washington, DC 20024", lat: 38.881050, lng: -77.028253 },
+      { match: "Fish Market",       nickname: "Municipal Fish Market at The Wharf", address: "1100 Maine Ave SW, Washington, DC 20024", lat: 38.881050, lng: -77.028253 },
+      { match: "Spy Museum",        nickname: "International Spy Museum", address: "700 L'Enfant Plaza SW, Washington, DC 20024", lat: 38.883955, lng: -77.025537 },
+      { match: "Washington Monument", nickname: "Washington Monument Lodge (15th St NW)", address: "2 15th St NW, Washington, DC 20024", lat: 38.889478, lng: -77.033387 },
+      { match: "Zoo",               nickname: "Smithsonian National Zoo (Connecticut Ave entrance)", address: "3001 Connecticut Ave NW, Washington, DC 20008", lat: 38.9296, lng: -77.0498 },
+      { match: "Lafayette",         nickname: "Lafayette Square (H St NW at 16th St)", address: "H St NW & 16th St NW, Washington, DC 20006", lat: 38.9002, lng: -77.0365 },
+      { match: "Old Ebbitt",        nickname: "Old Ebbitt Grill", address: "675 15th St NW, Washington, DC 20005", lat: 38.898056, lng: -77.033329 },
+      { match: "Rasika",            nickname: "Rasika Penn Quarter", address: "633 D St NW, Washington, DC 20004", lat: 38.894978, lng: -77.021371 },
+      { match: "The Hamilton",      nickname: "The Hamilton", address: "600 14th St NW, Washington, DC 20005", lat: 38.897557, lng: -77.032279 },
+      { match: "Founding Farmers",  nickname: "Founding Farmers DC", address: "1924 Pennsylvania Ave NW, Washington, DC 20006", lat: 38.900259, lng: -77.044560 },
+      { match: "Makers Union",      nickname: "Makers Union (The Wharf)", address: "664 Maine Ave SW, Washington, DC 20024", lat: 38.877814, lng: -77.022145 },
+      { match: "Ammathar",          nickname: "Ammathar Thai Cuisine", address: "1326 14th St NW, Washington, DC 20005", lat: 38.908148, lng: -77.032203 },
+      { match: "Tokyo Japanese",    nickname: "Tokyo Japanese Steakhouse", address: "66 Canal Center Plaza, Alexandria, VA 22314", lat: 38.813588, lng: -77.039241 },
+      { match: "Carmine",           nickname: "Carmine's DC", address: "425 7th St NW, Washington, DC 20004", lat: 38.895609, lng: -77.021713 }
+    ];
+
+    function findUberPin(name) {
+      if (!name) return null;
+      return UBER_PINS.find(p => name.includes(p.match)) || null;
+    }
+
+    function getUberDeepLink(dropoffName, coords, address) {
+      const pin = findUberPin(dropoffName);
+      const nickname = pin ? pin.nickname : (dropoffName || "Destination");
+      const addr = pin ? pin.address : (address || dropoffName || "");
+      const lat = pin ? pin.lat : (coords && coords.lat);
+      const lng = pin ? pin.lng : (coords && coords.lng);
+      let url = `https://m.uber.com/ul/?action=setPickup&client_id=dcfamilytrip&pickup=my_location` +
+        `&dropoff[nickname]=${encodeURIComponent(nickname)}&dropoff[formatted_address]=${encodeURIComponent(addr)}`;
+      if (lat && lng) url += `&dropoff[latitude]=${lat}&dropoff[longitude]=${lng}`;
+      return url;
+    }
+
+    // Look up a typed-in address on OpenStreetMap so custom dinners get a real pin
+    async function geocodeAddress(text) {
+      try {
+        const r = await fetch('https://nominatim.openstreetmap.org/search?format=jsonv2&limit=1&countrycodes=us&q=' + encodeURIComponent(text));
+        const data = await r.json();
+        if (data && data[0]) return { lat: parseFloat(data[0].lat), lng: parseFloat(data[0].lon) };
+      } catch (e) {}
+      return null;
     }
 
     const PRESET_DINNERS = [
@@ -1873,6 +1918,7 @@
               uberMeta: { estFare: `$${estLow}–$${estHigh}`, time: `${driveMins} min`, seats: "Seats 5" },
               destCoords: computed.dinner.coords,
               destName: computed.dinner.name,
+              destAddress: computed.dinner.location,
               icon: "fa-car-side"
             });
           } else {
@@ -2031,7 +2077,7 @@
 
         // UBER XL CARD WITH 1-TAP APP DEEP LINK
         if (item.type === 'transit-uber') {
-          const uberLink = getUberDeepLink(item.destName || item.location, item.destCoords);
+          const uberLink = getUberDeepLink(item.destName || item.location, item.destCoords, item.destAddress);
 
           return `
             <div class="relative pl-9">
@@ -2373,10 +2419,7 @@
       const addr = document.getElementById('customDinnerAddress').value.trim();
       if (!name) return;
 
-      const approxCoords = {
-        lat: 38.8950 + (Math.random() - 0.5) * 0.02,
-        lng: -77.0300 + (Math.random() - 0.5) * 0.02
-      };
+      const approxCoords = null; // filled in below from OpenStreetMap
 
       customDinners[editingDayIndex] = {
         time: "6:00 PM",
@@ -2389,6 +2432,16 @@
       };
 
       localStorage.setItem('dc_custom_dinners_v12', JSON.stringify(customDinners));
+
+      // Find the real map pin for this restaurant, then refresh the day
+      const dayToFix = editingDayIndex;
+      geocodeAddress(addr ? `${name}, ${addr}` : `${name}, Washington, DC`).then(async found => {
+        found = found || (addr ? await geocodeAddress(addr) : null);
+        if (!found || !customDinners[dayToFix] || customDinners[dayToFix].name !== name) return;
+        customDinners[dayToFix].coords = found;
+        try { localStorage.setItem('dc_custom_dinners_v12', JSON.stringify(customDinners)); } catch (e) {}
+        renderDay(dayToFix);
+      });
       document.getElementById('customDinnerName').value = '';
       document.getElementById('customDinnerAddress').value = '';
       closeDinnerModal();
