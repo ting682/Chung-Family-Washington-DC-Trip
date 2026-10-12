@@ -40,22 +40,22 @@
       <!-- Desktop Navigation & Quick Actions -->
       <div class="flex items-center gap-2 sm:gap-3">
         <div class="hidden lg:flex items-center bg-slate-100 p-1 rounded-xl border border-slate-200 text-xs font-bold">
-          <button onclick="switchMainView('itinerary')" id="deskNavItinerary" class="px-3.5 py-2 rounded-lg bg-white text-blue-600 shadow-xs transition flex items-center gap-2">
+          <button onclick="switchMainView('itinerary')" id="deskNavItinerary" class="px-3.5 py-2 rounded-lg bg-white text-blue-600 shadow-xs transition flex items-center gap-2 cursor-pointer">
             <i class="fa-solid fa-calendar-day"></i> Schedule
           </button>
-          <button onclick="switchMainView('checklist')" id="deskNavChecklist" class="px-3.5 py-2 rounded-lg text-slate-600 hover:text-slate-900 transition flex items-center gap-2">
+          <button onclick="switchMainView('checklist')" id="deskNavChecklist" class="px-3.5 py-2 rounded-lg text-slate-600 hover:text-slate-900 transition flex items-center gap-2 cursor-pointer">
             <i class="fa-solid fa-list-check"></i> Checklists
           </button>
-          <button onclick="switchMainView('kids')" id="deskNavKids" class="px-3.5 py-2 rounded-lg text-amber-600 hover:text-amber-700 transition flex items-center gap-1.5 bg-amber-50/50">
+          <button onclick="switchMainView('kids')" id="deskNavKids" class="px-3.5 py-2 rounded-lg text-amber-600 hover:text-amber-700 transition flex items-center gap-1.5 bg-amber-50/50 cursor-pointer">
             <i class="fa-solid fa-gamepad text-amber-500"></i> Kids Zone 🎮
           </button>
         </div>
 
-        <button onclick="toggleFlightDrawer()" class="h-10 px-3.5 rounded-xl bg-blue-50 border border-blue-200 text-blue-700 flex items-center gap-1.5 text-xs font-bold hover:bg-blue-100 active:scale-95 transition shadow-xs">
+        <button onclick="toggleFlightDrawer()" class="h-10 px-3.5 rounded-xl bg-blue-50 border border-blue-200 text-blue-700 flex items-center gap-1.5 text-xs font-bold hover:bg-blue-100 active:scale-95 transition shadow-xs cursor-pointer">
           <i class="fa-solid fa-plane-departure text-blue-600"></i>
-          <span>Live Gates & Flights</span>
+          <span>Live Gates &amp; Flights</span>
         </button>
-        <button onclick="toggleInfoModal()" class="w-10 h-10 rounded-xl bg-slate-100 border border-slate-200 flex items-center justify-center text-slate-600 hover:bg-slate-200 active:scale-95 transition">
+        <button onclick="toggleInfoModal()" class="w-10 h-10 rounded-xl bg-slate-100 border border-slate-200 flex items-center justify-center text-slate-600 hover:bg-slate-200 active:scale-95 transition cursor-pointer">
           <i class="fa-solid fa-circle-info text-base"></i>
         </button>
       </div>
@@ -73,7 +73,7 @@
         <span id="flightTickerText" class="text-slate-300 font-medium">Leave 2232 Shenley Park Ln</span>
         <span class="hidden md:inline-block text-slate-500">|</span>
         <span class="inline-flex items-center gap-1 bg-slate-800/90 text-amber-300 px-2 py-0.5 rounded border border-slate-700 text-[11px] font-mono font-bold">
-          <i class="fa-solid fa-moon text-[10px]"></i> Bedtime & Durations Built-In
+          <i class="fa-solid fa-circle-info text-[10px]"></i> Tap any sight to view History &amp; Facts
         </span>
       </div>
       <div class="flex items-center gap-2">
@@ -101,27 +101,27 @@
             </h3>
 
             <div id="dayNavContainer" class="flex lg:flex-col gap-2 overflow-x-auto lg:overflow-visible no-scrollbar pb-1 lg:pb-0">
-              <button onclick="switchDay(0)" class="day-tab flex-1 lg:w-full text-left px-3.5 py-2.5 rounded-xl text-xs font-bold transition bg-slate-900 text-white shadow-xs flex items-center justify-between" data-day="0">
+              <button onclick="switchDay(0)" class="day-tab flex-1 lg:w-full text-left px-3.5 py-2.5 rounded-xl text-xs font-bold transition bg-slate-900 text-white shadow-xs flex items-center justify-between cursor-pointer" data-day="0">
                 <span>Thu, Oct 15</span>
-                <span class="text-[10px] font-normal opacity-80 hidden lg:inline">Depart & Settle In</span>
+                <span class="text-[10px] font-normal opacity-80 hidden lg:inline">Depart &amp; Settle In</span>
               </button>
-              <button onclick="switchDay(1)" class="day-tab flex-1 lg:w-full text-left px-3.5 py-2.5 rounded-xl text-xs font-bold transition bg-slate-100 hover:bg-slate-200 text-slate-700 flex items-center justify-between" data-day="1">
+              <button onclick="switchDay(1)" class="day-tab flex-1 lg:w-full text-left px-3.5 py-2.5 rounded-xl text-xs font-bold transition bg-slate-100 hover:bg-slate-200 text-slate-700 flex items-center justify-between cursor-pointer" data-day="1">
                 <span>Fri, Oct 16</span>
-                <span class="text-[10px] font-normal opacity-70 hidden lg:inline">White House & Old Town</span>
+                <span class="text-[10px] font-normal opacity-70 hidden lg:inline">White House &amp; Old Town</span>
               </button>
-              <button onclick="switchDay(2)" class="day-tab flex-1 lg:w-full text-left px-3.5 py-2.5 rounded-xl text-xs font-bold transition bg-slate-100 hover:bg-slate-200 text-slate-700 flex items-center justify-between" data-day="2">
+              <button onclick="switchDay(2)" class="day-tab flex-1 lg:w-full text-left px-3.5 py-2.5 rounded-xl text-xs font-bold transition bg-slate-100 hover:bg-slate-200 text-slate-700 flex items-center justify-between cursor-pointer" data-day="2">
                 <span>Sat, Oct 17</span>
-                <span class="text-[10px] font-normal opacity-70 hidden lg:inline">Smithsonian & The Wharf</span>
+                <span class="text-[10px] font-normal opacity-70 hidden lg:inline">Smithsonian &amp; The Wharf</span>
               </button>
-              <button onclick="switchDay(3)" class="day-tab flex-1 lg:w-full text-left px-3.5 py-2.5 rounded-xl text-xs font-bold transition bg-slate-100 hover:bg-slate-200 text-slate-700 flex items-center justify-between" data-day="3">
+              <button onclick="switchDay(3)" class="day-tab flex-1 lg:w-full text-left px-3.5 py-2.5 rounded-xl text-xs font-bold transition bg-slate-100 hover:bg-slate-200 text-slate-700 flex items-center justify-between cursor-pointer" data-day="3">
                 <span>Sun, Oct 18</span>
-                <span class="text-[10px] font-normal opacity-70 hidden lg:inline">Spy Museum & Lincoln</span>
+                <span class="text-[10px] font-normal opacity-70 hidden lg:inline">Spy Museum &amp; Lincoln</span>
               </button>
-              <button onclick="switchDay(4)" class="day-tab flex-1 lg:w-full text-left px-3.5 py-2.5 rounded-xl text-xs font-bold transition bg-slate-100 hover:bg-slate-200 text-slate-700 flex items-center justify-between" data-day="4">
+              <button onclick="switchDay(4)" class="day-tab flex-1 lg:w-full text-left px-3.5 py-2.5 rounded-xl text-xs font-bold transition bg-slate-100 hover:bg-slate-200 text-slate-700 flex items-center justify-between cursor-pointer" data-day="4">
                 <span>Mon, Oct 19</span>
-                <span class="text-[10px] font-normal opacity-70 hidden lg:inline">Pandas & Capitol Tour</span>
+                <span class="text-[10px] font-normal opacity-70 hidden lg:inline">Pandas &amp; Capitol Tour</span>
               </button>
-              <button onclick="switchDay(5)" class="day-tab flex-1 lg:w-full text-left px-3.5 py-2.5 rounded-xl text-xs font-bold transition bg-slate-100 hover:bg-slate-200 text-slate-700 flex items-center justify-between" data-day="5">
+              <button onclick="switchDay(5)" class="day-tab flex-1 lg:w-full text-left px-3.5 py-2.5 rounded-xl text-xs font-bold transition bg-slate-100 hover:bg-slate-200 text-slate-700 flex items-center justify-between cursor-pointer" data-day="5">
                 <span>Tue, Oct 20</span>
                 <span class="text-[10px] font-normal opacity-70 hidden lg:inline">Flight Home to ATL</span>
               </button>
@@ -133,9 +133,9 @@
               <i class="fa-solid fa-person-walking text-indigo-600"></i> Max 20–30m Walk Rule
             </h4>
             <p class="text-[11px] leading-relaxed text-indigo-800">
-              When you change any dinner location, walking legs over <strong>1.0 mile (~20 mins)</strong> automatically switch to <strong>UberXL</strong> rides.
+              When you change any dinner location, walking legs over <strong>1.0 mile (~20 mins)</strong> automatically switch to <strong>UberXL</strong> rides with live one-tap booking links.
             </p>
-            <button onclick="resetAllDinners()" class="mt-2.5 text-[10px] font-bold text-indigo-700 hover:text-indigo-900 bg-white border border-indigo-200 px-2 py-1 rounded-lg transition">
+            <button onclick="resetAllDinners()" class="mt-2.5 text-[10px] font-bold text-indigo-700 hover:text-indigo-900 bg-white border border-indigo-200 px-2 py-1 rounded-lg transition cursor-pointer">
               Reset Dinners to Original
             </button>
           </div>
@@ -146,7 +146,7 @@
               <div>
                 <span class="text-[10px] font-black uppercase tracking-wider text-amber-200 block">Games for Kids</span>
                 <h4 class="text-sm font-black">Open DC Kids Zone! 🎮</h4>
-                <p class="text-[11px] text-amber-100 mt-0.5">Spy Ciphers & Panda Snack Toss</p>
+                <p class="text-[11px] text-amber-100 mt-0.5">Spy Ciphers &amp; Panda Snack Toss</p>
               </div>
             </div>
           </div>
@@ -158,10 +158,10 @@
           <div id="transitSummaryWidget" class="bg-white border border-slate-200 rounded-2xl p-4 shadow-xs flex items-center justify-between text-xs"></div>
 
           <div class="flex items-center gap-2 overflow-x-auto no-scrollbar text-xs">
-            <button onclick="filterTimeline('all')" class="filter-chip px-3.5 py-1.5 rounded-full font-bold bg-slate-800 text-white shadow-xs" data-filter="all">All Stops</button>
-            <button onclick="filterTimeline('site')" class="filter-chip px-3.5 py-1.5 rounded-full font-medium bg-white text-slate-600 border border-slate-200 hover:bg-slate-50" data-filter="site">🏛️ Sights</button>
-            <button onclick="filterTimeline('transit')" class="filter-chip px-3.5 py-1.5 rounded-full font-medium bg-white text-slate-600 border border-slate-200 hover:bg-slate-50" data-filter="transit">🚗 Rides & Walks</button>
-            <button onclick="filterTimeline('food')" class="filter-chip px-3.5 py-1.5 rounded-full font-medium bg-white text-slate-600 border border-slate-200 hover:bg-slate-50" data-filter="food">🍽️ Food</button>
+            <button onclick="filterTimeline('all')" class="filter-chip px-3.5 py-1.5 rounded-full font-bold bg-slate-800 text-white shadow-xs cursor-pointer" data-filter="all">All Stops</button>
+            <button onclick="filterTimeline('site')" class="filter-chip px-3.5 py-1.5 rounded-full font-medium bg-white text-slate-600 border border-slate-200 hover:bg-slate-50 cursor-pointer" data-filter="site">🏛️ Sights</button>
+            <button onclick="filterTimeline('transit')" class="filter-chip px-3.5 py-1.5 rounded-full font-medium bg-white text-slate-600 border border-slate-200 hover:bg-slate-50 cursor-pointer" data-filter="transit">🚗 Rides &amp; Walks</button>
+            <button onclick="filterTimeline('food')" class="filter-chip px-3.5 py-1.5 rounded-full font-medium bg-white text-slate-600 border border-slate-200 hover:bg-slate-50 cursor-pointer" data-filter="food">🍽️ Food</button>
           </div>
 
           <div id="timelineContainer" class="space-y-3 relative before:absolute before:inset-0 before:left-5 before:w-0.5 before:bg-slate-300"></div>
@@ -172,7 +172,7 @@
           <div class="bg-white rounded-2xl p-4 border border-slate-200 shadow-xs">
             <div class="flex items-center justify-between pb-3 border-b border-slate-100">
               <h3 class="text-xs font-black uppercase tracking-wider text-slate-400">Live Gate Tracker</h3>
-              <button onclick="refreshFlightData()" class="text-[10px] text-blue-600 font-bold hover:underline flex items-center gap-1">
+              <button onclick="refreshFlightData()" class="text-[10px] text-blue-600 font-bold hover:underline flex items-center gap-1 cursor-pointer">
                 <i class="fa-solid fa-arrows-rotate"></i> Sync Gates
               </button>
             </div>
@@ -225,8 +225,8 @@
               </div>
             </div>
 
-            <button onclick="toggleFlightDrawer()" class="w-full mt-3 py-2 text-center text-xs font-bold text-blue-600 bg-blue-50/50 hover:bg-blue-50 rounded-xl transition">
-              Open Full Flight & Gate Drawer
+            <button onclick="toggleFlightDrawer()" class="w-full mt-3 py-2 text-center text-xs font-bold text-blue-600 bg-blue-50/50 hover:bg-blue-50 rounded-xl transition cursor-pointer">
+              Open Full Flight &amp; Gate Drawer
             </button>
           </div>
         </aside>
@@ -234,14 +234,14 @@
       </div>
     </div>
 
-    <!-- VIEW 2: CHECKLISTS & REGISTRATIONS VIEW (RESTORED WITH SAFE PERSISTENCE) -->
+    <!-- VIEW 2: CHECKLISTS & REGISTRATIONS VIEW -->
     <section id="checklistView" class="hidden">
       <div class="lg:hidden flex bg-slate-200/90 p-1 rounded-xl mb-4 text-xs font-bold max-w-md mx-auto">
-        <button onclick="switchChecklistTab('packing')" id="tabPackingBtn" class="flex-1 py-2 rounded-lg bg-white text-slate-900 shadow-xs transition">
+        <button onclick="switchChecklistTab('packing')" id="tabPackingBtn" class="flex-1 py-2 rounded-lg bg-white text-slate-900 shadow-xs transition cursor-pointer">
           🎒 Packing (<span id="packingCount">0</span>)
         </button>
-        <button onclick="switchChecklistTab('passes')" id="tabPassesBtn" class="flex-1 py-2 rounded-lg text-slate-600 transition">
-          🎟️ Passes & Bookings (<span id="passesCount">0</span>)
+        <button onclick="switchChecklistTab('passes')" id="tabPassesBtn" class="flex-1 py-2 rounded-lg text-slate-600 transition cursor-pointer">
+          🎟️ Passes &amp; Bookings (<span id="passesCount">0</span>)
         </button>
       </div>
 
@@ -257,7 +257,7 @@
               </div>
               <div class="flex items-center gap-2">
                 <span id="packingPercent" class="text-sm font-black text-indigo-600">0%</span>
-                <button onclick="toggleCategoryManager()" class="text-xs font-bold text-slate-700 bg-slate-100 hover:bg-slate-200 px-3 py-1.5 rounded-xl transition flex items-center gap-1.5 border border-slate-200 shadow-2xs">
+                <button onclick="toggleCategoryManager()" class="text-xs font-bold text-slate-700 bg-slate-100 hover:bg-slate-200 px-3 py-1.5 rounded-xl transition flex items-center gap-1.5 border border-slate-200 shadow-2xs cursor-pointer">
                   <i class="fa-solid fa-gear text-slate-500 text-[11px]"></i>
                   <span>Manage Categories</span>
                 </button>
@@ -276,7 +276,7 @@
                   <select id="newPackingCategory" class="bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 text-xs text-slate-800 font-bold focus:outline-none focus:ring-2 focus:ring-blue-500 cursor-pointer">
                   </select>
 
-                  <button type="submit" class="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-xl text-xs font-bold shadow-xs active:scale-95 transition whitespace-nowrap">
+                  <button type="submit" class="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-xl text-xs font-bold shadow-xs active:scale-95 transition whitespace-nowrap cursor-pointer">
                     <i class="fa-solid fa-plus mr-1"></i> Add Item
                   </button>
                 </div>
@@ -293,7 +293,7 @@
 
               <div class="flex gap-2 mb-3">
                 <input type="text" id="newCategoryInput" placeholder="New category name..." class="flex-1 bg-white border border-slate-300 rounded-xl px-3 py-1.5 text-xs text-slate-800 focus:outline-none focus:ring-2 focus:ring-indigo-500" />
-                <button type="button" onclick="addNewCategory()" class="bg-slate-900 hover:bg-slate-800 text-white px-3.5 py-1.5 rounded-xl text-xs font-bold transition">
+                <button type="button" onclick="addNewCategory()" class="bg-slate-900 hover:bg-slate-800 text-white px-3.5 py-1.5 rounded-xl text-xs font-bold transition cursor-pointer">
                   + Add Category
                 </button>
               </div>
@@ -310,7 +310,7 @@
           <div class="bg-amber-50 border border-amber-200 rounded-2xl p-4 text-xs text-amber-900 flex items-start gap-3 shadow-xs">
             <i class="fa-solid fa-shield-halved text-amber-700 text-lg mt-0.5"></i>
             <div>
-              <p class="font-bold text-sm">Official ID & Security Protocol</p>
+              <p class="font-bold text-sm">Official ID &amp; Security Protocol</p>
               <p class="text-xs text-amber-800 mt-1 leading-relaxed">
                 Physical REAL IDs or Passports required for all adults at White House, Pentagon, and U.S. Capitol tours. Strictly no backpacks at the White House.
               </p>
@@ -320,8 +320,8 @@
           <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-xs">
             <div class="flex items-center justify-between mb-3">
               <div>
-                <h3 class="text-sm font-black uppercase tracking-wider text-slate-900">Reservations & Timed Passes</h3>
-                <p class="text-xs text-slate-500">Government tours & confirmed restaurant tables</p>
+                <h3 class="text-sm font-black uppercase tracking-wider text-slate-900">Reservations &amp; Timed Passes</h3>
+                <p class="text-xs text-slate-500">Government tours &amp; confirmed restaurant tables</p>
               </div>
               <span id="passesCountBadge" class="text-xs font-bold bg-blue-50 text-blue-700 px-2.5 py-1 rounded-full"></span>
             </div>
@@ -333,12 +333,12 @@
       </div>
     </section>
 
-    <!-- VIEW 3: KIDS ZONE MINI-GAMES VIEW (100% WORKING ENGINE) -->
+    <!-- VIEW 3: KIDS ZONE MINI-GAMES VIEW -->
     <section id="kidsView" class="hidden max-w-4xl mx-auto space-y-6">
       <div class="bg-gradient-to-r from-amber-500 via-rose-500 to-indigo-600 rounded-3xl p-6 text-white shadow-md relative overflow-hidden">
         <div class="relative z-10">
-          <span class="bg-white/20 backdrop-blur-md px-3 py-1 rounded-full text-xs font-black uppercase tracking-wider">Ages 8 & 11 · Washington DC Edition</span>
-          <h2 class="text-2xl sm:text-3xl font-black mt-2">🎮 DC Junior Explorer & Games</h2>
+          <span class="bg-white/20 backdrop-blur-md px-3 py-1 rounded-full text-xs font-black uppercase tracking-wider">Ages 8 &amp; 11 · Washington DC Edition</span>
+          <h2 class="text-2xl sm:text-3xl font-black mt-2">🎮 DC Junior Explorer &amp; Games</h2>
           <p class="text-xs sm:text-sm text-amber-100 max-w-xl mt-1">Play mini-games tied to the places you are visiting this week!</p>
         </div>
         <div class="absolute right-3 -bottom-4 text-7xl opacity-20 select-none">🐼🕵️🚀</div>
@@ -358,7 +358,7 @@
       <div id="gamePandaCard" class="bg-white rounded-3xl p-5 sm:p-6 border border-slate-200 shadow-sm text-center">
         <div class="flex items-center justify-between mb-3 text-xs">
           <span class="font-black text-emerald-700 bg-emerald-50 border border-emerald-200 px-3 py-1 rounded-full">
-            🐾 Feed Bao Li & Qing Bao
+            🐾 Feed Bao Li &amp; Qing Bao
           </span>
           <div class="flex items-center gap-3">
             <span class="font-bold text-slate-500">Score: <strong id="pandaScore" class="text-emerald-600 text-sm font-mono">0</strong></span>
@@ -436,6 +436,62 @@
 
   </div>
 
+  <!-- SITE DETAIL MODAL (SUMMARY & IMPORTANCE CARD) -->
+  <div id="siteDetailModal" class="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-xs hidden flex items-end sm:items-center justify-center p-0 sm:p-4">
+    <div class="bg-white w-full max-w-lg rounded-t-3xl sm:rounded-2xl p-5 sm:p-6 shadow-2xl max-h-[85vh] overflow-y-auto">
+      <div class="flex justify-between items-start pb-3 border-b border-slate-100">
+        <div class="flex items-center gap-3">
+          <div id="modalSiteIconBg" class="w-10 h-10 rounded-xl bg-blue-100 text-blue-700 flex items-center justify-center text-lg">
+            <i id="modalSiteIcon" class="fa-solid fa-landmark"></i>
+          </div>
+          <div>
+            <span class="text-[10px] font-black uppercase text-indigo-600 tracking-wider block" id="modalSiteCategory">Historical Landmark</span>
+            <h3 class="text-base sm:text-lg font-black text-slate-900 leading-snug" id="modalSiteTitle">Site Title</h3>
+          </div>
+        </div>
+        <button onclick="closeSiteModal()" class="w-8 h-8 rounded-full bg-slate-100 text-slate-500 hover:text-slate-900 flex items-center justify-center cursor-pointer">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <div class="mt-4 space-y-4 text-xs">
+        <!-- WHAT IS IT -->
+        <div class="bg-slate-50 p-3.5 rounded-xl border border-slate-200">
+          <h4 class="font-bold text-slate-900 uppercase tracking-wider text-[11px] flex items-center gap-1.5 mb-1 text-blue-700">
+            <i class="fa-solid fa-circle-question"></i> What is this place?
+          </h4>
+          <p id="modalSiteWhat" class="text-slate-700 leading-relaxed font-normal">...</p>
+        </div>
+
+        <!-- WHY IS IT IMPORTANT -->
+        <div class="bg-indigo-50/70 p-3.5 rounded-xl border border-indigo-100">
+          <h4 class="font-bold text-indigo-950 uppercase tracking-wider text-[11px] flex items-center gap-1.5 mb-1">
+            <i class="fa-solid fa-star text-amber-500"></i> Why is it important?
+          </h4>
+          <p id="modalSiteWhy" class="text-indigo-900 leading-relaxed font-normal">...</p>
+        </div>
+
+        <!-- KID-SPECIFIC HIGHLIGHT (FOR AGES 8 & 11) -->
+        <div class="bg-amber-50 p-3.5 rounded-xl border border-amber-200">
+          <h4 class="font-bold text-amber-950 uppercase tracking-wider text-[11px] flex items-center gap-1.5 mb-1">
+            <i class="fa-solid fa-binoculars text-amber-600"></i> What Kids (Ages 8 &amp; 11) Should Look For:
+          </h4>
+          <p id="modalSiteKids" class="text-amber-900 leading-relaxed font-normal">...</p>
+        </div>
+      </div>
+
+      <!-- MODAL BOTTOM BUTTONS -->
+      <div class="mt-5 pt-3 border-t border-slate-100 flex items-center justify-between gap-2">
+        <a id="modalSiteWebsiteBtn" href="#" target="_blank" class="flex-1 bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-3 rounded-xl text-center text-xs transition shadow-xs flex items-center justify-center gap-1.5">
+          <i class="fa-solid fa-globe"></i> Official Website
+        </a>
+        <button onclick="closeSiteModal()" class="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold rounded-xl text-xs transition cursor-pointer">
+          Close
+        </button>
+      </div>
+    </div>
+  </div>
+
   <!-- DINNER MODAL: SELECT PRESET OR CUSTOM RESTAURANT -->
   <div id="dinnerModal" class="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-xs hidden flex items-end sm:items-center justify-center p-0 sm:p-4">
     <div class="bg-white w-full max-w-md rounded-t-3xl sm:rounded-2xl p-5 sm:p-6 shadow-2xl max-h-[85vh] overflow-y-auto">
@@ -444,7 +500,7 @@
           <span class="text-[10px] font-black uppercase text-indigo-600 block tracking-wider" id="dinnerModalDayLabel">Day Dinner</span>
           <h3 class="text-base font-black text-slate-900">Change Dinner Restaurant</h3>
         </div>
-        <button onclick="closeDinnerModal()" class="w-8 h-8 rounded-full bg-slate-100 text-slate-500 hover:text-slate-900 flex items-center justify-center">
+        <button onclick="closeDinnerModal()" class="w-8 h-8 rounded-full bg-slate-100 text-slate-500 hover:text-slate-900 flex items-center justify-center cursor-pointer">
           <i class="fa-solid fa-xmark"></i>
         </button>
       </div>
@@ -463,8 +519,8 @@
         <div class="space-y-2">
           <input type="text" id="customDinnerName" placeholder="Restaurant Name (e.g., Carmine's)" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 text-xs text-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-500" />
           <input type="text" id="customDinnerAddress" placeholder="Address (e.g., 425 7th St NW)" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 text-xs text-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-500" />
-          <button onclick="saveCustomDinner()" class="w-full bg-slate-900 hover:bg-slate-800 text-white font-bold py-2 rounded-xl text-xs shadow-xs transition">
-            Apply Custom Dinner & Recalculate
+          <button onclick="saveCustomDinner()" class="w-full bg-slate-900 hover:bg-slate-800 text-white font-bold py-2 rounded-xl text-xs shadow-xs transition cursor-pointer">
+            Apply Custom Dinner &amp; Recalculate
           </button>
         </div>
       </div>
@@ -477,9 +533,9 @@
       <div class="flex justify-between items-center pb-3 border-b border-slate-100">
         <div class="flex items-center gap-2">
           <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-ping"></span>
-          <h2 class="text-base font-black text-slate-900">Live Active Gates & Flight Tracker</h2>
+          <h2 class="text-base font-black text-slate-900">Live Active Gates &amp; Flight Tracker</h2>
         </div>
-        <button onclick="toggleFlightDrawer()" class="w-8 h-8 rounded-full bg-slate-100 text-slate-500 hover:text-slate-900 flex items-center justify-center">
+        <button onclick="toggleFlightDrawer()" class="w-8 h-8 rounded-full bg-slate-100 text-slate-500 hover:text-slate-900 flex items-center justify-center cursor-pointer">
           <i class="fa-solid fa-xmark"></i>
         </button>
       </div>
@@ -491,7 +547,7 @@
             <i class="fa-solid fa-satellite text-[10px]"></i> Live FIDS Feeds Connected
           </p>
         </div>
-        <button onclick="refreshFlightData()" id="refreshBtn" class="px-3.5 py-1.5 rounded-xl bg-slate-800 border border-slate-700 text-xs font-bold text-slate-200 active:scale-95 transition flex items-center gap-1.5 hover:bg-slate-700">
+        <button onclick="refreshFlightData()" id="refreshBtn" class="px-3.5 py-1.5 rounded-xl bg-slate-800 border border-slate-700 text-xs font-bold text-slate-200 active:scale-95 transition flex items-center gap-1.5 hover:bg-slate-700 cursor-pointer">
           <i class="fa-solid fa-arrows-rotate text-xs"></i> Sync Gates
         </button>
       </div>
@@ -655,8 +711,8 @@
   <div id="infoModal" class="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-xs hidden flex items-end sm:items-center justify-center p-0 sm:p-4">
     <div class="bg-white w-full max-w-md rounded-t-3xl sm:rounded-2xl p-5 shadow-2xl max-h-[85vh] overflow-y-auto">
       <div class="flex justify-between items-center mb-3">
-        <h2 class="text-base font-black text-slate-900">Trip Hub & Addresses</h2>
-        <button onclick="toggleInfoModal()" class="w-8 h-8 rounded-full bg-slate-100 text-slate-500 hover:text-slate-900 flex items-center justify-center">
+        <h2 class="text-base font-black text-slate-900">Trip Hub &amp; Addresses</h2>
+        <button onclick="toggleInfoModal()" class="w-8 h-8 rounded-full bg-slate-100 text-slate-500 hover:text-slate-900 flex items-center justify-center cursor-pointer">
           <i class="fa-solid fa-xmark"></i>
         </button>
       </div>
@@ -687,19 +743,19 @@
 
   <!-- FIXED BOTTOM NAVIGATION BAR (Mobile Only) -->
   <nav class="lg:hidden fixed bottom-0 left-0 right-0 z-40 bg-white/95 backdrop-blur border-t border-slate-200 py-2.5 px-4 flex justify-around items-center max-w-md mx-auto shadow-lg">
-    <button onclick="switchMainView('itinerary')" id="mobNavItinerary" class="flex flex-col items-center gap-1 text-blue-600">
+    <button onclick="switchMainView('itinerary')" id="mobNavItinerary" class="flex flex-col items-center gap-1 text-blue-600 cursor-pointer">
       <i class="fa-solid fa-calendar-day text-lg"></i>
       <span class="text-[10px] font-bold">Schedule</span>
     </button>
-    <button onclick="switchMainView('checklist')" id="mobNavChecklist" class="flex flex-col items-center gap-1 text-slate-400 hover:text-slate-600">
+    <button onclick="switchMainView('checklist')" id="mobNavChecklist" class="flex flex-col items-center gap-1 text-slate-400 hover:text-slate-600 cursor-pointer">
       <i class="fa-solid fa-list-check text-lg"></i>
       <span class="text-[10px] font-bold">Checklists</span>
     </button>
-    <button onclick="switchMainView('kids')" id="mobNavKids" class="flex flex-col items-center gap-1 text-amber-500 hover:text-amber-600">
+    <button onclick="switchMainView('kids')" id="mobNavKids" class="flex flex-col items-center gap-1 text-amber-500 hover:text-amber-600 cursor-pointer">
       <i class="fa-solid fa-gamepad text-lg"></i>
       <span class="text-[10px] font-bold">Games</span>
     </button>
-    <button onclick="toggleFlightDrawer()" class="flex flex-col items-center gap-1 text-slate-400 hover:text-slate-600">
+    <button onclick="toggleFlightDrawer()" class="flex flex-col items-center gap-1 text-slate-400 hover:text-slate-600 cursor-pointer">
       <i class="fa-solid fa-door-open text-lg"></i>
       <span class="text-[10px] font-bold">Gates</span>
     </button>
@@ -708,6 +764,130 @@
   <!-- JAVASCRIPT LOGIC & DYNAMIC ROUTING ENGINE -->
   <script>
     const HOTEL_COORDS = { lat: 38.9079, lng: -77.0354 };
+
+    // DETAILED HISTORICAL & EDUCATIONAL CARD DATABASE
+    const SITE_KNOWLEDGE_BASE = {
+      "white-house": {
+        title: "The White House & Visitor Center",
+        category: "Executive Branch · Historic Residence",
+        icon: "fa-landmark",
+        what: "The official residence and workplace of every American president since John Adams in 1800. Designed by Irish-born architect James Hoban in the Neoclassical style.",
+        why: "It is the global symbol of American executive democracy and democratic leadership. Walking inside through the East Wing offers a rare firsthand look at rooms where world-changing treaties and presidential decisions unfolded.",
+        kids: "Look for portraits of past presidents, the historic Vermeil gold room, and try to spot Marine One or Secret Service stationed on the roof!"
+      },
+      "pentagon": {
+        title: "The Pentagon Guided Tour",
+        category: "Department of Defense Headquarters",
+        icon: "fa-shield-halved",
+        what: "The headquarters of the United States Department of Defense, located in Arlington, VA. With over 6.5 million square feet, it is one of the world's largest office buildings.",
+        why: "It directs all branches of the U.S. Armed Forces (Army, Navy, Air Force, Marines, Space Force). The tour includes the poignant indoor memorial chapel constructed at the exact impact site of American Airlines Flight 77 from September 11, 2001.",
+        kids: "Notice how the building has 5 sides and 5 concentric rings. The hallways stretch for over 17 miles, but you can walk between any two points in under 7 minutes!"
+      },
+      "old-town": {
+        title: "Old Town Alexandria Waterfront",
+        category: "Colonial Seaport & Historic District",
+        icon: "fa-water",
+        what: "George Washington's hometown, founded in 1749 along the Potomac River. Featuring preserved 18th-century cobblestone streets, gas lanterns, and vibrant waterfront piers.",
+        why: "A crucial colonial tobacco and trading port before Washington, D.C. was constructed. It showcases authentic colonial and Federal-period American architecture.",
+        kids: "Watch the water taxis dock along the river, search for the famous Spite House (the narrowest historic house in America), and explore cobblestones laid before the Revolutionary War!"
+      },
+      "natural-history": {
+        title: "National Museum of Natural History",
+        category: "Smithsonian Institution · Science & Nature",
+        icon: "fa-bone",
+        what: "Part of the Smithsonian Institution, housing over 145 million specimens of plants, animals, fossils, minerals, rocks, and human cultural artifacts.",
+        why: "Dedicated to inspiring curiosity about the natural world and humanity's place in it. It hosts the world's premier paleontological fossil hall and gem collection.",
+        kids: "Don't miss Henry the 11-ton African Elephant in the rotunda, the genuine T-Rex eating a Triceratops in the Deep Time Fossil Hall, and the cursed 45-carat deep blue Hope Diamond!"
+      },
+      "air-space": {
+        title: "National Air and Space Museum",
+        category: "Smithsonian Institution · Aviation & Space",
+        icon: "fa-rocket",
+        what: "The world's preeminent museum celebrating human flight, from the very first powered aircraft to lunar exploration and planetary spacecraft.",
+        why: "Preserves the authentic machinery behind humanity's greatest aerodynamic and astronautical triumphs. Almost every aircraft and spacecraft displayed has actually flown.",
+        kids: "Touch a genuine piece of Moon rock collected during the Apollo 17 lunar landing, stand beneath the original 1903 Wright Brothers Flyer, and look inside Neil Armstrong's Apollo 11 command module!"
+      },
+      "wharf": {
+        title: "The Wharf & Historic Fish Market",
+        category: "Southwest Waterfront & Maritime Heritage",
+        icon: "fa-anchor",
+        what: "A lively waterfront promenade alongside the Washington Channel, home to the Municipal Fish Market (operating continuously since 1805).",
+        why: "The oldest continuously operating open-air fish market in the United States, predating New York's Fulton Fish Market. It anchors D.C.'s modern maritime revitalization.",
+        kids: "Watch the floating fish barges steam live Maryland blue crabs, relax on the swinging benches over the water on Recreation Pier, and spot luxury yachts cruising past!"
+      },
+      "spy-museum": {
+        title: "International Spy Museum",
+        category: "Espionage History & Covert Operations",
+        icon: "fa-user-secret",
+        what: "The only public museum in the United States solely dedicated to espionage and intelligence, featuring the largest collection of international spy artifacts ever placed on public display.",
+        why: "Explores how espionage, cryptography, and covert operations shaped world history—from George Washington's Culper Spy Ring to Cold War secret agents and modern cyber warfare.",
+        kids: "At the start, kids receive a secret Undercover Alias and mission card. Throughout the museum, they must test their memory, crack secret ciphers, and crawl through hidden surveillance air ducts!"
+      },
+      "monument": {
+        title: "The Washington Monument",
+        category: "National Memorial & Architectural Icon",
+        icon: "fa-monument",
+        what: "A 555-foot marble and granite obelisk honoring George Washington, the commander-in-chief of the Continental Army and the first President of the United States.",
+        why: "When completed in 1884, it was the tallest building in the world. By D.C. building height tradition, it remains the tallest structure in the nation's capital, offering sweeping panoramic 360-degree views from its top observation deck.",
+        kids: "Take the high-speed 70-second elevator to the 500-foot observation deck! Look closely at the outside stone about one-third of the way up to spot where the color changes—construction was halted during the Civil War!"
+      },
+      "archives": {
+        title: "National Archives Museum",
+        category: "National Repository of Foundational Documents",
+        icon: "fa-scroll",
+        what: "The permanent home of the Charters of Freedom, housed inside the majestic monumental Rotunda designed by John Russell Pope.",
+        why: "Guards and displays the original parchment documents that established the United States and codified human liberties: the Declaration of Independence (1776), the Constitution (1787), and the Bill of Rights (1791).",
+        kids: "Stand right in front of the bulletproof, argon-gas-filled glass vaults to see John Hancock's famous giant signature on the original Declaration of Independence!"
+      },
+      "lincoln": {
+        title: "Lincoln Memorial & WWII Memorial",
+        category: "National Memorials & Reflecting Pool",
+        icon: "fa-columns",
+        what: "Neoclassical Greek Doric temple honoring Abraham Lincoln, overlooking the 2,000-foot Reflecting Pool and the World War II Memorial.",
+        why: "A consecrated altar of American civil rights and unity. It was the site of Martin Luther King Jr.'s 1963 'I Have a Dream' address and Marian Anderson's historic 1939 concert.",
+        kids: "Look for the exact spot where Martin Luther King Jr. stood (carved directly into the marble steps), read the Gettysburg Address on the wall, and see Lincoln's 19-foot seated statue!"
+      },
+      "national-zoo": {
+        title: "Smithsonian's National Zoo (Giant Pandas)",
+        category: "Smithsonian Conservation Biology Institute",
+        icon: "fa-paw",
+        what: "A 163-acre public zoo set in picturesque Rock Creek Park, home to over 2,100 animals and dedicated to global wildlife conservation.",
+        why: "One of only a handful of places in the Americas to experience giant pandas up close. Giant pandas Bao Li and Qing Bao reside here as part of an international breeding and conservation agreement.",
+        kids: "Head to the David M. Rubenstein Family Giant Panda Habitat early when the pandas are most playful and eating their morning bamboo stalks! Check out the Asian elephants and cheetahs next door!"
+      },
+      "museum-bible": {
+        title: "Museum of the Bible",
+        category: "Cultural History & Interactive Technology",
+        icon: "fa-book-bible",
+        what: "A 430,000-square-foot museum dedicated to the history, narrative, and global impact of the Bible across millennia.",
+        why: "Showcases centuries of manuscript history (including Dead Sea Scroll fragments and Gutenberg-era Bibles) and examines how biblical texts shaped literature, law, music, and civil rights movements.",
+        kids: "Walk through the full-scale interactive recreation of 1st-century Nazareth, experience the state-of-the-art multi-sensory Hebrew Bible walkthrough, and buckle up for the Washington Revelation simulation ride!"
+      },
+      "capitol": {
+        title: "United States Capitol Guided Tour",
+        category: "Legislative Branch · Seat of Congress",
+        icon: "fa-landmark-dome",
+        what: "The seat of the legislative branch of the U.S. federal government, where the Senate and House of Representatives convene to debate and write American law.",
+        why: "Begun in 1793 under George Washington, it is the architectural centerpiece and geographic origin point of Washington, D.C. The tour explores the 180-foot Capitol Rotunda, the Crypt, and National Statuary Hall.",
+        kids: "Look up inside the dome at the massive ceiling fresco ('The Apotheosis of Washington'), see the whisper gallery acoustics in Statuary Hall, and walk where lawmakers from all 50 states gather!"
+      },
+      "lafayette": {
+        title: "Lafayette Square & North Lawn",
+        category: "Historic Park & Presidential Public Square",
+        icon: "fa-camera",
+        what: "A 7-acre public park located immediately north of the White House, named in honor of General Marquis de Lafayette, hero of the American Revolution.",
+        why: "Often called 'The People's Common,' it is the premier public vantage point for viewing the White House. Bordered by historic homes and St. John's Church (the 'Church of the Presidents').",
+        kids: "Stand right along the North Lawn fence for the best unobstructed postcard family photo with the White House in the background!"
+      }
+    };
+
+    function getUberDeepLink(dropoffName, coords) {
+      const formattedName = encodeURIComponent(dropoffName || "Destination");
+      if (coords && coords.lat && coords.lng) {
+        return `https://m.uber.com/ul/?action=setPickup&client_id=dcfamilytrip&pickup=my_location&dropoff[formatted_address]=${formattedName}&dropoff[latitude]=${coords.lat}&dropoff[longitude]=${coords.lng}`;
+      }
+      return `https://m.uber.com/ul/?action=setPickup&client_id=dcfamilytrip&pickup=my_location&dropoff[formatted_address]=${formattedName}`;
+    }
 
     const PRESET_DINNERS = [
       { name: "Old Ebbitt Grill (DC Classic)", address: "675 15th St NW, Washington, DC", lat: 38.8980, lng: -77.0336, website: "https://www.ebbitt.com/" },
@@ -720,7 +900,6 @@
       { name: "Carmine's Italian (Family Style - Penn Qtr)", address: "425 7th St NW, Washington, DC", lat: 38.8953, lng: -77.0219, website: "https://www.carminesnyc.com/locations/washington-dc" }
     ];
 
-    // ITINERARY DATA WITH BEDTIME ROUTINE & EXPLICIT EVENT DURATIONS
     const initialTripData = [
       {
         day: "Thu, Oct 15",
@@ -729,7 +908,7 @@
         bedtime: {
           time: "9:30 PM",
           title: "🌙 Wind Down & Kids Bedtime",
-          desc: "Unpack bags, brush teeth, setup kid electronics to charge. Early 8:30 AM arrival required tomorrow for White House security!",
+          desc: "Unpack bags, brush teeth, setup electronics to charge. Early 8:30 AM arrival required tomorrow for White House security!",
           duration: "Overnight"
         },
         afternoonStop: { name: "Holiday Inn Washington-Central", coords: HOTEL_COORDS },
@@ -754,6 +933,8 @@
             location: "2232 Shenley Park Ln to ATL",
             desc: "40–45 miles via I-85 South (~55–65 mins depending on traffic).",
             uberMeta: { estFare: "$65–$85", time: "60 min", seats: "Seats 5 + Bags" },
+            destCoords: { lat: 33.6407, lng: -84.4277 },
+            destName: "ATL Domestic Terminal North",
             icon: "fa-car-side"
           },
           {
@@ -776,6 +957,8 @@
             location: "DCA to 1501 Rhode Island Ave NW",
             desc: "Follow 'Rideshare' signs outside baggage claim. 20–30 min ride across the bridge.",
             uberMeta: { estFare: "$35–$45", time: "25 min", seats: "Seats 5 + bags" },
+            destCoords: HOTEL_COORDS,
+            destName: "Holiday Inn Washington-Central",
             icon: "fa-car-side"
           },
           {
@@ -812,6 +995,7 @@
             type: "site", time: "8:30 AM", duration: "2 hrs", title: "White House Tour & Visitor Center",
             location: "1450 Pennsylvania Ave NW, Washington, DC 20004",
             website: "https://www.nps.gov/whho/index.htm",
+            siteKey: "white-house",
             desc: "Tour at 9:00 AM. ⚠️ Govt ID required for every adult. Strictly NO BAGS. Arrive 30 mins early.",
             icon: "fa-landmark"
           },
@@ -826,6 +1010,7 @@
             type: "site", time: "12:00 PM", duration: "2 hrs", title: "The Pentagon Guided Tour",
             location: "Arlington, VA (Pentagon Metro Tour Entrance)",
             website: "https://www.defense.gov/Experience/Pentagon-Tours/",
+            siteKey: "pentagon",
             desc: "1:00 PM tour. Mandatory arrival 60 min early. World's largest office building & 9/11 memorial.",
             icon: "fa-shield-halved"
           },
@@ -834,12 +1019,15 @@
             location: "King St & Union St, Alexandria, VA",
             desc: "15–20 min highway drive down GW Memorial Parkway.",
             uberMeta: { estFare: "$22–$28", time: "18 min", seats: "UberXL" },
+            destCoords: { lat: 38.8048, lng: -77.0401 },
+            destName: "Old Town Alexandria Waterfront",
             icon: "fa-car-side"
           },
           {
             type: "site", time: "~2:30 PM", duration: "1 hr 45 min", title: "Old Town Alexandria Waterfront",
             location: "King St & Union St, Alexandria, VA 22314",
             website: "https://www.visitalexandriava.com/",
+            siteKey: "old-town",
             desc: "18th-century cobblestone streets, tall ships, local boutiques, and flat riverside promenade.",
             icon: "fa-water"
           }
@@ -871,12 +1059,15 @@
             location: "10th St & Constitution Ave NW",
             desc: "Quick 10-minute drop-off on Constitution Ave.",
             uberMeta: { estFare: "$16–$20", time: "10 min", seats: "UberXL" },
+            destCoords: { lat: 38.8913, lng: -77.0261 },
+            destName: "National Museum of Natural History",
             icon: "fa-car-side"
           },
           {
             type: "site", time: "10:00 AM", duration: "2 hrs 30 min", title: "National Museum of Natural History",
             location: "10th St & Constitution Ave NW, Washington, DC 20560",
             website: "https://naturalhistory.si.edu/",
+            siteKey: "natural-history",
             desc: "Henry the Elephant, Hall of Fossils / Dinosaurs, and the Hope Diamond. Free admission.",
             icon: "fa-bone"
           },
@@ -891,6 +1082,7 @@
             type: "site", time: "1:30 PM", duration: "2 hrs 45 min", title: "National Air and Space Museum",
             location: "650 Jefferson Dr SW, Washington, DC 20004",
             website: "https://airandspace.si.edu/",
+            siteKey: "air-space",
             desc: "Wright 1903 Flyer, Apollo 11 command module, and touchable Moon rock. Timed entry pass required.",
             icon: "fa-rocket"
           },
@@ -899,12 +1091,15 @@
             location: "1100 Maine Ave SW",
             desc: "Short 8–10 minute hop down to the Southwest Waterfront.",
             uberMeta: { estFare: "$14–$18", time: "8 min", seats: "UberXL" },
+            destCoords: { lat: 38.8805, lng: -77.0269 },
+            destName: "The Wharf DC",
             icon: "fa-car-side"
           },
           {
             type: "site", time: "~4:45 PM", duration: "1 hr 15 min", title: "Municipal Fish Market & Recreation Pier",
             location: "1100 Maine Ave SW, Washington, DC 20024",
             website: "https://www.wharfdc.com/",
+            siteKey: "wharf",
             desc: "Oldest continuous open-air seafood market in the USA. Steamed blue crabs and swinging pier benches.",
             icon: "fa-anchor"
           }
@@ -936,12 +1131,15 @@
             location: "700 L'Enfant Plaza SW",
             desc: "10-minute morning ride to L'Enfant Plaza.",
             uberMeta: { estFare: "$16–$22", time: "11 min", seats: "UberXL" },
+            destCoords: { lat: 38.8841, lng: -77.0245 },
+            destName: "International Spy Museum",
             icon: "fa-car-side"
           },
           {
             type: "site", time: "10:00 AM", duration: "2 hrs", title: "International Spy Museum",
             location: "700 L'Enfant Plaza SW, Washington, DC 20024",
             website: "https://www.spymuseum.org/",
+            siteKey: "spy-museum",
             desc: "Interactive kid favorite: choose an undercover alias, memorize secret codes, and complete missions.",
             icon: "fa-user-secret"
           },
@@ -950,12 +1148,15 @@
             location: "2 15th St NW",
             desc: "Short 6-minute connection to the Monument base.",
             uberMeta: { estFare: "$12–$16", time: "6 min", seats: "UberXL" },
+            destCoords: { lat: 38.8895, lng: -77.0353 },
+            destName: "Washington Monument",
             icon: "fa-car-side"
           },
           {
             type: "site", time: "12:30 PM", duration: "1 hr 15 min", title: "Washington Monument",
             location: "2 15th St NW, Washington, DC 20418",
             website: "https://www.nps.gov/wamo/index.htm",
+            siteKey: "monument",
             desc: "Elevator ascent to the 500-foot observation deck. Timed tickets reserved on recreation.gov.",
             icon: "fa-monument"
           },
@@ -963,6 +1164,7 @@
             type: "site", time: "2:15 PM", duration: "1 hr", title: "National Archives Museum",
             location: "701 Constitution Ave NW, Washington, DC 20408",
             website: "https://museum.archives.gov/",
+            siteKey: "archives",
             desc: "The original Declaration of Independence, US Constitution, and Bill of Rights.",
             icon: "fa-scroll"
           },
@@ -970,6 +1172,7 @@
             type: "site", time: "~3:30 PM", duration: "1 hr 45 min", title: "WWII Memorial & Lincoln Memorial",
             location: "2 Lincoln Memorial Cir NW, Washington, DC 20002",
             website: "https://www.nps.gov/linc/index.htm",
+            siteKey: "lincoln",
             desc: "Reflecting pool walk in late-afternoon golden hour. Stand where MLK delivered 'I Have a Dream'.",
             icon: "fa-columns"
           }
@@ -1001,12 +1204,15 @@
             location: "3001 Connecticut Ave NW",
             desc: "Early morning ride up Connecticut Ave. Arrive before gates open to catch giant pandas eating breakfast.",
             uberMeta: { estFare: "$18–$24", time: "14 min", seats: "UberXL" },
+            destCoords: { lat: 38.9296, lng: -77.0498 },
+            destName: "Smithsonian National Zoo",
             icon: "fa-car-side"
           },
           {
             type: "site", time: "8:30 AM", duration: "2 hrs 45 min", title: "Smithsonian National Zoo (Giant Pandas)",
             location: "3001 Connecticut Ave NW, Washington, DC 20008",
             website: "https://nationalzoo.si.edu/",
+            siteKey: "national-zoo",
             desc: "Visit giant pandas Bao Li & Qing Bao. Tip: Request Uber pickup at the downhill Harvard St entrance!",
             icon: "fa-paw"
           },
@@ -1014,6 +1220,7 @@
             type: "site", time: "~12:15 PM", duration: "2 hrs 30 min", title: "Museum of the Bible",
             location: "400 4th St SW, Washington, DC 20024",
             website: "https://www.museumofthebible.org/",
+            siteKey: "museum-bible",
             desc: "Ancient Nazareth village walkthrough, Hebrew Bible experience, and high-tech flying theater simulation.",
             icon: "fa-book-bible"
           },
@@ -1021,6 +1228,7 @@
             type: "site", time: "3:20 PM", duration: "1 hr", title: "U.S. Capitol Guided Tour",
             location: "1st St SE, Washington, DC 20515",
             website: "https://www.visitthecapitol.gov/",
+            siteKey: "capitol",
             desc: "Visitor Center check-in by 2:45 PM. Explore the Crypt, Capitol Rotunda, and National Statuary Hall.",
             icon: "fa-landmark-dome"
           },
@@ -1029,12 +1237,15 @@
             location: "1st St SE to Lafayette Sq",
             desc: "12–20 min highway drive during early government rush hour.",
             uberMeta: { estFare: "$18–$24", time: "18 min", seats: "UberXL" },
+            destCoords: { lat: 38.8996, lng: -77.0365 },
+            destName: "Lafayette Square",
             icon: "fa-car-side"
           },
           {
             type: "site", time: "~4:45 PM", duration: "35 min", title: "Lafayette Square & North Lawn View",
             location: "H St NW & 16th St NW, Washington, DC 20006",
             website: "https://www.nps.gov/whho/index.htm",
+            siteKey: "lafayette",
             desc: "Classic postcard view of the White House across the park with benches.",
             icon: "fa-camera"
           }
@@ -1065,6 +1276,8 @@
             location: "DCA Terminal 2",
             desc: "15–20 min highway drive to DCA Terminal 2. Arrive by 11:50 AM (~2 hours ahead of 1:59 PM departure).",
             uberMeta: { estFare: "$26–$34", time: "18 min", seats: "UberXL" },
+            destCoords: { lat: 38.8512, lng: -77.0402 },
+            destName: "Reagan National Airport (DCA) Terminal 2",
             icon: "fa-car-side"
           },
           {
@@ -1079,7 +1292,6 @@
       }
     ];
 
-    // ROBUST DATA RECOVERY ENGINE (PREVENTS FUTURE LOSS)
     const defaultCategories = ['Essentials', 'Hygiene', 'Clothing', 'Electronics'];
     const defaultPacking = [
       { id: "p1", name: "REAL IDs & Passports (Every adult)", category: "Essentials", checked: false },
@@ -1116,13 +1328,11 @@
 
     function safeLoadStorage(key, fallback) {
       try {
-        // Try key, and legacy keys
         const item = localStorage.getItem(key) || 
-                     localStorage.getItem(key.replace('_v11', '_v10')) ||
-                     localStorage.getItem(key.replace('_v11', '_v9')) ||
-                     localStorage.getItem(key.replace('_v11', '_v8')) ||
-                     localStorage.getItem(key.replace('_v11', '_v7')) ||
-                     localStorage.getItem(key.replace('_v11', '_v6'));
+                     localStorage.getItem(key.replace('_v12', '_v11')) ||
+                     localStorage.getItem(key.replace('_v12', '_v10')) ||
+                     localStorage.getItem(key.replace('_v12', '_v9')) ||
+                     localStorage.getItem(key.replace('_v12', '_v8'));
         if (item) {
           const parsed = JSON.parse(item);
           if (Array.isArray(parsed) && parsed.length > 0) return parsed;
@@ -1131,10 +1341,10 @@
       return fallback;
     }
 
-    let customDinners = JSON.parse(localStorage.getItem('dc_custom_dinners_v11')) || {};
-    let packingCategories = safeLoadStorage('dc_categories_v11', defaultCategories);
-    let packingItems = safeLoadStorage('dc_packing_items_v11', defaultPacking);
-    let passesItems = safeLoadStorage('dc_passes_items_v11', defaultPasses);
+    let customDinners = JSON.parse(localStorage.getItem('dc_custom_dinners_v12')) || {};
+    let packingCategories = safeLoadStorage('dc_categories_v12', defaultCategories);
+    let packingItems = safeLoadStorage('dc_packing_items_v12', defaultPacking);
+    let passesItems = safeLoadStorage('dc_passes_items_v12', defaultPasses);
 
     let activeDayIndex = 0;
     let activeFilter = 'all';
@@ -1177,6 +1387,8 @@
               location: `${computed.afternoonStop.name} to ${computed.dinner.name}`,
               desc: `Distance is ${distToDinner.toFixed(1)} miles (~${walkTimeMins} min walk). Auto-routed to UberXL to avoid tiring out the kids.`,
               uberMeta: { estFare: `$${estLow}–$${estHigh}`, time: `${driveMins} min`, seats: "Seats 5" },
+              destCoords: computed.dinner.coords,
+              destName: computed.dinner.name,
               icon: "fa-car-side"
             });
           } else {
@@ -1222,6 +1434,8 @@
               location: `${computed.dinner.name} to Holiday Inn`,
               desc: `${distToHotel.toFixed(1)} miles back to 1501 Rhode Island Ave NW. Rest of the evening open.`,
               uberMeta: { estFare: `$${estLow}–$${estHigh}`, time: `${driveMins} min`, seats: "UberXL" },
+              destCoords: HOTEL_COORDS,
+              destName: "Holiday Inn Washington-Central",
               icon: "fa-car-side"
             });
           } else {
@@ -1239,7 +1453,6 @@
           }
         }
 
-        // ADD BEDTIME ROUTINE CARD AT THE END OF EACH DAY
         if (computed.bedtime) {
           items.push({
             type: "bedtime",
@@ -1286,7 +1499,7 @@
             </span>
           </div>
         </div>
-        <span class="text-[10px] font-bold bg-slate-100 text-slate-700 px-2.5 py-1 rounded-md border border-slate-200">Durations Shown</span>
+        <span class="text-[10px] font-bold bg-slate-100 text-slate-700 px-2.5 py-1 rounded-md border border-slate-200">Durations &amp; Facts</span>
       `;
 
       const container = document.getElementById('timelineContainer');
@@ -1332,8 +1545,10 @@
           `;
         }
 
-        // UBER XL CARD
+        // UBER XL CARD WITH 1-TAP APP DEEP LINK
         if (item.type === 'transit-uber') {
+          const uberLink = getUberDeepLink(item.destName || item.location, item.destCoords);
+
           return `
             <div class="relative pl-9">
               <div class="absolute left-2.5 -translate-x-1/2 top-4 w-7 h-7 rounded-full bg-slate-900 border-2 border-amber-400 flex items-center justify-center text-amber-400 shadow-xs z-10 animate-bounce-slow">
@@ -1352,9 +1567,19 @@
                 </div>
                 <h4 class="font-black text-sm text-white mt-1">${item.title}</h4>
                 <p class="text-xs text-slate-300 mt-1 leading-relaxed">${item.desc}</p>
-                <div class="mt-2.5 pt-2 border-t border-slate-700/60 flex items-center justify-between text-[11px] text-slate-400">
-                  <span><i class="fa-solid fa-users text-amber-400 mr-1"></i> ${item.uberMeta.seats}</span>
-                  <span><i class="fa-solid fa-clock text-amber-400 mr-1"></i> ~${item.uberMeta.time} drive</span>
+
+                <!-- 1-TAP UBER APP LAUNCH BUTTON -->
+                <div class="mt-3 pt-2.5 border-t border-slate-700/60 flex items-center justify-between">
+                  <div class="text-[11px] text-slate-400">
+                    <span><i class="fa-solid fa-users text-amber-400 mr-1"></i> ${item.uberMeta.seats}</span>
+                    <span class="ml-2"><i class="fa-solid fa-clock text-amber-400 mr-1"></i> ~${item.uberMeta.time} drive</span>
+                  </div>
+
+                  <a href="${uberLink}" target="_blank" class="bg-amber-400 hover:bg-amber-300 text-slate-950 font-black text-xs px-3.5 py-1.5 rounded-xl shadow-xs transition active:scale-95 flex items-center gap-1.5 cursor-pointer">
+                    <i class="fa-brands fa-uber text-sm"></i>
+                    <span>Open in Uber App</span>
+                    <i class="fa-solid fa-arrow-up-right-from-square text-[9px] opacity-70"></i>
+                  </a>
                 </div>
               </div>
             </div>
@@ -1443,8 +1668,9 @@
           `;
         }
 
-        // SIGHTSEEING / FOOD CARD
+        // SIGHTSEEING / FOOD CARD (WITH DIRECT SUMMARY CARD LAUNCHER)
         const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(item.location || item.title)}`;
+        const hasSiteInfo = !!(item.siteKey && SITE_KNOWLEDGE_BASE[item.siteKey]);
 
         return `
           <div class="relative pl-9">
@@ -1469,16 +1695,28 @@
                 </div>
               </div>
 
-              <h3 class="text-sm font-black text-slate-900 leading-snug">${item.title}</h3>
+              <!-- Clickable title to open site summary card -->
+              <h3 onclick="${hasSiteInfo ? `openSiteModal('${item.siteKey}')` : ''}" class="text-sm font-black text-slate-900 leading-snug ${hasSiteInfo ? 'cursor-pointer hover:text-indigo-600 transition flex items-center gap-1.5' : ''}">
+                <span>${item.title}</span>
+                ${hasSiteInfo ? `<i class="fa-regular fa-circle-question text-indigo-500 text-xs"></i>` : ''}
+              </h3>
               <p class="text-xs text-slate-600 mt-1 leading-relaxed">${item.desc}</p>
 
               <div class="mt-3.5 pt-2.5 border-t border-slate-100 flex items-center flex-wrap gap-x-4 gap-y-2 text-xs">
+                ${hasSiteInfo ? `
+                  <button onclick="openSiteModal('${item.siteKey}')" class="inline-flex items-center gap-1.5 font-bold text-indigo-700 hover:text-indigo-900 bg-indigo-50 hover:bg-indigo-100 px-2.5 py-1 rounded-lg transition cursor-pointer">
+                    <i class="fa-solid fa-book-open-reader text-[11px]"></i>
+                    <span>Quick Facts &amp; History</span>
+                  </button>
+                ` : ''}
+
                 ${item.website ? `
-                  <a href="${item.website}" target="_blank" class="inline-flex items-center gap-1.5 font-bold text-indigo-600 hover:text-indigo-800 bg-indigo-50/70 hover:bg-indigo-100/70 px-2.5 py-1 rounded-lg transition">
+                  <a href="${item.website}" target="_blank" class="inline-flex items-center gap-1.5 font-bold text-slate-600 hover:text-indigo-600 bg-slate-50 hover:bg-slate-100 px-2.5 py-1 rounded-lg transition">
                     <i class="fa-solid fa-globe text-[11px]"></i>
-                    <span>Official Website</span>
+                    <span>Official Site</span>
                   </a>
                 ` : ''}
+                
                 <a href="${mapsUrl}" target="_blank" class="inline-flex items-center gap-1 font-semibold text-slate-600 hover:text-blue-600">
                   <i class="fa-solid fa-location-dot text-slate-400"></i>
                   <span class="truncate max-w-[180px] sm:max-w-xs">${item.location}</span>
@@ -1490,13 +1728,52 @@
       }).join('');
     }
 
+    // SITE DETAIL MODAL (OPEN & CLOSE)
+    function openSiteModal(siteKey) {
+      const data = SITE_KNOWLEDGE_BASE[siteKey];
+      if (!data) return;
+
+      document.getElementById('modalSiteTitle').textContent = data.title;
+      document.getElementById('modalSiteCategory').textContent = data.category;
+      document.getElementById('modalSiteWhat').textContent = data.what;
+      document.getElementById('modalSiteWhy').textContent = data.why;
+      document.getElementById('modalSiteKids').textContent = data.kids;
+      document.getElementById('modalSiteIcon').className = `fa-solid ${data.icon || 'fa-landmark'}`;
+
+      // Find official website from current computed trip
+      const allComputed = getComputedTripData();
+      let foundWebsite = 'https://www.nps.gov/';
+      for (const day of allComputed) {
+        const found = day.items.find(i => i.siteKey === siteKey);
+        if (found && found.website) {
+          foundWebsite = found.website;
+          break;
+        }
+      }
+      document.getElementById('modalSiteWebsiteBtn').href = foundWebsite;
+
+      document.getElementById('siteDetailModal').classList.remove('hidden');
+    }
+
+    function closeSiteModal() {
+      document.getElementById('siteDetailModal').classList.add('hidden');
+    }
+
+    // Close modal on escape key
+    window.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') {
+        closeSiteModal();
+        closeDinnerModal();
+      }
+    });
+
     function switchDay(index) {
       activeDayIndex = index;
       document.querySelectorAll('.day-tab').forEach((btn, i) => {
         if (i === index) {
-          btn.className = 'day-tab flex-1 lg:w-full text-left px-3.5 py-2.5 rounded-xl text-xs font-bold transition bg-slate-900 text-white shadow-xs flex items-center justify-between';
+          btn.className = 'day-tab flex-1 lg:w-full text-left px-3.5 py-2.5 rounded-xl text-xs font-bold transition bg-slate-900 text-white shadow-xs flex items-center justify-between cursor-pointer';
         } else {
-          btn.className = 'day-tab flex-1 lg:w-full text-left px-3.5 py-2.5 rounded-xl text-xs font-bold transition bg-slate-100 hover:bg-slate-200 text-slate-700 flex items-center justify-between';
+          btn.className = 'day-tab flex-1 lg:w-full text-left px-3.5 py-2.5 rounded-xl text-xs font-bold transition bg-slate-100 hover:bg-slate-200 text-slate-700 flex items-center justify-between cursor-pointer';
         }
       });
       renderDay(index);
@@ -1506,9 +1783,9 @@
       activeFilter = type;
       document.querySelectorAll('.filter-chip').forEach(btn => {
         if (btn.dataset.filter === type) {
-          btn.className = 'filter-chip px-3.5 py-1.5 rounded-full font-bold bg-slate-800 text-white shadow-xs';
+          btn.className = 'filter-chip px-3.5 py-1.5 rounded-full font-bold bg-slate-800 text-white shadow-xs cursor-pointer';
         } else {
-          btn.className = 'filter-chip px-3.5 py-1.5 rounded-full font-medium bg-white text-slate-600 border border-slate-200 hover:bg-slate-50';
+          btn.className = 'filter-chip px-3.5 py-1.5 rounded-full font-medium bg-white text-slate-600 border border-slate-200 hover:bg-slate-50 cursor-pointer';
         }
       });
       renderDay(activeDayIndex);
@@ -1551,7 +1828,7 @@
         coords: { lat: preset.lat, lng: preset.lng }
       };
 
-      localStorage.setItem('dc_custom_dinners_v11', JSON.stringify(customDinners));
+      localStorage.setItem('dc_custom_dinners_v12', JSON.stringify(customDinners));
       closeDinnerModal();
       renderDay(editingDayIndex);
     }
@@ -1576,7 +1853,7 @@
         coords: approxCoords
       };
 
-      localStorage.setItem('dc_custom_dinners_v11', JSON.stringify(customDinners));
+      localStorage.setItem('dc_custom_dinners_v12', JSON.stringify(customDinners));
       document.getElementById('customDinnerName').value = '';
       document.getElementById('customDinnerAddress').value = '';
       closeDinnerModal();
@@ -1586,7 +1863,7 @@
     function resetAllDinners() {
       if (!confirm("Reset all changed dinners back to the original trip itinerary?")) return;
       customDinners = {};
-      localStorage.removeItem('dc_custom_dinners_v11');
+      localStorage.removeItem('dc_custom_dinners_v12');
       renderDay(activeDayIndex);
     }
 
@@ -1625,7 +1902,7 @@
         return;
       }
       packingCategories.push(val);
-      localStorage.setItem('dc_categories_v11', JSON.stringify(packingCategories));
+      localStorage.setItem('dc_categories_v12', JSON.stringify(packingCategories));
       input.value = '';
       updateCategoryDropdowns();
       renderChecklists();
@@ -1640,10 +1917,10 @@
         return;
       }
       packingCategories = packingCategories.map(c => c === oldName ? cleanName : c);
-      localStorage.setItem('dc_categories_v11', JSON.stringify(packingCategories));
+      localStorage.setItem('dc_categories_v12', JSON.stringify(packingCategories));
 
       packingItems = packingItems.map(item => item.category === oldName ? { ...item, category: cleanName } : item);
-      localStorage.setItem('dc_packing_items_v11', JSON.stringify(packingItems));
+      localStorage.setItem('dc_packing_items_v12', JSON.stringify(packingItems));
 
       updateCategoryDropdowns();
       renderChecklists();
@@ -1660,7 +1937,7 @@
         return;
       }
       packingItems = packingItems.map(i => i.id === itemId ? { ...i, category: matchedCat } : i);
-      localStorage.setItem('dc_packing_items_v11', JSON.stringify(packingItems));
+      localStorage.setItem('dc_packing_items_v12', JSON.stringify(packingItems));
       renderChecklists();
     }
 
@@ -1675,10 +1952,10 @@
         const ok = confirm(`Move ${affectedItems.length} item(s) to "${fallbackCat}" and delete "${catToRemove}"?`);
         if (!ok) return;
         packingItems = packingItems.map(item => item.category === catToRemove ? { ...item, category: fallbackCat } : item);
-        localStorage.setItem('dc_packing_items_v11', JSON.stringify(packingItems));
+        localStorage.setItem('dc_packing_items_v12', JSON.stringify(packingItems));
       }
       packingCategories = packingCategories.filter(c => c !== catToRemove);
-      localStorage.setItem('dc_categories_v11', JSON.stringify(packingCategories));
+      localStorage.setItem('dc_categories_v12', JSON.stringify(packingCategories));
       updateCategoryDropdowns();
       renderChecklists();
     }
@@ -1757,13 +2034,13 @@
 
     function togglePackingCheck(id) {
       packingItems = packingItems.map(item => item.id === id ? { ...item, checked: !item.checked } : item);
-      localStorage.setItem('dc_packing_items_v11', JSON.stringify(packingItems));
+      localStorage.setItem('dc_packing_items_v12', JSON.stringify(packingItems));
       renderChecklists();
     }
 
     function deletePackingItem(id) {
       packingItems = packingItems.filter(item => item.id !== id);
-      localStorage.setItem('dc_packing_items_v11', JSON.stringify(packingItems));
+      localStorage.setItem('dc_packing_items_v12', JSON.stringify(packingItems));
       renderChecklists();
     }
 
@@ -1776,14 +2053,14 @@
       if (!text) return;
 
       packingItems.push({ id: 'user_' + Date.now(), name: text, category: selectedCategory, checked: false });
-      localStorage.setItem('dc_packing_items_v11', JSON.stringify(packingItems));
+      localStorage.setItem('dc_packing_items_v12', JSON.stringify(packingItems));
       input.value = '';
       renderChecklists();
     }
 
     function togglePassCheck(id) {
       passesItems = passesItems.map(item => item.id === id ? { ...item, checked: !item.checked } : item);
-      localStorage.setItem('dc_passes_items_v11', JSON.stringify(passesItems));
+      localStorage.setItem('dc_passes_items_v12', JSON.stringify(passesItems));
       renderChecklists();
     }
 
@@ -1791,13 +2068,13 @@
       if (tab === 'packing') {
         document.getElementById('packingPanel').classList.remove('hidden');
         document.getElementById('passesPanel').classList.add('hidden');
-        document.getElementById('tabPackingBtn').className = 'flex-1 py-2 rounded-lg bg-white text-slate-900 shadow-xs transition';
-        document.getElementById('tabPassesBtn').className = 'flex-1 py-2 rounded-lg text-slate-600 transition';
+        document.getElementById('tabPackingBtn').className = 'flex-1 py-2 rounded-lg bg-white text-slate-900 shadow-xs transition cursor-pointer';
+        document.getElementById('tabPassesBtn').className = 'flex-1 py-2 rounded-lg text-slate-600 transition cursor-pointer';
       } else {
         document.getElementById('packingPanel').classList.add('hidden');
         document.getElementById('passesPanel').classList.remove('hidden');
-        document.getElementById('tabPassesBtn').className = 'flex-1 py-2 rounded-lg bg-white text-slate-900 shadow-xs transition';
-        document.getElementById('tabPackingBtn').className = 'flex-1 py-2 rounded-lg text-slate-600 transition';
+        document.getElementById('tabPassesBtn').className = 'flex-1 py-2 rounded-lg bg-white text-slate-900 shadow-xs transition cursor-pointer';
+        document.getElementById('tabPackingBtn').className = 'flex-1 py-2 rounded-lg text-slate-600 transition cursor-pointer';
       }
     }
 
@@ -1822,7 +2099,7 @@
         setTimeout(() => {
           initPandaCanvas();
           loadSpyMission(currentSpyMission);
-        }, 100);
+        }, 120);
       }
     }
 
@@ -1855,7 +2132,7 @@
     }
 
     // ==========================================
-    // MINI-GAME 1: PANDA BAMBOO TOSS (ROBUST ENGINE)
+    // MINI-GAME 1: PANDA BAMBOO TOSS
     // ==========================================
     let pCanvas, pCtx;
     let pandaBasket = { x: 170, y: 275, width: 65, height: 26 };
@@ -2033,7 +2310,7 @@
       document.getElementById('btnGameSpy').className = !isPanda ? 'flex-1 py-2.5 rounded-xl bg-white text-slate-900 shadow-xs transition flex items-center justify-center gap-1.5 cursor-pointer' : 'flex-1 py-2.5 rounded-xl text-slate-600 transition flex items-center justify-center gap-1.5 cursor-pointer';
 
       if (isPanda) {
-        setTimeout(initPandaCanvas, 50);
+        setTimeout(initPandaCanvas, 60);
       } else {
         loadSpyMission(currentSpyMission);
       }
