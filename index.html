@@ -2613,11 +2613,12 @@
     // ===== SHARED MASTER LIST (Google Sheet) SYNC =====
     // The Google Sheet "DC Trip 2026 – Master List" is the master copy.
     // Reading is open; saving changes needs the family passcode (asked once per device).
-    const SHEET_API = '';  // Apps Script web-app URL
+    const SHEET_API = 'https://script.google.com/macros/s/AKfycbxOk6PWWv7F7CDydHwzbKfuq9W6Pl68zMG7fzBNQmI2M3qkMEnxKFhNrMvVCJ1M7MZ3rg/exec';  // Apps Script web-app URL
     const SYNC_QUEUE_KEY = 'dc_sync_queue_v1';
     const SYNC_CODE_KEY = 'dc_family_code_v1';
     const SYNC_NAME_KEY = 'dc_family_name_v1';
     const SYNC_MIGRATED_KEY = 'dc_sync_migrated_v1';
+    const SYNC_PRESYNC_KEY = 'dc_presync_lists_v1';
     let sheetQueueList = safeLoadStorage(SYNC_QUEUE_KEY, []);
     let sheetBusy = false;
     let sheetLastSync = null;
@@ -2712,6 +2713,7 @@
       try {
         const data = await fetch(SHEET_API, { cache: 'no-store' }).then(r => r.json());
         if (sheetQueueList.length) { renderSyncStatus(); return; } // local changes still waiting; don't overwrite them
+        if (!lsGet(SYNC_MIGRATED_KEY) && !lsGet(SYNC_PRESYNC_KEY)) lsSet(SYNC_PRESYNC_KEY, JSON.stringify({ packing: packingItems, passes: passesItems }));
         if (!lsGet(SYNC_MIGRATED_KEY) && lsGet(SYNC_CODE_KEY)) { if (migrateLocalToSheet(data)) return; }
         applySheetSnapshot(data);
         if (sheetState !== 'nocode') sheetState = 'idle';
@@ -2728,15 +2730,14 @@
       if (!data || !data.ok) return false;
       const sheetPack = new Map(data.packing.map(i => [i.id, i]));
       const sheetPass = new Map(data.passes.map(i => [i.id, i]));
-      packingItems.forEach(i => {
+      let pre = { packing: packingItems, passes: passesItems };
+      try { const raw = lsGet(SYNC_PRESYNC_KEY); if (raw) pre = JSON.parse(raw); } catch (e) {}
+      (pre.packing || []).forEach(i => {
         const remote = sheetPack.get(i.id);
         if (!remote && String(i.id).startsWith('user_')) sheetQueueList.push({ list: 'packing', op: 'upsert', item: i });
         else if (remote && i.checked && !remote.checked) sheetQueueList.push({ list: 'packing', op: 'upsert', item: { id: i.id, name: remote.name, checked: true } });
       });
-      passesItems.forEach(i => {
-        const remote = sheetPass.get(i.id);
-        if (remote && i.checked && !remote.checked) sheetQueueList.push({ list: 'passes', op: 'upsert', item: { id: i.id, checked: true } });
-      });
+      // Pass statuses come from the confirmation-email audit in the Sheet, so they aren't overwritten from old phone data.
       lsSet(SYNC_QUEUE_KEY, JSON.stringify(sheetQueueList));
       if (!sheetQueueList.length) return false;
       sheetFlush();
