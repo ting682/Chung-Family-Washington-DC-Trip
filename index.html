@@ -501,6 +501,9 @@
         <a id="modalSiteWebsiteBtn" href="#" target="_blank" class="flex-1 bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-3 rounded-xl text-center text-xs transition shadow-xs flex items-center justify-center gap-1.5">
           <i class="fa-solid fa-globe"></i> Official Website
         </a>
+        <a id="modalSiteCallBtn" href="#" class="hidden flex-1 bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-2 px-3 rounded-xl text-center text-xs transition shadow-xs flex items-center justify-center gap-1.5">
+          <i class="fa-solid fa-phone"></i> <span id="modalSiteCallText">Call</span>
+        </a>
         <button onclick="closeSiteModal()" class="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold rounded-xl text-xs transition cursor-pointer">
           Close
         </button>
@@ -1102,6 +1105,49 @@
         "creditUrl": "https://commons.wikimedia.org/wiki/File:Museum_of_the_Bible_%2853839146587%29.jpg"
       }
     };
+
+    // PHONE NUMBERS FOR EVERY PLACE ON THE TRIP (verified Oct 2026 from official sites)
+    const SITE_PHONES = {
+      "white-house":     { number: "202-208-1631", label: "White House Visitor Center" },
+      "old-town":        { number: "703-838-5005", label: "Alexandria Visitor Center" },
+      "natural-history": { number: "202-633-1000", label: "Smithsonian visitor info" },
+      "air-space":       { number: "202-633-1000", label: "Smithsonian visitor info" },
+      "wharf":           { number: "202-688-3590", label: "The Wharf DC" },
+      "spy-museum":      { number: "202-393-7798", label: "International Spy Museum" },
+      "monument":        { number: "202-426-6841", label: "National Mall & Memorial Parks" },
+      "archives":        { number: "1-866-272-6272", label: "National Archives" },
+      "lincoln":         { number: "202-426-6841", label: "National Mall & Memorial Parks" },
+      "national-zoo":    { number: "202-633-1000", label: "Smithsonian visitor info" },
+      "museum-bible":    { number: "866-430-6682", label: "Museum of the Bible" },
+      "capitol":         { number: "202-226-8000", label: "U.S. Capitol Visitor Center" },
+      "lafayette":       { number: "202-208-1631", label: "President's Park (NPS)" }
+    };
+
+    // Matched against an item's title/name so saved custom dinners pick them up too
+    const NAMED_PHONES = [
+      { match: "Old Ebbitt",        number: "202-347-4800" },
+      { match: "Rasika",            number: "202-637-1222" },
+      { match: "The Hamilton",      number: "202-787-1000" },
+      { match: "Founding Farmers",  number: "202-822-8783" },
+      { match: "Makers Union",      number: "202-864-6396" },
+      { match: "Ammathar",          number: "202-588-1795" },
+      { match: "Tokyo Japanese",    number: "703-683-8878" },
+      { match: "Carmine",           number: "202-737-7770" },
+      { match: "Holiday Inn",       number: "202-483-2000" },
+      { match: "Hotel Breakfast",   number: "202-483-2000" },
+      { match: "ATL Airport",       number: "800-897-1910" },
+      { match: "AA 3357",           number: "800-433-7300" },
+      { match: "AA 4800",           number: "800-433-7300" }
+    ];
+
+    function getPlacePhone(item) {
+      if (item.phone) return item.phone;
+      if (item.siteKey && SITE_PHONES[item.siteKey]) return SITE_PHONES[item.siteKey].number;
+      if (item.type && item.type.startsWith('transit')) return null;
+      const text = `${item.title || ''} ${item.name || ''}`;
+      const hit = NAMED_PHONES.find(p => text.includes(p.match));
+      return hit ? hit.number : null;
+    }
 
     function getUberDeepLink(dropoffName, coords) {
       const formattedName = encodeURIComponent(dropoffName || "Destination");
@@ -1885,6 +1931,12 @@
                     <span class="font-black font-mono text-slate-900">${item.flightMeta.arrGate}</span>
                   </div>
                 </div>
+                ${getPlacePhone(item) ? `
+                  <a href="tel:${getPlacePhone(item).replace(/[^0-9+]/g, '')}" class="mt-3 inline-flex items-center gap-1.5 text-xs font-bold text-emerald-700 hover:text-emerald-900 bg-emerald-50 hover:bg-emerald-100 px-2.5 py-1 rounded-lg transition">
+                    <i class="fa-solid fa-phone text-[11px]"></i>
+                    <span>American Airlines: ${getPlacePhone(item)}</span>
+                  </a>
+                ` : ''}
               </div>
             </div>
           `;
@@ -1893,6 +1945,7 @@
         // SIGHTSEEING / FOOD CARD (WITH DIRECT SUMMARY CARD LAUNCHER)
         const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(item.location || item.title)}`;
         const hasSiteInfo = !!(item.siteKey && SITE_KNOWLEDGE_BASE[item.siteKey]);
+        const phone = getPlacePhone(item);
 
         return `
           <div class="relative pl-9">
@@ -1930,6 +1983,13 @@
                     <i class="fa-solid fa-book-open-reader text-[11px]"></i>
                     <span>Quick Facts &amp; History</span>
                   </button>
+                ` : ''}
+
+                ${phone ? `
+                  <a href="tel:${phone.replace(/[^0-9+]/g, '')}" class="inline-flex items-center gap-1.5 font-bold text-emerald-700 hover:text-emerald-900 bg-emerald-50 hover:bg-emerald-100 px-2.5 py-1 rounded-lg transition">
+                    <i class="fa-solid fa-phone text-[11px]"></i>
+                    <span>${phone}</span>
+                  </a>
                 ` : ''}
 
                 ${item.website ? `
@@ -1999,6 +2059,17 @@
         }
       }
       document.getElementById('modalSiteWebsiteBtn').href = foundWebsite;
+
+      const sitePhone = SITE_PHONES[siteKey];
+      const callBtn = document.getElementById('modalSiteCallBtn');
+      if (sitePhone) {
+        callBtn.href = 'tel:' + sitePhone.number.replace(/[^0-9+]/g, '');
+        callBtn.title = sitePhone.label;
+        document.getElementById('modalSiteCallText').textContent = sitePhone.number;
+        callBtn.classList.remove('hidden');
+      } else {
+        callBtn.classList.add('hidden');
+      }
 
       document.getElementById('siteDetailModal').classList.remove('hidden');
     }
