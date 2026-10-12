@@ -313,6 +313,7 @@
             </div>
           </div>
 
+          <div class="sync-status text-[11px] text-slate-500 flex items-center justify-between gap-2 bg-white border border-slate-200 rounded-xl px-3 py-2"></div>
           <div id="packingListContainer" class="space-y-4"></div>
         </div>
 
@@ -337,6 +338,7 @@
               <span id="passesCountBadge" class="text-xs font-bold bg-blue-50 text-blue-700 px-2.5 py-1 rounded-full"></span>
             </div>
 
+            <div class="sync-status text-[11px] text-slate-500 flex items-center justify-between gap-2 bg-slate-50 mb-3 border border-slate-200 rounded-xl px-3 py-2"></div>
             <div id="passesListContainer" class="space-y-3"></div>
           </div>
         </div>
@@ -2608,6 +2610,166 @@
       }
     }
 
+    // ===== SHARED MASTER LIST (Google Sheet) SYNC =====
+    // The Google Sheet "DC Trip 2026 – Master List" is the master copy.
+    // Reading is open; saving changes needs the family passcode (asked once per device).
+    const SHEET_API = '';  // Apps Script web-app URL
+    const SYNC_QUEUE_KEY = 'dc_sync_queue_v1';
+    const SYNC_CODE_KEY = 'dc_family_code_v1';
+    const SYNC_NAME_KEY = 'dc_family_name_v1';
+    const SYNC_MIGRATED_KEY = 'dc_sync_migrated_v1';
+    let sheetQueueList = safeLoadStorage(SYNC_QUEUE_KEY, []);
+    let sheetBusy = false;
+    let sheetLastSync = null;
+    let sheetState = 'idle'; // idle | saving | offline | error | nocode
+
+    function escHtml(v) {
+      return String(v == null ? '' : v).replace(/[&<>"']/g, ch => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[ch]));
+    }
+    function jsArg(v) { return escHtml(JSON.stringify(String(v))); }
+    function lsGet(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }
+    function lsSet(k, v) { try { localStorage.setItem(k, v); } catch (e) {} }
+
+    function renderSyncStatus() {
+      if (!SHEET_API) return;
+      let msg, action = '';
+      const pending = sheetQueueList.length;
+      if (sheetState === 'nocode') {
+        msg = `<span><i class="fa-solid fa-cloud text-slate-400"></i> Showing the family Master List. Your changes stay on this phone${pending ? ` (${pending} waiting)` : ''}.</span>`;
+        action = `<button onclick="sheetAskCode()" class="shrink-0 font-bold text-indigo-600 cursor-pointer">Enter passcode</button>`;
+      } else if (sheetState === 'saving' || sheetBusy) {
+        msg = `<span><i class="fa-solid fa-rotate fa-spin text-indigo-500"></i> Saving to the family Master List…</span>`;
+      } else if (sheetState === 'offline') {
+        msg = `<span><i class="fa-solid fa-wifi text-amber-500"></i> Offline${pending ? ` · ${pending} change${pending > 1 ? 's' : ''} will save when you're back online` : ' · showing the last saved list'}</span>`;
+        action = `<button onclick="sheetSync()" class="shrink-0 font-bold text-indigo-600 cursor-pointer">Retry</button>`;
+      } else {
+        const t = sheetLastSync ? sheetLastSync.toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' }) : '';
+        msg = `<span><i class="fa-solid fa-cloud text-emerald-500"></i> Synced with the family Master List${t ? ` · ${t}` : ''}</span>`;
+        action = `<button onclick="sheetSync()" class="shrink-0 font-bold text-indigo-600 cursor-pointer" title="Refresh"><i class="fa-solid fa-rotate"></i></button>`;
+      }
+      document.querySelectorAll('.sync-status').forEach(el => { el.innerHTML = msg + action; });
+    }
+
+    async function sheetPost(body) {
+      const res = await fetch(SHEET_API, { method: 'POST', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify(body) });
+      return res.json();
+    }
+
+    function applySheetSnapshot(data) {
+      if (!data || !data.ok || !Array.isArray(data.packing)) return;
+      packingItems = data.packing.map(i => ({ id: i.id, name: i.name, category: i.category || 'Essentials', checked: !!i.checked }));
+      passesItems = data.passes.map(i => ({ id: i.id, title: i.title, time: i.time, conf: i.conf, checked: !!i.checked }));
+      packingItems.forEach(i => { if (!packingCategories.includes(i.category)) packingCategories.push(i.category); });
+      lsSet('dc_packing_items_v12', JSON.stringify(packingItems));
+      lsSet('dc_passes_items_v12', JSON.stringify(passesItems));
+      lsSet('dc_categories_v12', JSON.stringify(packingCategories));
+      sheetLastSync = new Date();
+      if (typeof updateCategoryDropdowns === 'function') updateCategoryDropdowns();
+      renderChecklists();
+    }
+
+    function sheetQueue(op) {
+      if (!SHEET_API) return;
+      sheetQueueList.push(op);
+      lsSet(SYNC_QUEUE_KEY, JSON.stringify(sheetQueueList));
+      if (!lsGet(SYNC_CODE_KEY)) { sheetState = 'nocode'; renderSyncStatus(); return; }
+      sheetFlush();
+    }
+
+    async function sheetFlush() {
+      const code = lsGet(SYNC_CODE_KEY);
+      if (!code) { sheetState = 'nocode'; renderSyncStatus(); return false; }
+      if (sheetBusy) return false;
+      sheetBusy = true; sheetState = 'saving'; renderSyncStatus();
+      let last = null;
+      try {
+        while (sheetQueueList.length) {
+          const op = sheetQueueList[0];
+          const data = await sheetPost({ ...op, code, by: lsGet(SYNC_NAME_KEY) || 'Website' });
+          if (!data.ok && data.error === 'wrong passcode') {
+            try { localStorage.removeItem(SYNC_CODE_KEY); } catch (e) {}
+            sheetState = 'nocode'; return false;
+          }
+          sheetQueueList.shift();
+          lsSet(SYNC_QUEUE_KEY, JSON.stringify(sheetQueueList));
+          if (data.ok) last = data;
+        }
+        sheetState = 'idle';
+        if (last) applySheetSnapshot(last);
+        return true;
+      } catch (e) {
+        sheetState = navigator.onLine === false ? 'offline' : 'offline';
+        return false;
+      } finally {
+        sheetBusy = false; renderSyncStatus();
+      }
+    }
+
+    async function sheetSync() {
+      if (!SHEET_API) return;
+      if (sheetQueueList.length && lsGet(SYNC_CODE_KEY)) { await sheetFlush(); if (sheetQueueList.length) return; }
+      if (sheetBusy) return;
+      try {
+        const data = await fetch(SHEET_API, { cache: 'no-store' }).then(r => r.json());
+        if (sheetQueueList.length) { renderSyncStatus(); return; } // local changes still waiting; don't overwrite them
+        if (!lsGet(SYNC_MIGRATED_KEY) && lsGet(SYNC_CODE_KEY)) { if (migrateLocalToSheet(data)) return; }
+        applySheetSnapshot(data);
+        if (sheetState !== 'nocode') sheetState = 'idle';
+        if (!lsGet(SYNC_CODE_KEY)) sheetState = 'nocode';
+      } catch (e) {
+        sheetState = 'offline';
+      }
+      renderSyncStatus();
+    }
+
+    // First time a device connects: send up anything it added or ticked before sync existed.
+    function migrateLocalToSheet(data) {
+      lsSet(SYNC_MIGRATED_KEY, '1');
+      if (!data || !data.ok) return false;
+      const sheetPack = new Map(data.packing.map(i => [i.id, i]));
+      const sheetPass = new Map(data.passes.map(i => [i.id, i]));
+      packingItems.forEach(i => {
+        const remote = sheetPack.get(i.id);
+        if (!remote && String(i.id).startsWith('user_')) sheetQueueList.push({ list: 'packing', op: 'upsert', item: i });
+        else if (remote && i.checked && !remote.checked) sheetQueueList.push({ list: 'packing', op: 'upsert', item: { id: i.id, name: remote.name, checked: true } });
+      });
+      passesItems.forEach(i => {
+        const remote = sheetPass.get(i.id);
+        if (remote && i.checked && !remote.checked) sheetQueueList.push({ list: 'passes', op: 'upsert', item: { id: i.id, checked: true } });
+      });
+      lsSet(SYNC_QUEUE_KEY, JSON.stringify(sheetQueueList));
+      if (!sheetQueueList.length) return false;
+      sheetFlush();
+      return true;
+    }
+
+    async function sheetAskCode() {
+      const code = prompt('Family passcode (so your changes save to the shared Master List):');
+      if (!code) return;
+      try {
+        const res = await sheetPost({ op: 'check', code: code.trim() });
+        if (!res.ok) { alert('That passcode didn\'t work. Please try again.'); return; }
+      } catch (e) { alert('Couldn\'t reach the Master List. Check your connection and try again.'); return; }
+      lsSet(SYNC_CODE_KEY, code.trim());
+      if (!lsGet(SYNC_NAME_KEY)) {
+        const name = prompt('Your first name (shows in the Sheet\'s history):', '');
+        if (name && name.trim()) lsSet(SYNC_NAME_KEY, name.trim().slice(0, 40));
+      }
+      sheetState = 'idle';
+      sheetSync();
+    }
+
+    function sheetInit() {
+      if (!SHEET_API) return;
+      if (!lsGet(SYNC_CODE_KEY)) sheetState = 'nocode';
+      renderSyncStatus();
+      sheetSync();
+      document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'visible') sheetSync(); });
+      window.addEventListener('online', () => sheetSync());
+      setInterval(() => { if (document.visibilityState === 'visible') sheetSync(); }, 60000);
+    }
+
+
     function toggleCategoryManager() {
       document.getElementById('categoryManagerPanel').classList.toggle('hidden');
     }
@@ -2640,6 +2802,7 @@
 
       packingItems = packingItems.map(item => item.category === oldName ? { ...item, category: cleanName } : item);
       localStorage.setItem('dc_packing_items_v12', JSON.stringify(packingItems));
+      sheetQueue({ list: 'packing', op: 'renameCategory', from: oldName, to: cleanName });
 
       updateCategoryDropdowns();
       renderChecklists();
@@ -2657,6 +2820,7 @@
       }
       packingItems = packingItems.map(i => i.id === itemId ? { ...i, category: matchedCat } : i);
       localStorage.setItem('dc_packing_items_v12', JSON.stringify(packingItems));
+      sheetQueue({ list: 'packing', op: 'upsert', item: { id: itemId, name: item.name, category: matchedCat } });
       renderChecklists();
     }
 
@@ -2672,6 +2836,7 @@
         if (!ok) return;
         packingItems = packingItems.map(item => item.category === catToRemove ? { ...item, category: fallbackCat } : item);
         localStorage.setItem('dc_packing_items_v12', JSON.stringify(packingItems));
+        affectedItems.forEach(it => sheetQueue({ list: 'packing', op: 'upsert', item: { id: it.id, name: it.name, category: fallbackCat } }));
       }
       packingCategories = packingCategories.filter(c => c !== catToRemove);
       localStorage.setItem('dc_categories_v12', JSON.stringify(packingCategories));
@@ -2696,13 +2861,13 @@
             <div class="flex items-center justify-between mb-2.5">
               <h4 class="text-xs font-black uppercase tracking-wider text-slate-700 flex items-center gap-1.5">
                 <i class="fa-solid fa-folder-open text-indigo-500 text-[11px]"></i>
-                <span>${cat}</span>
+                <span>${escHtml(cat)}</span>
               </h4>
               <div class="flex items-center gap-1">
                 <span class="text-[10px] font-bold text-slate-400 bg-slate-50 border border-slate-200 px-2 py-0.5 rounded-full">
                   ${catItems.filter(i => i.checked).length}/${catItems.length}
                 </span>
-                <button onclick="renameCategory('${cat}')" class="text-slate-400 hover:text-indigo-600 p-1 cursor-pointer" title="Rename category">
+                <button onclick="renameCategory(${jsArg(cat)})" class="text-slate-400 hover:text-indigo-600 p-1 cursor-pointer" title="Rename category">
                   <i class="fa-solid fa-pencil text-[10px]"></i>
                 </button>
               </div>
@@ -2714,14 +2879,14 @@
                 ${catItems.map(item => `
                   <div class="flex items-center justify-between text-xs py-1 hover:bg-slate-50 px-2 rounded-lg transition group">
                     <label class="flex items-center gap-2.5 flex-1 cursor-pointer select-none">
-                      <input type="checkbox" onchange="togglePackingCheck('${item.id}')" ${item.checked ? 'checked' : ''} class="w-4 h-4 rounded border-slate-300 text-indigo-600 focus:ring-0 cursor-pointer" />
-                      <span class="${item.checked ? 'line-through text-slate-400' : 'text-slate-800 font-medium'}">${item.name}</span>
+                      <input type="checkbox" onchange="togglePackingCheck(${jsArg(item.id)})" ${item.checked ? 'checked' : ''} class="w-4 h-4 rounded border-slate-300 text-indigo-600 focus:ring-0 cursor-pointer" />
+                      <span class="${item.checked ? 'line-through text-slate-400' : 'text-slate-800 font-medium'}">${escHtml(item.name)}</span>
                     </label>
                     <div class="flex items-center gap-1.5 opacity-80 group-hover:opacity-100">
-                      <button onclick="changeItemCategory('${item.id}')" title="Move category" class="text-slate-400 hover:text-indigo-600 p-1 cursor-pointer">
+                      <button onclick="changeItemCategory(${jsArg(item.id)})" title="Move category" class="text-slate-400 hover:text-indigo-600 p-1 cursor-pointer">
                         <i class="fa-solid fa-arrow-right-arrow-left text-[10px]"></i>
                       </button>
-                      <button onclick="deletePackingItem('${item.id}')" title="Delete item" class="text-slate-300 hover:text-rose-500 p-1 cursor-pointer">
+                      <button onclick="deletePackingItem(${jsArg(item.id)})" title="Delete item" class="text-slate-300 hover:text-rose-500 p-1 cursor-pointer">
                         <i class="fa-solid fa-trash-can text-xs"></i>
                       </button>
                     </div>
@@ -2742,11 +2907,11 @@
       document.getElementById('passesListContainer').innerHTML = passesItems.map(item => `
         <div class="bg-slate-50/80 rounded-xl p-3.5 border border-slate-200 shadow-xs flex items-start justify-between gap-3 hover:bg-slate-50 transition">
           <div class="flex-1">
-            <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-blue-100 text-blue-800 font-mono">${item.time}</span>
-            <h4 class="text-xs font-black text-slate-900 mt-1">${item.title}</h4>
-            <p class="text-[11px] text-slate-500 font-mono mt-0.5 font-medium">${item.conf}</p>
+            <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-blue-100 text-blue-800 font-mono">${escHtml(item.time)}</span>
+            <h4 class="text-xs font-black text-slate-900 mt-1">${escHtml(item.title)}</h4>
+            <p class="text-[11px] text-slate-500 font-mono mt-0.5 font-medium">${escHtml(item.conf)}</p>
           </div>
-          <input type="checkbox" onchange="togglePassCheck('${item.id}')" ${item.checked ? 'checked' : ''} class="w-5 h-5 mt-1 rounded border-slate-300 text-emerald-600 focus:ring-0 cursor-pointer" />
+          <input type="checkbox" onchange="togglePassCheck(${jsArg(item.id)})" ${item.checked ? 'checked' : ''} class="w-5 h-5 mt-1 rounded border-slate-300 text-emerald-600 focus:ring-0 cursor-pointer" />
         </div>
       `).join('');
     }
@@ -2754,12 +2919,15 @@
     function togglePackingCheck(id) {
       packingItems = packingItems.map(item => item.id === id ? { ...item, checked: !item.checked } : item);
       localStorage.setItem('dc_packing_items_v12', JSON.stringify(packingItems));
+      const tItem = packingItems.find(i => i.id === id);
+      if (tItem) sheetQueue({ list: 'packing', op: 'upsert', item: { id, name: tItem.name, checked: tItem.checked } });
       renderChecklists();
     }
 
     function deletePackingItem(id) {
       packingItems = packingItems.filter(item => item.id !== id);
       localStorage.setItem('dc_packing_items_v12', JSON.stringify(packingItems));
+      sheetQueue({ list: 'packing', op: 'delete', item: { id } });
       renderChecklists();
     }
 
@@ -2771,8 +2939,10 @@
       const selectedCategory = categorySelect.value || 'Essentials';
       if (!text) return;
 
-      packingItems.push({ id: 'user_' + Date.now(), name: text, category: selectedCategory, checked: false });
+      const newItem = { id: 'user_' + Date.now(), name: text, category: selectedCategory, checked: false };
+      packingItems.push(newItem);
       localStorage.setItem('dc_packing_items_v12', JSON.stringify(packingItems));
+      sheetQueue({ list: 'packing', op: 'upsert', item: newItem });
       input.value = '';
       renderChecklists();
     }
@@ -2780,6 +2950,8 @@
     function togglePassCheck(id) {
       passesItems = passesItems.map(item => item.id === id ? { ...item, checked: !item.checked } : item);
       localStorage.setItem('dc_passes_items_v12', JSON.stringify(passesItems));
+      const pItem = passesItems.find(i => i.id === id);
+      if (pItem) sheetQueue({ list: 'passes', op: 'upsert', item: { id, checked: pItem.checked } });
       renderChecklists();
     }
 
@@ -3542,6 +3714,7 @@
     renderDay(0);
     updateCategoryDropdowns();
     renderChecklists();
+    sheetInit();
     updateCountdown();
     setInterval(updateCountdown, 1000);
   </script>
