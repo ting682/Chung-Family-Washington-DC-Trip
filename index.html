@@ -29,7 +29,8 @@
     /* ===== CLASSIC CAPITAL THEME =====
        Navy, marble and one red accent. Serif headings like the lettering
        on DC monuments; body text in Public Sans (the U.S. government typeface). */
-    :root { --navy:#13233F; --navy-2:#24365A; --marble:#F6F3EC; --stone:#DDD6C8; --ink-2:#3D4963; --ink-3:#5B6680; --red:#A8262E; --red-soft:#F6E7E7; --navy-soft:#EAEEF5; }
+    :root { --navy:#13233F; --navy-2:#24365A; --marble:#F6F3EC; --marble-2:#EFEBE2; --stone:#DDD6C8; --ink-2:#3D4963; --ink-3:#5B6680; --red:#A8262E; --red-soft:#F6E7E7; --red-line:#E9C9CB; --navy-soft:#EAEEF5; --mist:#C9D2E3; --photo:#D8D1C1; }
+    body, header.sticky, .bg-white, [class*="bg-[color:var"], .day-tab, .leg-btn { transition: background-color .8s ease, color .8s ease, border-color .8s ease; }
     body { background: var(--marble) !important; color: var(--navy); font-family: 'Public Sans', system-ui, -apple-system, sans-serif; }
     .serif, header h1, #daySummary h2, #timelineContainer h3, #timelineContainer h4,
     #modalSiteTitle, #kidsView h2, #checklistView h3 { font-family: 'Libre Caslon Text', Georgia, serif !important; letter-spacing: 0 !important; }
@@ -43,21 +44,21 @@
     .bg-indigo-600, .bg-blue-600, .bg-indigo-700, .bg-blue-700, .bg-slate-900, .bg-slate-800, .bg-indigo-950, .bg-violet-600, .bg-purple-600 { background-color: var(--navy) !important; }
     .hover\:bg-indigo-700:hover, .hover\:bg-blue-700:hover, .hover\:bg-slate-800:hover { background-color: var(--navy-2) !important; }
     .bg-indigo-50, .bg-blue-50, .bg-indigo-100, .bg-blue-100, .bg-violet-50, .bg-purple-50, .bg-blue-50\/70 { background-color: var(--navy-soft) !important; }
-    .bg-slate-100, .bg-slate-50, .bg-slate-50\/80 { background-color: #EFEBE2 !important; }
+    .bg-slate-100, .bg-slate-50, .bg-slate-50\/80 { background-color: var(--marble-2) !important; }
     .text-indigo-500, .text-indigo-600, .text-indigo-700, .text-indigo-800, .text-indigo-900, .text-indigo-950,
     .text-blue-500, .text-blue-600, .text-blue-700, .text-blue-800, .text-blue-900, .text-violet-600, .text-violet-700, .text-purple-700 { color: var(--navy) !important; }
     .hover\:text-indigo-600:hover, .hover\:text-indigo-900:hover, .hover\:text-blue-600:hover { color: var(--red) !important; }
-    .border-indigo-200, .border-blue-200, .border-blue-300, .border-indigo-100, .border-blue-100, .border-violet-200, .border-blue-200\/80, .border-indigo-900 { border-color: #C9D2E3 !important; }
+    .border-indigo-200, .border-blue-200, .border-blue-300, .border-indigo-100, .border-blue-100, .border-violet-200, .border-blue-200\/80, .border-indigo-900 { border-color: var(--mist) !important; }
     .border-slate-200, .border-slate-100 { border-color: var(--stone) !important; }
     .bg-rose-100, .bg-rose-50 { background-color: var(--red-soft) !important; }
     .text-rose-800, .text-rose-700, .text-rose-600 { color: var(--red) !important; }
-    .border-rose-200 { border-color: #E9C9CB !important; }
+    .border-rose-200 { border-color: var(--red-line) !important; }
     .text-slate-900, .text-slate-800 { color: var(--navy) !important; }
     .text-slate-700, .text-slate-600 { color: var(--ink-2) !important; }
     .text-slate-500, .text-slate-400 { color: var(--ink-3) !important; }
     .bg-white { background-color: #FFFFFF; }
-    .shadow-xs, .shadow-md { box-shadow: 0 1px 2px rgba(19,35,63,0.06) !important; }
-    header.sticky { background: rgba(246,243,236,0.96) !important; border-bottom: 1px solid var(--stone) !important; }
+    .shadow-xs, .shadow-md { box-shadow: 0 1px 2px rgba(0,0,0,0.06) !important; }
+    header.sticky { background: var(--marble) !important; border-bottom: 1px solid var(--stone) !important; }
     header h1 { font-weight: 700 !important; }
     .day-tab { min-height: 44px; white-space: nowrap; flex: 0 0 auto; }
     .filter-chip { min-height: 40px; white-space: nowrap; flex: 0 0 auto; }
@@ -68,13 +69,56 @@
     .leg-row .leg-note { font-size: 13px; color: var(--ink-3); margin-top: 2px; line-height: 1.4; }
     .leg-btn { display:inline-flex; align-items:center; gap:6px; min-height:40px; padding:0 12px; border:1px solid var(--red); color: var(--red) !important; border-radius:10px; font-weight:700; font-size:13px; white-space:nowrap; background:#fff; }
     .leg-btn:active { transform: scale(0.97); }
-    .stop-photo { display:block; width:100%; height:160px; object-fit:cover; background:#D8D1C1; }
+    .stop-photo { display:block; width:100%; height:160px; object-fit:cover; background: var(--photo); }
     .next-rule { height:2px; width:44px; background: var(--red); margin-top:10px; }
     #mobileBottomNav button { min-height: 48px; flex: 1; }
+    /* Backups for the theme color classes (work even before Tailwind loads) */
+    .before\:bg-\[color\:var\(--stone\)\]::before { background-color: var(--stone); }
+    .bg-\[color\:var\(--marble\)\] { background-color: var(--marble); }
+    .bg-\[color\:var\(--navy\)\] { background-color: var(--navy); }
+    .bg-\[color\:var\(--red-soft\)\] { background-color: var(--red-soft); }
+    .border-\[color\:var\(--mist\)\] { border-color: var(--mist); }
+    .text-\[color\:var\(--ink-3\)\] { color: var(--ink-3); }
+    .text-\[color\:var\(--mist\)\] { color: var(--mist); }
+    .text-\[color\:var\(--red\)\] { color: var(--red); }
     #mobileBottomNav .text-amber-500 { color: var(--red) !important; }
     #deskNavKids.bg-amber-500 { background-color: var(--navy) !important; }
     #deskNavKids { color: var(--ink-2); background: transparent; }
   </style>
+  <meta name="theme-color" content="#F6F3EC" />
+  <script>
+    // ===== TIME-OF-DAY COLORS =====
+    // Warm sunrise colors in the morning, the navy & marble look midday,
+    // cool dusk blues in the evening and deep indigo at night.
+    // Uses the phone's own clock. Add ?mood=morning|midday|evening|night to the URL to preview one.
+    const DAY_MOODS = {
+      morning: { label: 'Good morning', icon: 'fa-sun', vars: { navy:'#5A2414', 'navy-2':'#74321D', marble:'#FFF4E5', 'marble-2':'#FBE7CF', stone:'#EBD3B3', 'ink-2':'#5C3A2A', 'ink-3':'#80593F', red:'#C2410C', 'red-soft':'#FDE6D2', 'red-line':'#F5C9A6', 'navy-soft':'#FCEBDD', mist:'#F6D5B5', photo:'#EED9C0' } },
+      midday:  { label: 'Good afternoon', icon: 'fa-landmark', vars: { navy:'#13233F', 'navy-2':'#24365A', marble:'#F6F3EC', 'marble-2':'#EFEBE2', stone:'#DDD6C8', 'ink-2':'#3D4963', 'ink-3':'#5B6680', red:'#A8262E', 'red-soft':'#F6E7E7', 'red-line':'#E9C9CB', 'navy-soft':'#EAEEF5', mist:'#C9D2E3', photo:'#D8D1C1' } },
+      evening: { label: 'Good evening', icon: 'fa-cloud-moon', vars: { navy:'#0E3B53', 'navy-2':'#175070', marble:'#EEF4F7', 'marble-2':'#E1EBF1', stone:'#C8D8E2', 'ink-2':'#2F4B5C', 'ink-3':'#4A6677', red:'#0F7488', 'red-soft':'#DDF0F3', 'red-line':'#B5DDE4', 'navy-soft':'#E2EDF4', mist:'#BFD6E3', photo:'#CFDCE4' } },
+      night:   { label: 'Good night', icon: 'fa-moon', vars: { navy:'#1A1F45', 'navy-2':'#262C5C', marble:'#ECEEF7', 'marble-2':'#E0E3F1', stone:'#C9CDE3', 'ink-2':'#363B63', 'ink-3':'#535884', red:'#4F45C4', 'red-soft':'#E6E4F8', 'red-line':'#CBC6F0', 'navy-soft':'#E3E5F3', mist:'#C4C8E6', photo:'#D3D6E6' } }
+    };
+    function currentMood() {
+      try { const q = new URLSearchParams(location.search).get('mood'); if (q && DAY_MOODS[q]) return q; } catch (e) {}
+      const h = new Date().getHours();
+      if (h >= 5 && h < 11) return 'morning';
+      if (h >= 11 && h < 17) return 'midday';
+      if (h >= 17 && h < 21) return 'evening';
+      return 'night';
+    }
+    function applyDayMood() {
+      const key = currentMood(), mood = DAY_MOODS[key], root = document.documentElement;
+      if (root.dataset.mood === key) return;
+      root.dataset.mood = key;
+      Object.entries(mood.vars).forEach(([k, v]) => root.style.setProperty('--' + k, v));
+      const meta = document.querySelector('meta[name="theme-color"]'); if (meta) meta.setAttribute('content', mood.vars.marble);
+      const label = document.getElementById('moodLabel'); if (label) label.textContent = mood.label;
+      const icon = document.getElementById('moodIcon'); if (icon) icon.className = 'fa-solid ' + mood.icon + ' text-[11px] text-[color:var(--red)]';
+    }
+    applyDayMood();
+    document.addEventListener('DOMContentLoaded', () => { document.documentElement.dataset.mood = ''; applyDayMood(); });
+    setInterval(applyDayMood, 60000);
+    document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'visible') applyDayMood(); });
+  </script>
 </head>
 <body class="bg-slate-100 text-slate-800 antialiased pb-24 lg:pb-12">
 
@@ -84,13 +128,13 @@
       
       <!-- Brand & Title -->
       <div class="flex items-center gap-3">
-        <div class="w-10 h-10 rounded-xl bg-[#13233F] flex items-center justify-center text-white shadow-xs">
+        <div class="w-10 h-10 rounded-xl bg-[color:var(--navy)] flex items-center justify-center text-white shadow-xs">
           <i class="fa-solid fa-monument text-lg"></i>
         </div>
         <div>
           <div class="flex items-center gap-2">
-            <span class="inline-block w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-            <span class="text-[11px] font-black uppercase tracking-wider text-slate-500">Live Trip Companion</span>
+            <i id="moodIcon" class="fa-solid fa-landmark text-[11px] text-[color:var(--red)]"></i>
+            <span id="moodLabel" class="text-[11px] font-black uppercase tracking-wider text-slate-500">Live Trip Companion</span>
           </div>
           <h1 class="text-[21px] sm:text-2xl lg:text-[28px] font-black text-slate-900 leading-tight">Washington, DC Vacation</h1>
         </div>
@@ -122,7 +166,7 @@
   </header>
 
   <!-- LIVE COUNTDOWN & SMART TRIP TICKER -->
-  <div class="bg-[#13233F] text-white px-4 lg:px-8 py-2.5 text-xs shadow-inner">
+  <div class="bg-[color:var(--navy)] text-white px-4 lg:px-8 py-2.5 text-xs shadow-inner">
     <div class="max-w-7xl mx-auto flex flex-col sm:flex-row sm:items-center justify-between gap-1.5">
       <div class="flex items-center gap-2 flex-wrap">
         <span class="text-amber-400 font-bold flex items-center gap-1.5">
@@ -197,9 +241,9 @@
 
           <div onclick="switchMainView('kids')" class="cursor-pointer bg-white border border-slate-200 rounded-2xl p-4 shadow-xs transition active:scale-98">
             <div class="flex items-center gap-3">
-              <span class="w-11 h-11 rounded-xl bg-[#F6E7E7] text-[#A8262E] flex items-center justify-center text-lg"><i class="fa-solid fa-gamepad"></i></span>
+              <span class="w-11 h-11 rounded-xl bg-[color:var(--red-soft)] text-[color:var(--red)] flex items-center justify-center text-lg"><i class="fa-solid fa-gamepad"></i></span>
               <div>
-                <span class="text-[10px] font-bold uppercase tracking-wider text-[#A8262E] block">Games for Kids</span>
+                <span class="text-[10px] font-bold uppercase tracking-wider text-[color:var(--red)] block">Games for Kids</span>
                 <h4 class="serif text-base font-bold text-slate-900">Open the DC Kids Zone</h4>
                 <p class="text-[11px] text-slate-500 mt-0.5">Trivia, scavenger hunt, spy ciphers &amp; more</p>
               </div>
@@ -209,7 +253,7 @@
 
         <!-- CENTER COLUMN: ITINERARY STOPS -->
         <section class="lg:col-span-6 space-y-4">
-          <div id="daySummary" class="bg-[#13233F] text-white p-5 rounded-2xl shadow-md"></div>
+          <div id="daySummary" class="bg-[color:var(--navy)] text-white p-5 rounded-2xl shadow-md"></div>
           <div id="transitSummaryWidget" class="bg-white border border-slate-200 rounded-2xl p-4 shadow-xs flex items-center justify-between text-xs"></div>
 
           <div class="flex items-center gap-2 overflow-x-auto no-scrollbar text-xs">
@@ -219,7 +263,7 @@
             <button onclick="filterTimeline('food')" class="filter-chip px-3.5 py-1.5 rounded-full font-medium bg-white text-slate-600 border border-slate-200 hover:bg-slate-50 cursor-pointer" data-filter="food"><i class="fa-solid fa-utensils mr-1"></i>Food</button>
           </div>
 
-          <div id="timelineContainer" class="space-y-3 relative before:absolute before:inset-0 before:left-5 before:w-0.5 before:bg-[#DDD6C8]"></div>
+          <div id="timelineContainer" class="space-y-3 relative before:absolute before:inset-0 before:left-5 before:w-0.5 before:bg-[color:var(--stone)]"></div>
         </section>
 
         <!-- RIGHT COLUMN: DESKTOP GATES MONITOR -->
@@ -320,7 +364,7 @@
             </div>
             
             <div class="w-full h-2.5 bg-slate-100 rounded-full overflow-hidden mb-4">
-              <div id="packingProgressBar" class="h-full bg-[#13233F] transition-all duration-300" style="width: 0%"></div>
+              <div id="packingProgressBar" class="h-full bg-[color:var(--navy)] transition-all duration-300" style="width: 0%"></div>
             </div>
 
             <button type="button" onclick="openAlexaModal()" class="w-full mb-4 bg-sky-50 hover:bg-sky-100 border border-sky-200 text-sky-800 font-bold py-2.5 rounded-xl text-xs transition flex items-center justify-center gap-2 cursor-pointer">
@@ -396,7 +440,7 @@
 
     <!-- VIEW 3: KIDS ZONE MINI-GAMES VIEW -->
     <section id="kidsView" class="hidden max-w-4xl mx-auto space-y-6">
-      <div class="bg-[#13233F] rounded-3xl p-6 text-white shadow-md relative overflow-hidden">
+      <div class="bg-[color:var(--navy)] rounded-3xl p-6 text-white shadow-md relative overflow-hidden">
         <div class="relative z-10">
           <span class="bg-white/20 backdrop-blur-md px-3 py-1 rounded-full text-xs font-black uppercase tracking-wider">Ages 8 &amp; 11 · Washington DC Edition</span>
           <h2 class="text-2xl sm:text-3xl font-black mt-2">🎮 DC Junior Explorer &amp; Games</h2>
@@ -2103,13 +2147,13 @@
       const data = allComputed[index];
 
       document.getElementById('daySummary').innerHTML = `
-        <div class="flex items-center justify-between text-[#C9D2E3] text-xs font-semibold uppercase tracking-wider mb-1.5">
+        <div class="flex items-center justify-between text-[color:var(--mist)] text-xs font-semibold uppercase tracking-wider mb-1.5">
           <span>${data.day}</span>
           <span>Day ${index + 1} of 6</span>
         </div>
         <h2 class="text-2xl sm:text-[28px] font-bold leading-tight">${data.theme}</h2>
         <div class="next-rule"></div>
-        <p class="text-sm text-[#C9D2E3] mt-2.5 font-medium leading-relaxed">${data.tagline}</p>
+        <p class="text-sm text-[color:var(--mist)] mt-2.5 font-medium leading-relaxed">${data.tagline}</p>
       `;
 
       const uberCount = data.items.filter(i => i.type === 'transit-uber').length;
@@ -2118,7 +2162,7 @@
 
       document.getElementById('transitSummaryWidget').innerHTML = `
         <div class="flex items-center gap-2.5">
-          <span class="w-9 h-9 rounded-full bg-[#F6E7E7] text-[#A8262E] flex items-center justify-center font-bold text-sm">
+          <span class="w-9 h-9 rounded-full bg-[color:var(--red-soft)] text-[color:var(--red)] flex items-center justify-center font-bold text-sm">
             <i class="fa-solid fa-route"></i>
           </span>
           <div>
@@ -2158,7 +2202,7 @@
               <div class="absolute left-2.5 -translate-x-1/2 top-4 w-7 h-7 rounded-full bg-indigo-950 border-2 border-amber-300 flex items-center justify-center text-amber-300 shadow-xs z-10">
                 <i class="fa-solid fa-moon text-xs"></i>
               </div>
-              <div class="bg-[#13233F] text-white rounded-2xl p-4 border border-indigo-900 shadow-xs">
+              <div class="bg-[color:var(--navy)] text-white rounded-2xl p-4 border border-indigo-900 shadow-xs">
                 <div class="flex items-center justify-between text-xs mb-1">
                   <div class="flex items-center gap-1.5">
                     <span class="text-[10px] font-black uppercase tracking-wider bg-amber-400 text-slate-950 px-2 py-0.5 rounded">Night Rest</span>
@@ -2178,7 +2222,7 @@
           const uberLink = getUberDeepLink(item.destName || item.location, item.destCoords, item.destAddress);
           return `
             <div class="relative pl-9">
-              <div class="absolute left-2.5 -translate-x-1/2 top-2.5 w-7 h-7 rounded-full bg-[#F6F3EC] border border-[#C9D2E3] flex items-center justify-center text-[#5B6680] z-10">
+              <div class="absolute left-2.5 -translate-x-1/2 top-2.5 w-7 h-7 rounded-full bg-[color:var(--marble)] border border-[color:var(--mist)] flex items-center justify-center text-[color:var(--ink-3)] z-10">
                 <i class="fa-solid fa-car-side text-[11px]"></i>
               </div>
               <div class="leg-row">
@@ -2197,7 +2241,7 @@
         if (item.type === 'transit-walk') {
           return `
             <div class="relative pl-9">
-              <div class="absolute left-2.5 -translate-x-1/2 top-2.5 w-7 h-7 rounded-full bg-[#F6F3EC] border border-[#C9D2E3] flex items-center justify-center text-[#5B6680] z-10">
+              <div class="absolute left-2.5 -translate-x-1/2 top-2.5 w-7 h-7 rounded-full bg-[color:var(--marble)] border border-[color:var(--mist)] flex items-center justify-center text-[color:var(--ink-3)] z-10">
                 <i class="fa-solid fa-person-walking text-[11px]"></i>
               </div>
               <div class="leg-row">
@@ -2303,7 +2347,7 @@
 
         return `
           <div class="relative pl-9">
-            <div class="absolute left-2.5 -translate-x-1/2 top-4 w-7 h-7 rounded-full bg-[#13233F] flex items-center justify-center text-white z-10">
+            <div class="absolute left-2.5 -translate-x-1/2 top-4 w-7 h-7 rounded-full bg-[color:var(--navy)] flex items-center justify-center text-white z-10">
               <i class="fa-solid ${item.icon} text-xs"></i>
             </div>
             <div class="bg-white rounded-2xl border border-slate-200 shadow-xs overflow-hidden">
