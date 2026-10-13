@@ -8,7 +8,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Text:wght@400;700&family=Public+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Young+Serif&family=Figtree:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
   <style>
     /* Stop iPhone/iPad Safari from auto-zooming when a text box is tapped.
        Safari zooms on any field with text smaller than 16px, so on touch
@@ -26,14 +26,14 @@
     }
     .animate-bounce-slow { animation: bounce-slow 2.2s infinite ease-in-out; }
 
-    /* ===== CLASSIC CAPITAL THEME =====
+    /* ===== SITE THEME =====
        Navy, marble and one red accent. Serif headings like the lettering
-       on DC monuments; body text in Public Sans (the U.S. government typeface). */
-    :root { --navy:#13233F; --navy-2:#24365A; --marble:#F6F3EC; --marble-2:#EFEBE2; --stone:#DDD6C8; --ink-2:#3D4963; --ink-3:#5B6680; --red:#A8262E; --red-soft:#F6E7E7; --red-line:#E9C9CB; --navy-soft:#EAEEF5; --mist:#C9D2E3; --photo:#D8D1C1; --rule:#A8262E; }
+       on DC monuments; body text in Figtree. Colors change with the time of day (see DAY_MOODS). */
+    :root { --navy:#1D3F8F; --navy-2:#2A52AE; --marble:#F4F8FF; --marble-2:#E6EEFB; --stone:#C5D4F0; --ink-2:#2D3F66; --ink-3:#4A5C82; --red:#C8202F; --red-soft:#FDE4E6; --red-line:#F4B9BF; --navy-soft:#E3ECFC; --mist:#BFD3F7; --photo:#CFDBF0; --rule:#FF5A5F; --band1:#C8202F; --band2:#F2C14E; --band3:#3F7BE0; }
     body, header.sticky, .bg-white, [class*="bg-[color:var"], .day-tab, .leg-btn { transition: background-color .8s ease, color .8s ease, border-color .8s ease; }
-    body { background: var(--marble) !important; color: var(--navy); font-family: 'Public Sans', system-ui, -apple-system, sans-serif; }
+    body { background: var(--marble) !important; color: var(--navy); font-family: 'Figtree', system-ui, -apple-system, sans-serif; }
     .serif, header h1, #daySummary h2, #timelineContainer h3, #timelineContainer h4,
-    #modalSiteTitle, #kidsView h2, #checklistView h3 { font-family: 'Libre Caslon Text', Georgia, serif !important; letter-spacing: 0 !important; }
+    #modalSiteTitle, #kidsView h2, #checklistView h3 { font-family: 'Young Serif', Georgia, serif !important; font-weight: 400 !important; letter-spacing: 0 !important; }
     /* Bigger small print: nothing below ~12px */
     .text-\[9px\]  { font-size: 11px !important; }
     .text-\[10px\] { font-size: 12px !important; }
@@ -72,6 +72,15 @@
     .stop-photo { display:block; width:100%; height:160px; object-fit:cover; background: var(--photo); }
     .next-rule { height:2px; width:44px; background: var(--rule); margin-top:10px; }
     #mobileBottomNav button { min-height: 48px; flex: 1; }
+    /* Sunrise / sunset horizon stripes and color touches */
+    .horizon { display:flex; flex-direction:column; }
+    .horizon span { display:block; transition: background-color .8s ease; }
+    .horizon span:nth-child(1) { height:6px; background: var(--band1); }
+    .horizon span:nth-child(2) { height:5px; background: var(--band2); }
+    .horizon span:nth-child(3) { height:4px; background: var(--band3); }
+    #daySummary { border-bottom: 6px solid var(--band2); }
+    #timelineContainer .text-\[15px\].font-bold { color: var(--red) !important; }
+    .leg-row > div + .leg-btn, .leg-row .leg-meta { }
     /* Backups for the theme color classes (work even before Tailwind loads) */
     .before\:bg-\[color\:var\(--stone\)\]::before { background-color: var(--stone); }
     .bg-\[color\:var\(--marble\)\] { background-color: var(--marble); }
@@ -85,17 +94,17 @@
     #deskNavKids.bg-amber-500 { background-color: var(--navy) !important; }
     #deskNavKids { color: var(--ink-2); background: transparent; }
   </style>
-  <meta name="theme-color" content="#F6F3EC" />
+  <meta name="theme-color" content="#F4F8FF" />
   <script>
     // ===== TIME-OF-DAY COLORS =====
     // Warm sunrise colors in the morning, the navy & marble look midday,
     // cool dusk blues in the evening and deep indigo at night.
     // Uses the phone's own clock. Add ?mood=morning|midday|evening|night to the URL to preview one.
     const DAY_MOODS = {
-      morning: { label: 'Good morning', icon: 'fa-sun', vars: { navy:'#5A2414', 'navy-2':'#74321D', marble:'#FFF4E5', 'marble-2':'#FBE7CF', stone:'#EBD3B3', 'ink-2':'#5C3A2A', 'ink-3':'#80593F', red:'#C2410C', 'red-soft':'#FDE6D2', 'red-line':'#F5C9A6', 'navy-soft':'#FCEBDD', mist:'#F6D5B5', photo:'#EED9C0', rule:'#C2410C' } },
-      midday:  { label: 'Good afternoon', icon: 'fa-landmark', vars: { navy:'#13233F', 'navy-2':'#24365A', marble:'#F6F3EC', 'marble-2':'#EFEBE2', stone:'#DDD6C8', 'ink-2':'#3D4963', 'ink-3':'#5B6680', red:'#A8262E', 'red-soft':'#F6E7E7', 'red-line':'#E9C9CB', 'navy-soft':'#EAEEF5', mist:'#C9D2E3', photo:'#D8D1C1', rule:'#A8262E' } },
-      evening: { label: 'Good evening', icon: 'fa-cloud-moon', vars: { navy:'#0E3B53', 'navy-2':'#175070', marble:'#EEF4F7', 'marble-2':'#E1EBF1', stone:'#C8D8E2', 'ink-2':'#2F4B5C', 'ink-3':'#4A6677', red:'#0F7488', 'red-soft':'#DDF0F3', 'red-line':'#B5DDE4', 'navy-soft':'#E2EDF4', mist:'#BFD6E3', photo:'#CFDCE4', rule:'#5FC3D3' } },
-      night:   { label: 'Good night', icon: 'fa-moon', vars: { navy:'#1A1F45', 'navy-2':'#262C5C', marble:'#ECEEF7', 'marble-2':'#E0E3F1', stone:'#C9CDE3', 'ink-2':'#363B63', 'ink-3':'#535884', red:'#4F45C4', 'red-soft':'#E6E4F8', 'red-line':'#CBC6F0', 'navy-soft':'#E3E5F3', mist:'#C4C8E6', photo:'#D3D6E6', rule:'#A49CF0' } }
+      morning: { label: 'Good morning', icon: 'fa-sun', vars: { navy:'#7A1F4E', 'navy-2':'#942A60', marble:'#FFF5EC', 'marble-2':'#FFE6D9', stone:'#F9C9B4', 'ink-2':'#6B2C46', 'ink-3':'#8E4A62', red:'#C8461C', 'red-soft':'#FFE1CF', 'red-line':'#FBBF9F', 'navy-soft':'#FDE3EC', mist:'#FFC9DD', photo:'#F9D3C4', rule:'#FFB347', band1:'#FF7EB3', band2:'#FF8A5B', band3:'#FFC145' } },
+      midday:  { label: 'Good afternoon', icon: 'fa-landmark', vars: { navy:'#1D3F8F', 'navy-2':'#2A52AE', marble:'#F4F8FF', 'marble-2':'#E6EEFB', stone:'#C5D4F0', 'ink-2':'#2D3F66', 'ink-3':'#4A5C82', red:'#C8202F', 'red-soft':'#FDE4E6', 'red-line':'#F4B9BF', 'navy-soft':'#E3ECFC', mist:'#BFD3F7', photo:'#CFDBF0', rule:'#FF5A5F', band1:'#C8202F', band2:'#F2C14E', band3:'#3F7BE0' } },
+      evening: { label: 'Good evening', icon: 'fa-cloud-sun', vars: { navy:'#3B1A5A', 'navy-2':'#4E2475', marble:'#FFF3EA', 'marble-2':'#FFE2D1', stone:'#F6BFA6', 'ink-2':'#4A2A55', 'ink-3':'#6E4A6F', red:'#C2441C', 'red-soft':'#FFDCCB', 'red-line':'#F7B293', 'navy-soft':'#F0E2F5', mist:'#F5C8E0', photo:'#F4C9B5', rule:'#FF9E57', band1:'#E4572E', band2:'#F48C3B', band3:'#F4B942' } },
+      night:   { label: 'Good night', icon: 'fa-moon', vars: { navy:'#1B1A4B', 'navy-2':'#2A2870', marble:'#F0EFFF', 'marble-2':'#E2E0FA', stone:'#C8C4F0', 'ink-2':'#34306B', 'ink-3':'#524D8A', red:'#5B3BE0', 'red-soft':'#E9E3FF', 'red-line':'#CBBEFB', 'navy-soft':'#E6E4FB', mist:'#C9C3F5', photo:'#D6D2F2', rule:'#B9A8FF', band1:'#5B3BE0', band2:'#3A86FF', band3:'#B9A8FF' } }
     };
     function currentMood() {
       try { const q = new URLSearchParams(location.search).get('mood'); if (q && DAY_MOODS[q]) return q; } catch (e) {}
@@ -183,6 +192,8 @@
       </div>
     </div>
   </div>
+
+  <div class="horizon" aria-hidden="true"><span></span><span></span><span></span></div>
 
   <!-- MAIN APP CONTAINER -->
   <div class="max-w-7xl mx-auto px-4 lg:px-8 pt-4 lg:pt-6">
