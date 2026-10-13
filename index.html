@@ -29,7 +29,7 @@
     /* ===== SITE THEME =====
        Navy, marble and one red accent. Serif headings like the lettering
        on DC monuments; body text in Figtree. Colors change with the time of day (see DAY_MOODS). */
-    :root { --navy:#1D3F8F; --navy-2:#2A52AE; --marble:#F4F8FF; --marble-2:#E6EEFB; --stone:#C5D4F0; --ink-2:#2D3F66; --ink-3:#4A5C82; --red:#C8202F; --red-soft:#FDE4E6; --red-line:#F4B9BF; --navy-soft:#E3ECFC; --mist:#BFD3F7; --photo:#CFDBF0; --rule:#FF5A5F; --band1:#C8202F; --band2:#F2C14E; --band3:#3F7BE0; }
+    :root { --navy:#1D3F8F; --navy-2:#2A52AE; --hero:#D3E2FF; --hero-2:#C2D6FF; --on-hero:#142F6B; --on-hero-2:#34508C; --marble:#F7FAFF; --marble-2:#EEF4FF; --stone:#CCDAF3; --ink-2:#2D3F66; --ink-3:#4A5C82; --red:#C8202F; --red-soft:#FDE6E8; --red-line:#F4BEC3; --navy-soft:#E6EEFD; --mist:#BFD3F7; --photo:#D7E2F5; --rule:#E5484D; --band1:#F7A8AE; --band2:#FFE08A; --band3:#A9C7FF; }
     body, header.sticky, .bg-white, [class*="bg-[color:var"], .day-tab, .leg-btn { transition: background-color .8s ease, color .8s ease, border-color .8s ease; }
     body { background: var(--marble) !important; color: var(--navy); font-family: 'Figtree', system-ui, -apple-system, sans-serif; }
     .serif, header h1, #daySummary h2, #timelineContainer h3, #timelineContainer h4,
@@ -41,8 +41,14 @@
     .text-xs { font-size: 13px !important; line-height: 1.45 !important; }
     .uppercase.tracking-wider { letter-spacing: 0.04em !important; }
     /* One palette: blues, indigos and violets become navy; roses become the red accent */
-    .bg-indigo-600, .bg-blue-600, .bg-indigo-700, .bg-blue-700, .bg-slate-900, .bg-slate-800, .bg-indigo-950, .bg-violet-600, .bg-purple-600 { background-color: var(--navy) !important; }
-    .hover\:bg-indigo-700:hover, .hover\:bg-blue-700:hover, .hover\:bg-slate-800:hover { background-color: var(--navy-2) !important; }
+    /* Feature surfaces (day header, countdown bar, selected buttons) use a light pastel with dark text */
+    .bg-\[color\:var\(--navy\)\], .bg-indigo-600, .bg-blue-600, .bg-indigo-700, .bg-blue-700, .bg-slate-900, .bg-slate-800, .bg-indigo-950, .bg-violet-600, .bg-purple-600 { background-color: var(--hero) !important; color: var(--on-hero) !important; }
+    :is(.bg-\[color\:var\(--navy\)\], .bg-indigo-600, .bg-blue-600, .bg-indigo-700, .bg-blue-700, .bg-slate-900, .bg-slate-800, .bg-indigo-950, .bg-violet-600, .bg-purple-600).text-white, :is(.bg-\[color\:var\(--navy\)\], .bg-indigo-600, .bg-blue-600, .bg-indigo-700, .bg-blue-700, .bg-slate-900, .bg-slate-800, .bg-indigo-950, .bg-violet-600, .bg-purple-600) .text-white { color: var(--on-hero) !important; }
+    :is(.bg-\[color\:var\(--navy\)\], .bg-indigo-600, .bg-blue-600, .bg-indigo-700, .bg-blue-700, .bg-slate-900, .bg-slate-800, .bg-indigo-950, .bg-violet-600, .bg-purple-600) .text-\[color\:var\(--mist\)\], :is(.bg-\[color\:var\(--navy\)\], .bg-indigo-600, .bg-blue-600, .bg-indigo-700, .bg-blue-700, .bg-slate-900, .bg-slate-800, .bg-indigo-950, .bg-violet-600, .bg-purple-600) [class*="text-indigo-"], :is(.bg-\[color\:var\(--navy\)\], .bg-indigo-600, .bg-blue-600, .bg-indigo-700, .bg-blue-700, .bg-slate-900, .bg-slate-800, .bg-indigo-950, .bg-violet-600, .bg-purple-600) .text-slate-300, :is(.bg-\[color\:var\(--navy\)\], .bg-indigo-600, .bg-blue-600, .bg-indigo-700, .bg-blue-700, .bg-slate-900, .bg-slate-800, .bg-indigo-950, .bg-violet-600, .bg-purple-600) .text-slate-400, :is(.bg-\[color\:var\(--navy\)\], .bg-indigo-600, .bg-blue-600, .bg-indigo-700, .bg-blue-700, .bg-slate-900, .bg-slate-800, .bg-indigo-950, .bg-violet-600, .bg-purple-600) [class*="text-blue-1"] { color: var(--on-hero-2) !important; }
+    :is(.bg-\[color\:var\(--navy\)\], .bg-indigo-600, .bg-blue-600, .bg-indigo-700, .bg-blue-700, .bg-slate-900, .bg-slate-800, .bg-indigo-950, .bg-violet-600, .bg-purple-600) [class*="text-amber-"] { color: var(--on-hero) !important; }
+    :is(.bg-\[color\:var\(--navy\)\], .bg-indigo-600, .bg-blue-600, .bg-indigo-700, .bg-blue-700, .bg-slate-900, .bg-slate-800, .bg-indigo-950, .bg-violet-600, .bg-purple-600) .bg-slate-800\/80, :is(.bg-\[color\:var\(--navy\)\], .bg-indigo-600, .bg-blue-600, .bg-indigo-700, .bg-blue-700, .bg-slate-900, .bg-slate-800, .bg-indigo-950, .bg-violet-600, .bg-purple-600) .bg-slate-800\/90 { background-color: rgba(255,255,255,0.6) !important; }
+    :is(.bg-\[color\:var\(--navy\)\], .bg-indigo-600, .bg-blue-600, .bg-indigo-700, .bg-blue-700, .bg-slate-900, .bg-slate-800, .bg-indigo-950, .bg-violet-600, .bg-purple-600) .border-slate-700, :is(.bg-\[color\:var\(--navy\)\], .bg-indigo-600, .bg-blue-600, .bg-indigo-700, .bg-blue-700, .bg-slate-900, .bg-slate-800, .bg-indigo-950, .bg-violet-600, .bg-purple-600).border-slate-700, :is(.bg-\[color\:var\(--navy\)\], .bg-indigo-600, .bg-blue-600, .bg-indigo-700, .bg-blue-700, .bg-slate-900, .bg-slate-800, .bg-indigo-950, .bg-violet-600, .bg-purple-600).border-indigo-900 { border-color: rgba(0,0,0,0.08) !important; }
+    .hover\:bg-indigo-700:hover, .hover\:bg-blue-700:hover, .hover\:bg-slate-800:hover { background-color: var(--hero-2) !important; }
     .bg-indigo-50, .bg-blue-50, .bg-indigo-100, .bg-blue-100, .bg-violet-50, .bg-purple-50, .bg-blue-50\/70 { background-color: var(--navy-soft) !important; }
     .bg-slate-100, .bg-slate-50, .bg-slate-50\/80 { background-color: var(--marble-2) !important; }
     .text-indigo-500, .text-indigo-600, .text-indigo-700, .text-indigo-800, .text-indigo-900, .text-indigo-950,
@@ -84,7 +90,6 @@
     /* Backups for the theme color classes (work even before Tailwind loads) */
     .before\:bg-\[color\:var\(--stone\)\]::before { background-color: var(--stone); }
     .bg-\[color\:var\(--marble\)\] { background-color: var(--marble); }
-    .bg-\[color\:var\(--navy\)\] { background-color: var(--navy); }
     .bg-\[color\:var\(--red-soft\)\] { background-color: var(--red-soft); }
     .border-\[color\:var\(--mist\)\] { border-color: var(--mist); }
     .text-\[color\:var\(--ink-3\)\] { color: var(--ink-3); }
@@ -94,17 +99,17 @@
     #deskNavKids.bg-amber-500 { background-color: var(--navy) !important; }
     #deskNavKids { color: var(--ink-2); background: transparent; }
   </style>
-  <meta name="theme-color" content="#F4F8FF" />
+  <meta name="theme-color" content="#F7FAFF" />
   <script>
     // ===== TIME-OF-DAY COLORS =====
     // Warm sunrise colors in the morning, the navy & marble look midday,
     // cool dusk blues in the evening and deep indigo at night.
     // Uses the phone's own clock. Add ?mood=morning|midday|evening|night to the URL to preview one.
     const DAY_MOODS = {
-      morning: { label: 'Good morning', icon: 'fa-sun', vars: { navy:'#7A1F4E', 'navy-2':'#942A60', marble:'#FFF5EC', 'marble-2':'#FFE6D9', stone:'#F9C9B4', 'ink-2':'#6B2C46', 'ink-3':'#8E4A62', red:'#C8461C', 'red-soft':'#FFE1CF', 'red-line':'#FBBF9F', 'navy-soft':'#FDE3EC', mist:'#FFC9DD', photo:'#F9D3C4', rule:'#FFB347', band1:'#FF7EB3', band2:'#FF8A5B', band3:'#FFC145' } },
-      midday:  { label: 'Good afternoon', icon: 'fa-landmark', vars: { navy:'#1D3F8F', 'navy-2':'#2A52AE', marble:'#F4F8FF', 'marble-2':'#E6EEFB', stone:'#C5D4F0', 'ink-2':'#2D3F66', 'ink-3':'#4A5C82', red:'#C8202F', 'red-soft':'#FDE4E6', 'red-line':'#F4B9BF', 'navy-soft':'#E3ECFC', mist:'#BFD3F7', photo:'#CFDBF0', rule:'#FF5A5F', band1:'#C8202F', band2:'#F2C14E', band3:'#3F7BE0' } },
-      evening: { label: 'Good evening', icon: 'fa-cloud-sun', vars: { navy:'#3B1A5A', 'navy-2':'#4E2475', marble:'#FFF3EA', 'marble-2':'#FFE2D1', stone:'#F6BFA6', 'ink-2':'#4A2A55', 'ink-3':'#6E4A6F', red:'#C2441C', 'red-soft':'#FFDCCB', 'red-line':'#F7B293', 'navy-soft':'#F0E2F5', mist:'#F5C8E0', photo:'#F4C9B5', rule:'#FF9E57', band1:'#E4572E', band2:'#F48C3B', band3:'#F4B942' } },
-      night:   { label: 'Good night', icon: 'fa-moon', vars: { navy:'#1B1A4B', 'navy-2':'#2A2870', marble:'#F0EFFF', 'marble-2':'#E2E0FA', stone:'#C8C4F0', 'ink-2':'#34306B', 'ink-3':'#524D8A', red:'#5B3BE0', 'red-soft':'#E9E3FF', 'red-line':'#CBBEFB', 'navy-soft':'#E6E4FB', mist:'#C9C3F5', photo:'#D6D2F2', rule:'#B9A8FF', band1:'#5B3BE0', band2:'#3A86FF', band3:'#B9A8FF' } }
+      morning: { label: 'Good morning', icon: 'fa-sun', vars: { navy:'#6A2445', hero:'#FFD6C9', 'hero-2':'#FFC7B5', 'on-hero':'#5A1E3C', 'on-hero-2':'#7E3A57', marble:'#FFF8F3', 'marble-2':'#FFEFE7', stone:'#F8D3C4', 'ink-2':'#6B2C46', 'ink-3':'#8A475F', red:'#C2461F', 'red-soft':'#FFE4D6', 'red-line':'#FAC4AA', 'navy-soft':'#FDE6EE', mist:'#F5C3D6', photo:'#FBDCCF', rule:'#E8743F', band1:'#FFB3CF', band2:'#FFC2A1', band3:'#FFE29A' } },
+      midday:  { label: 'Good afternoon', icon: 'fa-landmark', vars: { navy:'#1D3F8F', hero:'#D3E2FF', 'hero-2':'#C2D6FF', 'on-hero':'#142F6B', 'on-hero-2':'#34508C', marble:'#F7FAFF', 'marble-2':'#EEF4FF', stone:'#CCDAF3', 'ink-2':'#2D3F66', 'ink-3':'#4A5C82', red:'#C8202F', 'red-soft':'#FDE6E8', 'red-line':'#F4BEC3', 'navy-soft':'#E6EEFD', mist:'#BFD3F7', photo:'#D7E2F5', rule:'#E5484D', band1:'#F7A8AE', band2:'#FFE08A', band3:'#A9C7FF' } },
+      evening: { label: 'Good evening', icon: 'fa-cloud-moon', vars: { navy:'#34296E', hero:'#DCD6F8', 'hero-2':'#CEC6F4', 'on-hero':'#2E2560', 'on-hero-2':'#4C4280', marble:'#F8F7FF', 'marble-2':'#F1EFFC', stone:'#D6D0F2', 'ink-2':'#3B3366', 'ink-3':'#5A5285', red:'#A93B72', 'red-soft':'#F9E1EE', 'red-line':'#EEBBD5', 'navy-soft':'#ECE9FB', mist:'#C9C1F0', photo:'#DED9F5', rule:'#D46A9F', band1:'#F6B8D1', band2:'#C9B8F2', band3:'#A8D4F0' } },
+      night:   { label: 'Good night', icon: 'fa-moon', vars: { navy:'#1B1A4B', hero:'#C9CCF2', 'hero-2':'#BABEEE', 'on-hero':'#1B1A4B', 'on-hero-2':'#3B3A75', marble:'#F5F6FD', 'marble-2':'#ECEEFA', stone:'#CDD0EF', 'ink-2':'#34306B', 'ink-3':'#524D8A', red:'#4F45C4', 'red-soft':'#E8E6FA', 'red-line':'#CAC5F2', 'navy-soft':'#E6E8F8', mist:'#C4C8E6', photo:'#D9DBF3', rule:'#6F66D8', band1:'#9FA6EE', band2:'#B7C9F5', band3:'#D8D0F7' } }
     };
     function currentMood() {
       try { const q = new URLSearchParams(location.search).get('mood'); if (q && DAY_MOODS[q]) return q; } catch (e) {}
