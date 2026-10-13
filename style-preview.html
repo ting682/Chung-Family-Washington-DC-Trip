@@ -59,8 +59,8 @@
     .shadow-xs, .shadow-md { box-shadow: 0 1px 2px rgba(19,35,63,0.06) !important; }
     header.sticky { background: rgba(246,243,236,0.96) !important; border-bottom: 1px solid var(--stone) !important; }
     header h1 { font-weight: 700 !important; }
-    .day-tab { min-height: 44px; }
-    .filter-chip { min-height: 38px; }
+    .day-tab { min-height: 44px; white-space: nowrap; flex: 0 0 auto; }
+    .filter-chip { min-height: 40px; white-space: nowrap; flex: 0 0 auto; }
     /* Quiet ride & walk rows between the places */
     .leg-row { display:flex; align-items:flex-start; gap:10px; padding:6px 4px 6px 0; color: var(--ink-3); }
     .leg-row .leg-title { color: var(--ink-2); font-weight: 600; font-size: 14px; line-height: 1.35; }
@@ -92,7 +92,7 @@
             <span class="inline-block w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
             <span class="text-[11px] font-black uppercase tracking-wider text-slate-500">Live Trip Companion</span>
           </div>
-          <h1 class="text-xl lg:text-2xl font-black text-slate-900 leading-tight">Washington, DC Vacation</h1>
+          <h1 class="text-[21px] sm:text-2xl lg:text-[28px] font-black text-slate-900 leading-tight">Washington, DC Vacation</h1>
         </div>
       </div>
 
@@ -112,7 +112,7 @@
 
         <button onclick="toggleFlightDrawer()" class="h-10 px-3.5 rounded-xl bg-blue-50 border border-blue-200 text-blue-700 flex items-center gap-1.5 text-xs font-bold hover:bg-blue-100 active:scale-95 transition shadow-xs cursor-pointer">
           <i class="fa-solid fa-plane-departure text-blue-600"></i>
-          <span>Live Gates &amp; Flights</span>
+          <span class="hidden sm:inline whitespace-nowrap">Live Gates &amp; Flights</span><span class="sm:hidden">Flights</span>
         </button>
         <button onclick="toggleInfoModal()" class="w-10 h-10 rounded-xl bg-slate-100 border border-slate-200 flex items-center justify-center text-slate-600 hover:bg-slate-200 active:scale-95 transition cursor-pointer">
           <i class="fa-solid fa-circle-info text-base"></i>
@@ -130,10 +130,6 @@
           <span id="countdownLabel">Departure Countdown:</span>
         </span>
         <span id="flightTickerText" class="text-slate-300 font-medium">Leave 2232 Shenley Park Ln</span>
-        <span class="hidden md:inline-block text-slate-500">|</span>
-        <span class="inline-flex items-center gap-1 bg-slate-800/90 text-amber-300 px-2 py-0.5 rounded border border-slate-700 text-[11px] font-mono font-bold">
-          <i class="fa-solid fa-circle-info text-[10px]"></i> Tap any sight to view History &amp; Facts
-        </span>
       </div>
       <div class="flex items-center gap-2">
         <span class="text-slate-400 text-[11px] hidden sm:inline">Target: Oct 15 @ 11:30 AM EDT</span>
