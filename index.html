@@ -6,6 +6,9 @@
   <title>DC Family Trip 2026</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Text:wght@400;700&family=Public+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
   <style>
     /* Stop iPhone/iPad Safari from auto-zooming when a text box is tapped.
        Safari zooms on any field with text smaller than 16px, so on touch
@@ -22,6 +25,55 @@
       50% { transform: translateY(-4px); }
     }
     .animate-bounce-slow { animation: bounce-slow 2.2s infinite ease-in-out; }
+
+    /* ===== CLASSIC CAPITAL THEME =====
+       Navy, marble and one red accent. Serif headings like the lettering
+       on DC monuments; body text in Public Sans (the U.S. government typeface). */
+    :root { --navy:#13233F; --navy-2:#24365A; --marble:#F6F3EC; --stone:#DDD6C8; --ink-2:#3D4963; --ink-3:#5B6680; --red:#A8262E; --red-soft:#F6E7E7; --navy-soft:#EAEEF5; }
+    body { background: var(--marble) !important; color: var(--navy); font-family: 'Public Sans', system-ui, -apple-system, sans-serif; }
+    .serif, header h1, #daySummary h2, #timelineContainer h3, #timelineContainer h4,
+    #modalSiteTitle, #kidsView h2, #checklistView h3 { font-family: 'Libre Caslon Text', Georgia, serif !important; letter-spacing: 0 !important; }
+    /* Bigger small print: nothing below ~12px */
+    .text-\[9px\]  { font-size: 11px !important; }
+    .text-\[10px\] { font-size: 12px !important; }
+    .text-\[11px\] { font-size: 12.5px !important; }
+    .text-xs { font-size: 13px !important; line-height: 1.45 !important; }
+    .uppercase.tracking-wider { letter-spacing: 0.04em !important; }
+    /* One palette: blues, indigos and violets become navy; roses become the red accent */
+    .bg-indigo-600, .bg-blue-600, .bg-indigo-700, .bg-blue-700, .bg-slate-900, .bg-slate-800, .bg-indigo-950, .bg-violet-600, .bg-purple-600 { background-color: var(--navy) !important; }
+    .hover\:bg-indigo-700:hover, .hover\:bg-blue-700:hover, .hover\:bg-slate-800:hover { background-color: var(--navy-2) !important; }
+    .bg-indigo-50, .bg-blue-50, .bg-indigo-100, .bg-blue-100, .bg-violet-50, .bg-purple-50, .bg-blue-50\/70 { background-color: var(--navy-soft) !important; }
+    .bg-slate-100, .bg-slate-50, .bg-slate-50\/80 { background-color: #EFEBE2 !important; }
+    .text-indigo-500, .text-indigo-600, .text-indigo-700, .text-indigo-800, .text-indigo-900, .text-indigo-950,
+    .text-blue-500, .text-blue-600, .text-blue-700, .text-blue-800, .text-blue-900, .text-violet-600, .text-violet-700, .text-purple-700 { color: var(--navy) !important; }
+    .hover\:text-indigo-600:hover, .hover\:text-indigo-900:hover, .hover\:text-blue-600:hover { color: var(--red) !important; }
+    .border-indigo-200, .border-blue-200, .border-blue-300, .border-indigo-100, .border-blue-100, .border-violet-200, .border-blue-200\/80, .border-indigo-900 { border-color: #C9D2E3 !important; }
+    .border-slate-200, .border-slate-100 { border-color: var(--stone) !important; }
+    .bg-rose-100, .bg-rose-50 { background-color: var(--red-soft) !important; }
+    .text-rose-800, .text-rose-700, .text-rose-600 { color: var(--red) !important; }
+    .border-rose-200 { border-color: #E9C9CB !important; }
+    .text-slate-900, .text-slate-800 { color: var(--navy) !important; }
+    .text-slate-700, .text-slate-600 { color: var(--ink-2) !important; }
+    .text-slate-500, .text-slate-400 { color: var(--ink-3) !important; }
+    .bg-white { background-color: #FFFFFF; }
+    .shadow-xs, .shadow-md { box-shadow: 0 1px 2px rgba(19,35,63,0.06) !important; }
+    header.sticky { background: rgba(246,243,236,0.96) !important; border-bottom: 1px solid var(--stone) !important; }
+    header h1 { font-weight: 700 !important; }
+    .day-tab { min-height: 44px; white-space: nowrap; flex: 0 0 auto; }
+    .filter-chip { min-height: 40px; white-space: nowrap; flex: 0 0 auto; }
+    /* Quiet ride & walk rows between the places */
+    .leg-row { display:flex; align-items:flex-start; gap:10px; padding:6px 4px 6px 0; color: var(--ink-3); }
+    .leg-row .leg-title { color: var(--ink-2); font-weight: 600; font-size: 14px; line-height: 1.35; }
+    .leg-row .leg-meta { font-size: 13px; }
+    .leg-row .leg-note { font-size: 13px; color: var(--ink-3); margin-top: 2px; line-height: 1.4; }
+    .leg-btn { display:inline-flex; align-items:center; gap:6px; min-height:40px; padding:0 12px; border:1px solid var(--red); color: var(--red) !important; border-radius:10px; font-weight:700; font-size:13px; white-space:nowrap; background:#fff; }
+    .leg-btn:active { transform: scale(0.97); }
+    .stop-photo { display:block; width:100%; height:160px; object-fit:cover; background:#D8D1C1; }
+    .next-rule { height:2px; width:44px; background: var(--red); margin-top:10px; }
+    #mobileBottomNav button { min-height: 48px; flex: 1; }
+    #mobileBottomNav .text-amber-500 { color: var(--red) !important; }
+    #deskNavKids.bg-amber-500 { background-color: var(--navy) !important; }
+    #deskNavKids { color: var(--ink-2); background: transparent; }
   </style>
 </head>
 <body class="bg-slate-100 text-slate-800 antialiased pb-24 lg:pb-12">
@@ -32,7 +84,7 @@
       
       <!-- Brand & Title -->
       <div class="flex items-center gap-3">
-        <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-blue-600 via-indigo-600 to-rose-500 flex items-center justify-center text-white shadow-xs">
+        <div class="w-10 h-10 rounded-xl bg-[#13233F] flex items-center justify-center text-white shadow-xs">
           <i class="fa-solid fa-monument text-lg"></i>
         </div>
         <div>
@@ -40,7 +92,7 @@
             <span class="inline-block w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
             <span class="text-[11px] font-black uppercase tracking-wider text-slate-500">Live Trip Companion</span>
           </div>
-          <h1 class="text-xl lg:text-2xl font-black text-slate-900 leading-tight">Washington, DC Vacation</h1>
+          <h1 class="text-[21px] sm:text-2xl lg:text-[28px] font-black text-slate-900 leading-tight">Washington, DC Vacation</h1>
         </div>
       </div>
 
@@ -54,13 +106,13 @@
             <i class="fa-solid fa-list-check"></i> Checklists
           </button>
           <button onclick="switchMainView('kids')" id="deskNavKids" class="px-3.5 py-2 rounded-lg text-amber-600 hover:text-amber-700 transition flex items-center gap-1.5 bg-amber-50/50 cursor-pointer">
-            <i class="fa-solid fa-gamepad text-amber-500"></i> Kids Zone 🎮
+            <i class="fa-solid fa-gamepad"></i> Kids Zone
           </button>
         </div>
 
         <button onclick="toggleFlightDrawer()" class="h-10 px-3.5 rounded-xl bg-blue-50 border border-blue-200 text-blue-700 flex items-center gap-1.5 text-xs font-bold hover:bg-blue-100 active:scale-95 transition shadow-xs cursor-pointer">
           <i class="fa-solid fa-plane-departure text-blue-600"></i>
-          <span>Live Gates &amp; Flights</span>
+          <span class="hidden sm:inline whitespace-nowrap">Live Gates &amp; Flights</span><span class="sm:hidden">Flights</span>
         </button>
         <button onclick="toggleInfoModal()" class="w-10 h-10 rounded-xl bg-slate-100 border border-slate-200 flex items-center justify-center text-slate-600 hover:bg-slate-200 active:scale-95 transition cursor-pointer">
           <i class="fa-solid fa-circle-info text-base"></i>
@@ -70,7 +122,7 @@
   </header>
 
   <!-- LIVE COUNTDOWN & SMART TRIP TICKER -->
-  <div class="bg-gradient-to-r from-slate-900 via-indigo-950 to-slate-900 text-white px-4 lg:px-8 py-2.5 text-xs shadow-inner">
+  <div class="bg-[#13233F] text-white px-4 lg:px-8 py-2.5 text-xs shadow-inner">
     <div class="max-w-7xl mx-auto flex flex-col sm:flex-row sm:items-center justify-between gap-1.5">
       <div class="flex items-center gap-2 flex-wrap">
         <span class="text-amber-400 font-bold flex items-center gap-1.5">
@@ -78,10 +130,6 @@
           <span id="countdownLabel">Departure Countdown:</span>
         </span>
         <span id="flightTickerText" class="text-slate-300 font-medium">Leave 2232 Shenley Park Ln</span>
-        <span class="hidden md:inline-block text-slate-500">|</span>
-        <span class="inline-flex items-center gap-1 bg-slate-800/90 text-amber-300 px-2 py-0.5 rounded border border-slate-700 text-[11px] font-mono font-bold">
-          <i class="fa-solid fa-circle-info text-[10px]"></i> Tap any sight to view History &amp; Facts
-        </span>
       </div>
       <div class="flex items-center gap-2">
         <span class="text-slate-400 text-[11px] hidden sm:inline">Target: Oct 15 @ 11:30 AM EDT</span>
@@ -147,13 +195,13 @@
             </button>
           </div>
 
-          <div onclick="switchMainView('kids')" class="cursor-pointer bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white rounded-2xl p-4 shadow-xs transition active:scale-98">
+          <div onclick="switchMainView('kids')" class="cursor-pointer bg-white border border-slate-200 rounded-2xl p-4 shadow-xs transition active:scale-98">
             <div class="flex items-center gap-3">
-              <span class="text-3xl">🐼</span>
+              <span class="w-11 h-11 rounded-xl bg-[#F6E7E7] text-[#A8262E] flex items-center justify-center text-lg"><i class="fa-solid fa-gamepad"></i></span>
               <div>
-                <span class="text-[10px] font-black uppercase tracking-wider text-amber-200 block">Games for Kids</span>
-                <h4 class="text-sm font-black">Open DC Kids Zone! 🎮</h4>
-                <p class="text-[11px] text-amber-100 mt-0.5">Spy Ciphers &amp; Panda Snack Toss</p>
+                <span class="text-[10px] font-bold uppercase tracking-wider text-[#A8262E] block">Games for Kids</span>
+                <h4 class="serif text-base font-bold text-slate-900">Open the DC Kids Zone</h4>
+                <p class="text-[11px] text-slate-500 mt-0.5">Trivia, scavenger hunt, spy ciphers &amp; more</p>
               </div>
             </div>
           </div>
@@ -161,17 +209,17 @@
 
         <!-- CENTER COLUMN: ITINERARY STOPS -->
         <section class="lg:col-span-6 space-y-4">
-          <div id="daySummary" class="bg-gradient-to-br from-indigo-600 via-blue-600 to-indigo-800 text-white p-5 rounded-2xl shadow-md"></div>
+          <div id="daySummary" class="bg-[#13233F] text-white p-5 rounded-2xl shadow-md"></div>
           <div id="transitSummaryWidget" class="bg-white border border-slate-200 rounded-2xl p-4 shadow-xs flex items-center justify-between text-xs"></div>
 
           <div class="flex items-center gap-2 overflow-x-auto no-scrollbar text-xs">
             <button onclick="filterTimeline('all')" class="filter-chip px-3.5 py-1.5 rounded-full font-bold bg-slate-800 text-white shadow-xs cursor-pointer" data-filter="all">All Stops</button>
-            <button onclick="filterTimeline('site')" class="filter-chip px-3.5 py-1.5 rounded-full font-medium bg-white text-slate-600 border border-slate-200 hover:bg-slate-50 cursor-pointer" data-filter="site">🏛️ Sights</button>
-            <button onclick="filterTimeline('transit')" class="filter-chip px-3.5 py-1.5 rounded-full font-medium bg-white text-slate-600 border border-slate-200 hover:bg-slate-50 cursor-pointer" data-filter="transit">🚗 Rides &amp; Walks</button>
-            <button onclick="filterTimeline('food')" class="filter-chip px-3.5 py-1.5 rounded-full font-medium bg-white text-slate-600 border border-slate-200 hover:bg-slate-50 cursor-pointer" data-filter="food">🍽️ Food</button>
+            <button onclick="filterTimeline('site')" class="filter-chip px-3.5 py-1.5 rounded-full font-medium bg-white text-slate-600 border border-slate-200 hover:bg-slate-50 cursor-pointer" data-filter="site"><i class="fa-solid fa-landmark mr-1"></i>Sights</button>
+            <button onclick="filterTimeline('transit')" class="filter-chip px-3.5 py-1.5 rounded-full font-medium bg-white text-slate-600 border border-slate-200 hover:bg-slate-50 cursor-pointer" data-filter="transit"><i class="fa-solid fa-car-side mr-1"></i>Rides &amp; Walks</button>
+            <button onclick="filterTimeline('food')" class="filter-chip px-3.5 py-1.5 rounded-full font-medium bg-white text-slate-600 border border-slate-200 hover:bg-slate-50 cursor-pointer" data-filter="food"><i class="fa-solid fa-utensils mr-1"></i>Food</button>
           </div>
 
-          <div id="timelineContainer" class="space-y-3 relative before:absolute before:inset-0 before:left-5 before:w-0.5 before:bg-slate-300"></div>
+          <div id="timelineContainer" class="space-y-3 relative before:absolute before:inset-0 before:left-5 before:w-0.5 before:bg-[#DDD6C8]"></div>
         </section>
 
         <!-- RIGHT COLUMN: DESKTOP GATES MONITOR -->
@@ -245,10 +293,10 @@
     <section id="checklistView" class="hidden">
       <div class="lg:hidden flex bg-slate-200/90 p-1 rounded-xl mb-4 text-xs font-bold max-w-md mx-auto">
         <button onclick="switchChecklistTab('packing')" id="tabPackingBtn" class="flex-1 py-2 rounded-lg bg-white text-slate-900 shadow-xs transition cursor-pointer">
-          🎒 Packing (<span id="packingCount">0</span>)
+          <i class="fa-solid fa-suitcase mr-1"></i>Packing (<span id="packingCount">0</span>)
         </button>
         <button onclick="switchChecklistTab('passes')" id="tabPassesBtn" class="flex-1 py-2 rounded-lg text-slate-600 transition cursor-pointer">
-          🎟️ Passes &amp; Bookings (<span id="passesCount">0</span>)
+          <i class="fa-solid fa-ticket mr-1"></i>Passes (<span id="passesCount">0</span>)
         </button>
       </div>
 
@@ -272,7 +320,7 @@
             </div>
             
             <div class="w-full h-2.5 bg-slate-100 rounded-full overflow-hidden mb-4">
-              <div id="packingProgressBar" class="h-full bg-gradient-to-r from-blue-500 to-indigo-600 transition-all duration-300" style="width: 0%"></div>
+              <div id="packingProgressBar" class="h-full bg-[#13233F] transition-all duration-300" style="width: 0%"></div>
             </div>
 
             <button type="button" onclick="openAlexaModal()" class="w-full mb-4 bg-sky-50 hover:bg-sky-100 border border-sky-200 text-sky-800 font-bold py-2.5 rounded-xl text-xs transition flex items-center justify-center gap-2 cursor-pointer">
@@ -348,7 +396,7 @@
 
     <!-- VIEW 3: KIDS ZONE MINI-GAMES VIEW -->
     <section id="kidsView" class="hidden max-w-4xl mx-auto space-y-6">
-      <div class="bg-gradient-to-r from-amber-500 via-rose-500 to-indigo-600 rounded-3xl p-6 text-white shadow-md relative overflow-hidden">
+      <div class="bg-[#13233F] rounded-3xl p-6 text-white shadow-md relative overflow-hidden">
         <div class="relative z-10">
           <span class="bg-white/20 backdrop-blur-md px-3 py-1 rounded-full text-xs font-black uppercase tracking-wider">Ages 8 &amp; 11 · Washington DC Edition</span>
           <h2 class="text-2xl sm:text-3xl font-black mt-2">🎮 DC Junior Explorer &amp; Games</h2>
@@ -738,7 +786,7 @@
       <p class="mt-3 text-xs text-slate-500">Confirmation codes and boarding passes are in the American Airlines app.</p>
 
       <!-- FLIGHT 1: OUTBOUND CARD -->
-      <div class="mt-4 p-4 rounded-2xl bg-gradient-to-br from-blue-50 to-indigo-50/50 border border-blue-200 shadow-xs">
+      <div class="mt-4 p-4 rounded-2xl bg-white border border-blue-200 shadow-xs">
         <div class="flex items-center justify-between mb-2">
           <div class="flex items-center gap-1.5">
             <span class="px-2 py-0.5 rounded-md text-[10px] font-black bg-blue-600 text-white uppercase">Outbound Flight</span>
@@ -809,7 +857,7 @@
       </div>
 
       <!-- FLIGHT 2: RETURN CARD -->
-      <div class="mt-4 p-4 rounded-2xl bg-gradient-to-br from-amber-50 to-orange-50/50 border border-amber-200 shadow-xs">
+      <div class="mt-4 p-4 rounded-2xl bg-white border border-amber-200 shadow-xs">
         <div class="flex items-center justify-between mb-2">
           <div class="flex items-center gap-1.5">
             <span class="px-2 py-0.5 rounded-md text-[10px] font-black bg-amber-600 text-white uppercase">Return Flight</span>
@@ -880,7 +928,7 @@
       </div>
 
       <!-- XIAOBIN LANGE: SEPARATE EXPEDIA BOOKING -->
-      <div class="mt-4 p-4 rounded-2xl bg-gradient-to-br from-violet-50 to-purple-50/50 border border-violet-200 shadow-xs">
+      <div class="mt-4 p-4 rounded-2xl bg-white border border-violet-200 shadow-xs">
         <div class="flex items-center justify-between mb-2">
           <span class="px-2 py-0.5 rounded-md text-[10px] font-black bg-violet-600 text-white uppercase">Xiaobin Lange · Separate Booking</span>
           <span class="text-[10px] font-bold text-violet-700">1 traveler</span>
@@ -951,22 +999,22 @@
   </div>
 
   <!-- FIXED BOTTOM NAVIGATION BAR (Mobile Only) -->
-  <nav class="lg:hidden fixed bottom-0 left-0 right-0 z-40 bg-white/95 backdrop-blur border-t border-slate-200 py-2.5 px-4 flex justify-around items-center max-w-md mx-auto shadow-lg">
+  <nav id="mobileBottomNav" class="lg:hidden fixed bottom-0 left-0 right-0 z-40 bg-white border-t border-slate-200 pt-1.5 pb-[max(0.5rem,env(safe-area-inset-bottom))] px-2 flex justify-around items-center">
     <button onclick="switchMainView('itinerary')" id="mobNavItinerary" class="flex flex-col items-center gap-1 text-blue-600 cursor-pointer">
       <i class="fa-solid fa-calendar-day text-lg"></i>
-      <span class="text-[10px] font-bold">Schedule</span>
+      <span class="text-[12px] font-bold">Schedule</span>
     </button>
     <button onclick="switchMainView('checklist')" id="mobNavChecklist" class="flex flex-col items-center gap-1 text-slate-400 hover:text-slate-600 cursor-pointer">
       <i class="fa-solid fa-list-check text-lg"></i>
-      <span class="text-[10px] font-bold">Checklists</span>
+      <span class="text-[12px] font-bold">Checklists</span>
     </button>
-    <button onclick="switchMainView('kids')" id="mobNavKids" class="flex flex-col items-center gap-1 text-amber-500 hover:text-amber-600 cursor-pointer">
+    <button onclick="switchMainView('kids')" id="mobNavKids" class="flex flex-col items-center gap-1 text-slate-400 hover:text-slate-600 cursor-pointer">
       <i class="fa-solid fa-gamepad text-lg"></i>
-      <span class="text-[10px] font-bold">Games</span>
+      <span class="text-[12px] font-bold">Games</span>
     </button>
     <button onclick="toggleFlightDrawer()" class="flex flex-col items-center gap-1 text-slate-400 hover:text-slate-600 cursor-pointer">
       <i class="fa-solid fa-door-open text-lg"></i>
-      <span class="text-[10px] font-bold">Gates</span>
+      <span class="text-[12px] font-bold">Gates</span>
     </button>
   </nav>
 
@@ -2055,12 +2103,13 @@
       const data = allComputed[index];
 
       document.getElementById('daySummary').innerHTML = `
-        <div class="flex items-center justify-between opacity-80 text-xs font-black uppercase tracking-wider mb-1">
+        <div class="flex items-center justify-between text-[#C9D2E3] text-xs font-semibold uppercase tracking-wider mb-1.5">
           <span>${data.day}</span>
           <span>Day ${index + 1} of 6</span>
         </div>
-        <h2 class="text-xl sm:text-2xl font-black leading-snug">${data.theme}</h2>
-        <p class="text-xs sm:text-sm text-blue-100 mt-1 font-medium">${data.tagline}</p>
+        <h2 class="text-2xl sm:text-[28px] font-bold leading-tight">${data.theme}</h2>
+        <div class="next-rule"></div>
+        <p class="text-sm text-[#C9D2E3] mt-2.5 font-medium leading-relaxed">${data.tagline}</p>
       `;
 
       const uberCount = data.items.filter(i => i.type === 'transit-uber').length;
@@ -2069,17 +2118,16 @@
 
       document.getElementById('transitSummaryWidget').innerHTML = `
         <div class="flex items-center gap-2.5">
-          <span class="w-8 h-8 rounded-full bg-slate-900 text-amber-400 flex items-center justify-center font-bold text-xs shadow-xs">
+          <span class="w-9 h-9 rounded-full bg-[#F6E7E7] text-[#A8262E] flex items-center justify-center font-bold text-sm">
             <i class="fa-solid fa-route"></i>
           </span>
           <div>
-            <span class="font-black text-slate-800 block text-xs uppercase tracking-wider">Daily Movement Plan</span>
+            <span class="font-bold text-slate-800 block text-sm">Getting around today</span>
             <span class="text-slate-500 font-medium text-xs">
-              🚗 ${uberCount}x UberXL · 👟 ${walkCount}x Walks${metroCount ? ` · 🚇 ${metroCount}x Metro` : ''}
+              ${uberCount} Uber ride${uberCount === 1 ? '' : 's'} · ${walkCount} walk${walkCount === 1 ? '' : 's'}${metroCount ? ` · ${metroCount} Metro` : ''}
             </span>
           </div>
         </div>
-        <span class="text-[10px] font-bold bg-slate-100 text-slate-700 px-2.5 py-1 rounded-md border border-slate-200">Durations &amp; Facts</span>
       `;
 
       const container = document.getElementById('timelineContainer');
@@ -2110,7 +2158,7 @@
               <div class="absolute left-2.5 -translate-x-1/2 top-4 w-7 h-7 rounded-full bg-indigo-950 border-2 border-amber-300 flex items-center justify-center text-amber-300 shadow-xs z-10">
                 <i class="fa-solid fa-moon text-xs"></i>
               </div>
-              <div class="bg-gradient-to-r from-indigo-950 to-slate-900 text-white rounded-2xl p-4 border border-indigo-900 shadow-xs">
+              <div class="bg-[#13233F] text-white rounded-2xl p-4 border border-indigo-900 shadow-xs">
                 <div class="flex items-center justify-between text-xs mb-1">
                   <div class="flex items-center gap-1.5">
                     <span class="text-[10px] font-black uppercase tracking-wider bg-amber-400 text-slate-950 px-2 py-0.5 rounded">Night Rest</span>
@@ -2125,69 +2173,38 @@
           `;
         }
 
-        // UBER XL CARD WITH 1-TAP APP DEEP LINK
+        // UBER RIDE: quiet row with a one-tap Uber button
         if (item.type === 'transit-uber') {
           const uberLink = getUberDeepLink(item.destName || item.location, item.destCoords, item.destAddress);
-
           return `
             <div class="relative pl-9">
-              <div class="absolute left-2.5 -translate-x-1/2 top-4 w-7 h-7 rounded-full bg-slate-900 border-2 border-amber-400 flex items-center justify-center text-amber-400 shadow-xs z-10 animate-bounce-slow">
-                <i class="fa-solid fa-car-side text-xs"></i>
+              <div class="absolute left-2.5 -translate-x-1/2 top-2.5 w-7 h-7 rounded-full bg-[#F6F3EC] border border-[#C9D2E3] flex items-center justify-center text-[#5B6680] z-10">
+                <i class="fa-solid fa-car-side text-[11px]"></i>
               </div>
-              <div class="bg-gradient-to-r from-slate-900 to-slate-800 text-white rounded-2xl p-4 border border-slate-700 shadow-xs">
-                <div class="flex items-center justify-between text-xs mb-1">
-                  <div class="flex items-center gap-1.5">
-                    <span class="text-[10px] font-black uppercase tracking-wider bg-amber-400 text-slate-950 px-2 py-0.5 rounded">UberXL</span>
-                    <span class="text-slate-300 font-semibold">${item.time}</span>
-                  </div>
-                  <div class="flex items-center gap-1.5">
-                    ${durationBadge}
-                    <span class="text-xs font-mono text-amber-300 font-bold">${item.uberMeta.estFare}</span>
-                  </div>
+              <div class="leg-row">
+                <div class="flex-1 min-w-0">
+                  <div class="leg-meta">${item.time} · Uber${item.uberMeta && item.uberMeta.time ? ` · ~${item.uberMeta.time}` : ''}${item.uberMeta && item.uberMeta.estFare ? ` · ${item.uberMeta.estFare}` : ''}</div>
+                  <div class="leg-title">${item.title.replace(/^UberXL:\s*/, '')}</div>
+                  ${item.desc ? `<div class="leg-note">${item.desc}</div>` : ''}
                 </div>
-                <h4 class="font-black text-sm text-white mt-1">${item.title}</h4>
-                <p class="text-xs text-slate-300 mt-1 leading-relaxed">${item.desc}</p>
-
-                <!-- 1-TAP UBER APP LAUNCH BUTTON -->
-                <div class="mt-3 pt-2.5 border-t border-slate-700/60 flex items-center justify-between">
-                  <div class="text-[11px] text-slate-400">
-                    <span><i class="fa-solid fa-users text-amber-400 mr-1"></i> ${item.uberMeta.seats}</span>
-                    <span class="ml-2"><i class="fa-solid fa-clock text-amber-400 mr-1"></i> ~${item.uberMeta.time} drive</span>
-                  </div>
-
-                  <a href="${uberLink}" target="_blank" class="bg-amber-400 hover:bg-amber-300 text-slate-950 font-black text-xs px-3.5 py-1.5 rounded-xl shadow-xs transition active:scale-95 flex items-center gap-1.5 cursor-pointer">
-                    <i class="fa-brands fa-uber text-sm"></i>
-                    <span>Open in Uber App</span>
-                    <i class="fa-solid fa-arrow-up-right-from-square text-[9px] opacity-70"></i>
-                  </a>
-                </div>
+                <a href="${uberLink}" target="_blank" rel="noopener" class="leg-btn mt-1"><i class="fa-brands fa-uber"></i> Open Uber</a>
               </div>
             </div>
           `;
         }
 
-        // WALKING CARD
+        // WALK: quiet row
         if (item.type === 'transit-walk') {
           return `
             <div class="relative pl-9">
-              <div class="absolute left-2.5 -translate-x-1/2 top-4 w-7 h-7 rounded-full bg-emerald-600 border-2 border-white flex items-center justify-center text-white shadow-xs z-10">
-                <i class="fa-solid fa-person-walking text-xs"></i>
+              <div class="absolute left-2.5 -translate-x-1/2 top-2.5 w-7 h-7 rounded-full bg-[#F6F3EC] border border-[#C9D2E3] flex items-center justify-center text-[#5B6680] z-10">
+                <i class="fa-solid fa-person-walking text-[11px]"></i>
               </div>
-              <div class="bg-emerald-50/80 border border-emerald-200 rounded-2xl p-3.5 text-slate-800 shadow-xs">
-                <div class="flex items-center justify-between text-xs mb-1">
-                  <div class="flex items-center gap-1.5">
-                    <span class="text-[10px] font-black uppercase tracking-wider bg-emerald-600 text-white px-2 py-0.5 rounded">Walk / Stroll</span>
-                    <span class="text-emerald-900 font-semibold">${item.time}</span>
-                  </div>
-                  <div class="flex items-center gap-1.5">
-                    ${durationBadge}
-                    <span class="text-[10px] font-bold text-emerald-800">${item.walkMeta.dist}</span>
-                  </div>
-                </div>
-                <h4 class="font-bold text-xs text-slate-900">${item.title}</h4>
-                <p class="text-xs text-slate-600 mt-0.5">${item.desc}</p>
-                <div class="mt-2 text-[10px] font-bold text-emerald-700 flex items-center gap-1">
-                  <i class="fa-solid fa-shoe-prints"></i> ${item.walkMeta.steps}
+              <div class="leg-row">
+                <div class="flex-1 min-w-0">
+                  <div class="leg-meta">${item.time} · Walk${item.duration ? ` · ${item.duration}` : ''}${item.walkMeta && item.walkMeta.dist ? ` · ${item.walkMeta.dist}` : ''}</div>
+                  <div class="leg-title">${item.title}</div>
+                  ${item.desc ? `<div class="leg-note">${item.desc}</div>` : ''}
                 </div>
               </div>
             </div>
@@ -2282,16 +2299,19 @@
         const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(item.location || item.title)}`;
         const hasSiteInfo = !!(item.siteKey && SITE_KNOWLEDGE_BASE[item.siteKey]);
         const phone = getPlacePhone(item);
+        const photo = item.siteKey && typeof SITE_IMAGES !== 'undefined' ? SITE_IMAGES[item.siteKey] : null;
 
         return `
           <div class="relative pl-9">
-            <div class="absolute left-2.5 -translate-x-1/2 top-4 w-7 h-7 rounded-full bg-white border-2 border-slate-800 flex items-center justify-center text-slate-800 shadow-xs z-10">
+            <div class="absolute left-2.5 -translate-x-1/2 top-4 w-7 h-7 rounded-full bg-[#13233F] flex items-center justify-center text-white z-10">
               <i class="fa-solid ${item.icon} text-xs"></i>
             </div>
-            <div class="bg-white rounded-2xl p-4 border border-slate-200 shadow-xs transition hover:border-slate-300">
+            <div class="bg-white rounded-2xl border border-slate-200 shadow-xs overflow-hidden">
+              ${photo ? `<img src="${photo.src}" alt="${photo.alt}" loading="lazy" class="stop-photo ${hasSiteInfo ? 'cursor-pointer' : ''}" ${hasSiteInfo ? `onclick="openSiteModal('${item.siteKey}')"` : ''} onerror="this.remove()">` : ''}
+              <div class="p-4">
               <div class="flex items-center justify-between gap-2 mb-1.5">
                 <div class="flex items-center gap-2">
-                  <span class="text-xs font-bold text-slate-900">${item.time}</span>
+                  <span class="text-[15px] font-bold text-slate-900">${item.time}</span>
                   ${durationBadge}
                 </div>
                 <div class="flex items-center gap-1.5">
@@ -2307,11 +2327,11 @@
               </div>
 
               <!-- Clickable title to open site summary card -->
-              <h3 onclick="${hasSiteInfo ? `openSiteModal('${item.siteKey}')` : ''}" class="text-sm font-black text-slate-900 leading-snug ${hasSiteInfo ? 'cursor-pointer hover:text-indigo-600 transition flex items-center gap-1.5' : ''}">
+              <h3 onclick="${hasSiteInfo ? `openSiteModal('${item.siteKey}')` : ''}" class="text-[19px] font-bold text-slate-900 leading-snug ${hasSiteInfo ? 'cursor-pointer hover:text-indigo-600 transition flex items-center gap-1.5' : ''}">
                 <span>${item.title}</span>
                 ${hasSiteInfo ? `<i class="fa-regular fa-circle-question text-indigo-500 text-xs"></i>` : ''}
               </h3>
-              <p class="text-xs text-slate-600 mt-1 leading-relaxed">${item.desc}</p>
+              <p class="text-[15px] text-slate-600 mt-1.5 leading-relaxed">${item.desc}</p>
 
               <div class="mt-3.5 pt-2.5 border-t border-slate-100 flex items-center flex-wrap gap-x-4 gap-y-2 text-xs">
                 ${hasSiteInfo ? `
@@ -2339,6 +2359,7 @@
                   <i class="fa-solid fa-location-dot text-slate-400"></i>
                   <span class="truncate max-w-[180px] sm:max-w-xs">${item.location}</span>
                 </a>
+              </div>
               </div>
             </div>
           </div>
