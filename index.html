@@ -29,7 +29,7 @@
     /* ===== CLASSIC CAPITAL THEME =====
        Navy, marble and one red accent. Serif headings like the lettering
        on DC monuments; body text in Public Sans (the U.S. government typeface). */
-    :root { --navy:#13233F; --navy-2:#24365A; --marble:#F6F3EC; --marble-2:#EFEBE2; --stone:#DDD6C8; --ink-2:#3D4963; --ink-3:#5B6680; --red:#A8262E; --red-soft:#F6E7E7; --red-line:#E9C9CB; --navy-soft:#EAEEF5; --mist:#C9D2E3; --photo:#D8D1C1; }
+    :root { --navy:#13233F; --navy-2:#24365A; --marble:#F6F3EC; --marble-2:#EFEBE2; --stone:#DDD6C8; --ink-2:#3D4963; --ink-3:#5B6680; --red:#A8262E; --red-soft:#F6E7E7; --red-line:#E9C9CB; --navy-soft:#EAEEF5; --mist:#C9D2E3; --photo:#D8D1C1; --rule:#A8262E; }
     body, header.sticky, .bg-white, [class*="bg-[color:var"], .day-tab, .leg-btn { transition: background-color .8s ease, color .8s ease, border-color .8s ease; }
     body { background: var(--marble) !important; color: var(--navy); font-family: 'Public Sans', system-ui, -apple-system, sans-serif; }
     .serif, header h1, #daySummary h2, #timelineContainer h3, #timelineContainer h4,
@@ -70,7 +70,7 @@
     .leg-btn { display:inline-flex; align-items:center; gap:6px; min-height:40px; padding:0 12px; border:1px solid var(--red); color: var(--red) !important; border-radius:10px; font-weight:700; font-size:13px; white-space:nowrap; background:#fff; }
     .leg-btn:active { transform: scale(0.97); }
     .stop-photo { display:block; width:100%; height:160px; object-fit:cover; background: var(--photo); }
-    .next-rule { height:2px; width:44px; background: var(--red); margin-top:10px; }
+    .next-rule { height:2px; width:44px; background: var(--rule); margin-top:10px; }
     #mobileBottomNav button { min-height: 48px; flex: 1; }
     /* Backups for the theme color classes (work even before Tailwind loads) */
     .before\:bg-\[color\:var\(--stone\)\]::before { background-color: var(--stone); }
@@ -92,10 +92,10 @@
     // cool dusk blues in the evening and deep indigo at night.
     // Uses the phone's own clock. Add ?mood=morning|midday|evening|night to the URL to preview one.
     const DAY_MOODS = {
-      morning: { label: 'Good morning', icon: 'fa-sun', vars: { navy:'#5A2414', 'navy-2':'#74321D', marble:'#FFF4E5', 'marble-2':'#FBE7CF', stone:'#EBD3B3', 'ink-2':'#5C3A2A', 'ink-3':'#80593F', red:'#C2410C', 'red-soft':'#FDE6D2', 'red-line':'#F5C9A6', 'navy-soft':'#FCEBDD', mist:'#F6D5B5', photo:'#EED9C0' } },
-      midday:  { label: 'Good afternoon', icon: 'fa-landmark', vars: { navy:'#13233F', 'navy-2':'#24365A', marble:'#F6F3EC', 'marble-2':'#EFEBE2', stone:'#DDD6C8', 'ink-2':'#3D4963', 'ink-3':'#5B6680', red:'#A8262E', 'red-soft':'#F6E7E7', 'red-line':'#E9C9CB', 'navy-soft':'#EAEEF5', mist:'#C9D2E3', photo:'#D8D1C1' } },
-      evening: { label: 'Good evening', icon: 'fa-cloud-moon', vars: { navy:'#0E3B53', 'navy-2':'#175070', marble:'#EEF4F7', 'marble-2':'#E1EBF1', stone:'#C8D8E2', 'ink-2':'#2F4B5C', 'ink-3':'#4A6677', red:'#0F7488', 'red-soft':'#DDF0F3', 'red-line':'#B5DDE4', 'navy-soft':'#E2EDF4', mist:'#BFD6E3', photo:'#CFDCE4' } },
-      night:   { label: 'Good night', icon: 'fa-moon', vars: { navy:'#1A1F45', 'navy-2':'#262C5C', marble:'#ECEEF7', 'marble-2':'#E0E3F1', stone:'#C9CDE3', 'ink-2':'#363B63', 'ink-3':'#535884', red:'#4F45C4', 'red-soft':'#E6E4F8', 'red-line':'#CBC6F0', 'navy-soft':'#E3E5F3', mist:'#C4C8E6', photo:'#D3D6E6' } }
+      morning: { label: 'Good morning', icon: 'fa-sun', vars: { navy:'#5A2414', 'navy-2':'#74321D', marble:'#FFF4E5', 'marble-2':'#FBE7CF', stone:'#EBD3B3', 'ink-2':'#5C3A2A', 'ink-3':'#80593F', red:'#C2410C', 'red-soft':'#FDE6D2', 'red-line':'#F5C9A6', 'navy-soft':'#FCEBDD', mist:'#F6D5B5', photo:'#EED9C0', rule:'#C2410C' } },
+      midday:  { label: 'Good afternoon', icon: 'fa-landmark', vars: { navy:'#13233F', 'navy-2':'#24365A', marble:'#F6F3EC', 'marble-2':'#EFEBE2', stone:'#DDD6C8', 'ink-2':'#3D4963', 'ink-3':'#5B6680', red:'#A8262E', 'red-soft':'#F6E7E7', 'red-line':'#E9C9CB', 'navy-soft':'#EAEEF5', mist:'#C9D2E3', photo:'#D8D1C1', rule:'#A8262E' } },
+      evening: { label: 'Good evening', icon: 'fa-cloud-moon', vars: { navy:'#0E3B53', 'navy-2':'#175070', marble:'#EEF4F7', 'marble-2':'#E1EBF1', stone:'#C8D8E2', 'ink-2':'#2F4B5C', 'ink-3':'#4A6677', red:'#0F7488', 'red-soft':'#DDF0F3', 'red-line':'#B5DDE4', 'navy-soft':'#E2EDF4', mist:'#BFD6E3', photo:'#CFDCE4', rule:'#5FC3D3' } },
+      night:   { label: 'Good night', icon: 'fa-moon', vars: { navy:'#1A1F45', 'navy-2':'#262C5C', marble:'#ECEEF7', 'marble-2':'#E0E3F1', stone:'#C9CDE3', 'ink-2':'#363B63', 'ink-3':'#535884', red:'#4F45C4', 'red-soft':'#E6E4F8', 'red-line':'#CBC6F0', 'navy-soft':'#E3E5F3', mist:'#C4C8E6', photo:'#D3D6E6', rule:'#A49CF0' } }
     };
     function currentMood() {
       try { const q = new URLSearchParams(location.search).get('mood'); if (q && DAY_MOODS[q]) return q; } catch (e) {}
